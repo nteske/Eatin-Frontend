@@ -1,0 +1,9 @@
+.example-full-width {
+    display: block;
+    text-align: center;
+}
+
+.recaptcha {
+    transform: scale(0.7);
+    transform-origin: 0;
+}

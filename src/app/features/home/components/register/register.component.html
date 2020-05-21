@@ -1,0 +1,76 @@
+<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()" style="background-color: gray;">
+    <mat-form-field class="example-full-width">
+        <mat-label>Ime</mat-label>
+        <input formControlName="ime" matInput placeholder="Ime" type="text" value="" />
+        <mat-error *ngIf="form.controls.ime.errors?.required">
+            Potrebno je uneti ime.
+        </mat-error>
+        <mat-error *ngIf="
+            !form.controls.ime.errors?.required &&
+            form.controls.ime.errors?.minlength
+          ">
+            Unesite validno ime.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Prezime</mat-label>
+        <input formControlName="prezime" matInput placeholder="Prezime" type="text" value="" />
+        <mat-error *ngIf="form.controls.prezime.errors?.required">
+            Potrebno je uneti prezime.
+        </mat-error>
+        <mat-error *ngIf="
+            !form.controls.prezime.errors?.required &&
+            form.controls.prezime.errors?.minlength
+          ">
+            Unesite validno prezime.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Email Adresa</mat-label>
+        <input formControlName="email" matInput type="email" placeholder="kredencijali@primer.com" />
+        <mat-error *ngIf="form.controls.email.errors?.required">
+            Potrebno je uneti email adresu.
+        </mat-error>
+        <mat-error *ngIf="
+        !form.controls.email.errors?.required &&
+        form.controls.email.errors?.minlength
+      ">
+            Unesite validnu email adresu.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Lozinka</mat-label>
+        <input formControlName="password" matInput placeholder="Lozinka" type="password" value="" />
+        <mat-error *ngIf="form.controls.password.errors?.required">
+            Potrebno je uneti lozinku.
+        </mat-error>
+        <mat-error *ngIf="
+        !form.controls.password.errors?.required &&
+        form.controls.password.errors?.minlength
+      ">
+            Unesite validnu lozinku.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Broj telefona</mat-label>
+        <input formControlName="broj" matInput placeholder="Broj telefona" type="text" value="" />
+        <mat-error *ngIf="form.controls.broj.errors?.required">
+            Potrebno je uneti broj telefona.
+        </mat-error>
+        <mat-error *ngIf="
+        !form.controls.broj.errors?.required &&
+        form.controls.broj.errors?.minlength
+      ">
+            Unesite validan broj telefona.
+        </mat-error>
+    </mat-form-field>
+
+    <div class="form-group recaptcha">
+        <!--<label for="formGroupExampleInput2">Molimo potvrdite da niste robot:</label> <br>-->
+        <re-captcha formControlName="kapcaProvera" #captchaElem [siteKey]="token">
+        </re-captcha>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+    Register
+  </button>
+</form>

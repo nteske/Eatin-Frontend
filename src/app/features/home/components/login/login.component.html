@@ -1,0 +1,31 @@
+<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()" style="background-color: gray;">
+    <mat-form-field class="example-full-width">
+        <mat-label>Email Adresa</mat-label>
+        <input formControlName="email" matInput type="email" placeholder="kredencijali@primer.com" />
+        <mat-error *ngIf="form.controls.email.errors?.required">
+            Potrebno je uneti email adresu.
+        </mat-error>
+        <mat-error *ngIf="
+        !form.controls.email.errors?.required &&
+        form.controls.email.errors?.minlength
+      ">
+            Unesite validnu email adresu.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Lozinka</mat-label>
+        <input formControlName="password" matInput placeholder="Lozinka" type="password" value="" />
+        <mat-error *ngIf="form.controls.password.errors?.required">
+            Potrebno je uneti lozinku.
+        </mat-error>
+        <mat-error *ngIf="
+        !form.controls.password.errors?.required &&
+        form.controls.password.errors?.minlength
+      ">
+            Unesite validnu lozinku.
+        </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+    Login
+  </button>
+</form>
