@@ -8,4 +8,9 @@ export class ApiUrls {
     //nasted putanje
     public static register: string = "register";
     public static login: string = "login";
+
+     //-------------restoran (url backend srv + promenjive)-------------
+     public static restorant: string = "/restorant/";
+     //nasted putanje
+     public static locations: string = "locations";
 }

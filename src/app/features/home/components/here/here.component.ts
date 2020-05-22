@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  
+import { MapMarkersService } from '../../services/map-markers.service';
 import { ApiKeys } from '../../../../core/constants/api-keys';
+import { Lokacija } from 'src/app/features/home/models/lokacija.model';
 declare var H: any;  
 
 
@@ -31,7 +33,7 @@ export class HereComponent implements OnInit {
   public height: any;
 
 
-  public constructor() {
+  public constructor(private mapMarkersService:MapMarkersService) {
       this.platform = new H.service.Platform({
           "appid": ApiKeys.hereId,
           "apikey": ApiKeys.hereKey
@@ -51,18 +53,20 @@ export class HereComponent implements OnInit {
           }
       );
       window.addEventListener('resize', () => this.map.getViewPort().resize());
-     // var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
+     //var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
       this.nekiUi = H.ui.UI.createDefault(this.map, defaultLayers);
-      this.dropMarker();
+      //var group = new H.map.Group();
+     // this.map.addObject(group);
+      this.mapMarkersService.getMarkers().subscribe(data=>{
+        for(let lokacija of data)this.dropMarker(lokacija);
+      });
   }
-  private dropMarker() {
-    var group = new H.map.Group();
-    this.map.addObject(group);
- 
-      var marker = new H.map.Marker({ lat: this.lat, lng: this.lng});
+  private dropMarker(lokacija : Lokacija) {
+    console.log(lokacija);
+      var marker = new H.map.Marker({ lat: lokacija.latitude, lng: lokacija.longitude});
       // add custom data to the marker
-      marker.setData("html");
-      group.addObject(marker);
+      marker.setData(lokacija.ulica);
+      this.map.addObject(marker);
 
 }
 }

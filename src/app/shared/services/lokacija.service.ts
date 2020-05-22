@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Lokacija } from '../models/lokacija.model';
+import { Lokacija } from '../../features/home/models/lokacija.model';
 
 @Injectable({
   providedIn: 'root'
