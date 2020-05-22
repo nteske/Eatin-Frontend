@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Dostavljac } from '../models/dostavljac.model';
+import { Dostavljac } from '../models (to be deleted)/dostavljac.model';
 
 @Injectable({
   providedIn: 'root'

@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Uloga } from '../models/uloga.model';
+import { Mera } from '../models (to be deleted)/mera.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UlogaService {
-  private readonly API_URL = ApiUrls.backend+'/uloga/';
-  dataChange: BehaviorSubject<Uloga[]> = new BehaviorSubject<Uloga[]>([]);
+export class MeraService {
+  private readonly API_URL = ApiUrls.backend+'/mera/';
+  dataChange: BehaviorSubject<Mera[]> = new BehaviorSubject<Mera[]>([]);
   constructor(private httpClient: HttpClient) { }
 /*
-  public getAllUloga(): Observable<Uloga[]> {
-    this.httpClient.get<Uloga[]>(this.API_URL).subscribe(data => {
+  public getAllMera(): Observable<Mera[]> {
+    this.httpClient.get<Mera[]>(this.API_URL).subscribe(data => {
         this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
@@ -22,15 +22,15 @@ export class UlogaService {
 
     return this.dataChange.asObservable();
 }
-    public addUloga(uloga: Uloga): void {
-        this.httpClient.post(this.API_URL, uloga).subscribe();
+    public addMera(mera: Mera): void {
+        this.httpClient.post(this.API_URL, mera).subscribe();
     }
 
-    public updateUloga(uloga: Uloga): void {
-        this.httpClient.put(this.API_URL, uloga).subscribe();
+    public updateMera(mera: Mera): void {
+        this.httpClient.put(this.API_URL, mera).subscribe();
     }
 
-    public deleteUloga(id: number): void {
+    public deleteMera(id: number): void {
         this.httpClient.delete(this.API_URL + id).subscribe();
     }
 */

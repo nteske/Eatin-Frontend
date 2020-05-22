@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Mera } from '../models/mera.model';
+import { Radi } from '../models (to be deleted)/radi.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MeraService {
-  private readonly API_URL = ApiUrls.backend+'/mera/';
-  dataChange: BehaviorSubject<Mera[]> = new BehaviorSubject<Mera[]>([]);
+export class RadiService {
+  private readonly API_URL = ApiUrls.backend+'/radi/';
+  dataChange: BehaviorSubject<Radi[]> = new BehaviorSubject<Radi[]>([]);
   constructor(private httpClient: HttpClient) { }
 /*
-  public getAllMera(): Observable<Mera[]> {
-    this.httpClient.get<Mera[]>(this.API_URL).subscribe(data => {
+  public getAllRadi(): Observable<Radi[]> {
+    this.httpClient.get<Radi[]>(this.API_URL).subscribe(data => {
         this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
@@ -22,15 +22,15 @@ export class MeraService {
 
     return this.dataChange.asObservable();
 }
-    public addMera(mera: Mera): void {
-        this.httpClient.post(this.API_URL, mera).subscribe();
+    public addRadi(radi: Radi): void {
+        this.httpClient.post(this.API_URL, radi).subscribe();
     }
 
-    public updateMera(mera: Mera): void {
-        this.httpClient.put(this.API_URL, mera).subscribe();
+    public updateRadi(radi: Radi): void {
+        this.httpClient.put(this.API_URL, radi).subscribe();
     }
 
-    public deleteMera(id: number): void {
+    public deleteRadi(id: number): void {
         this.httpClient.delete(this.API_URL + id).subscribe();
     }
 */

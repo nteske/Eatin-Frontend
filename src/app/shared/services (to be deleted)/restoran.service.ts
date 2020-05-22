@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Restoran } from '../models/restoran.model';
+import { Restoran } from '../models (to be deleted)/restoran.model';
 
 @Injectable({
   providedIn: 'root'

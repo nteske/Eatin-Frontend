@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { MozeBitiMere } from '../models/moze_biti_mere.model';
+import { MozeBitiMere } from '../models (to be deleted)/moze_biti_mere.model';
 
 @Injectable({
   providedIn: 'root'

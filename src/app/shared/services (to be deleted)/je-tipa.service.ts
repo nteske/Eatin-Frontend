@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { JeTipa } from '../models/je_tipa.model';
+import { JeTipa } from '../models (to be deleted)/je_tipa.model';
 
 @Injectable({
   providedIn: 'root'

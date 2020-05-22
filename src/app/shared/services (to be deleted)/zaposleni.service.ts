@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Zaposleni } from '../models/zaposleni.model';
+import { Zaposleni } from '../models (to be deleted)/zaposleni.model';
 
 @Injectable({
   providedIn: 'root'

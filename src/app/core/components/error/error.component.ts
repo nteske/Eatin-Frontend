@@ -23,8 +23,8 @@ export class ErrorComponent implements OnInit {
           /************Rukovanje pristiglim greskama************/
           let msg=error.message;
           let status=parseInt(error.title);
-          if(status==0)msg="Failed to connect to the server";
-          else if(status==401) msg="Please login first!";
+          if(status==0)msg="Failed to connect to the server!";
+          else if(status==401) msg="Please sing in first!";
           else if(status==403) msg="Restricted!";
           else if(status==404) msg="Server can't find a route!";
           else if(status==500) msg="Server error!";

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Sadrzi } from '../models/sadrzi.model';
+import { Sadrzi } from '../models (to be deleted)/sadrzi.model';
 
 @Injectable({
   providedIn: 'root'

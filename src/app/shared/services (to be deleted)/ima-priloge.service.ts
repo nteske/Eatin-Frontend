@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { ImaPriloge } from '../models/ima_priloge.model';
+import { ImaPriloge } from '../models (to be deleted)/ima_priloge.model';
 
 @Injectable({
   providedIn: 'root'

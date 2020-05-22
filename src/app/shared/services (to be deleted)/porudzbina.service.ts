@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Porudzbina } from '../models/porudzbina.model';
+import { Porudzbina } from '../models (to be deleted)/porudzbina.model';
 
 @Injectable({
   providedIn: 'root'

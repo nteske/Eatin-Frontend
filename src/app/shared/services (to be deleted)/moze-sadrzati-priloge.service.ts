@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { MozeSadrzatiPriloge } from '../models/moze_sadrzati_priloge.model';
+import { MozeSadrzatiPriloge } from '../models (to be deleted)/moze_sadrzati_priloge.model';
 
 @Injectable({
   providedIn: 'root'

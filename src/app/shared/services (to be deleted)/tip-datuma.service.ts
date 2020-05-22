@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { TipDatuma } from '../models/tip_datuma.model';
+import { TipDatuma } from '../models (to be deleted)/tip_datuma.model';
 
 @Injectable({
   providedIn: 'root'

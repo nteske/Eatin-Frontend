@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiUrls } from '../../core/constants/api-urls';
-import { Radi } from '../models/radi.model';
+import { Uloga } from '../models (to be deleted)/uloga.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RadiService {
-  private readonly API_URL = ApiUrls.backend+'/radi/';
-  dataChange: BehaviorSubject<Radi[]> = new BehaviorSubject<Radi[]>([]);
+export class UlogaService {
+  private readonly API_URL = ApiUrls.backend+'/uloga/';
+  dataChange: BehaviorSubject<Uloga[]> = new BehaviorSubject<Uloga[]>([]);
   constructor(private httpClient: HttpClient) { }
 /*
-  public getAllRadi(): Observable<Radi[]> {
-    this.httpClient.get<Radi[]>(this.API_URL).subscribe(data => {
+  public getAllUloga(): Observable<Uloga[]> {
+    this.httpClient.get<Uloga[]>(this.API_URL).subscribe(data => {
         this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
@@ -22,15 +22,15 @@ export class RadiService {
 
     return this.dataChange.asObservable();
 }
-    public addRadi(radi: Radi): void {
-        this.httpClient.post(this.API_URL, radi).subscribe();
+    public addUloga(uloga: Uloga): void {
+        this.httpClient.post(this.API_URL, uloga).subscribe();
     }
 
-    public updateRadi(radi: Radi): void {
-        this.httpClient.put(this.API_URL, radi).subscribe();
+    public updateUloga(uloga: Uloga): void {
+        this.httpClient.put(this.API_URL, uloga).subscribe();
     }
 
-    public deleteRadi(id: number): void {
+    public deleteUloga(id: number): void {
         this.httpClient.delete(this.API_URL + id).subscribe();
     }
 */
