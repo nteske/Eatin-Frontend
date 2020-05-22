@@ -2,6 +2,6 @@ export const Roles = {
     admin: 'Admin',
     delivery: 'Dostavljac',
     employee: 'Zaposleni',
-    user: 'Klijen',
+    user: 'Klijent',
     guest: 'Gost'
   }
