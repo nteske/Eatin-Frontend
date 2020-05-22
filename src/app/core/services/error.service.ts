@@ -8,7 +8,10 @@ export class ErrorService {
   errorOccurred = new EventEmitter<Error>();
 
   handleError(error: any) {
-      const errorData = new Error(error.status,error._body);
+      var text="uknown";
+      if(error.statusText)text=error.statusText;
+      else if(error.error)text=error.error;
+      const errorData = new Error(error.status,text);
       this.errorOccurred.emit(errorData);
   }
 }

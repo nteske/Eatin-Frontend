@@ -62,7 +62,6 @@ export class HereComponent implements OnInit {
       });
   }
   private dropMarker(lokacija : Lokacija) {
-    console.log(lokacija);
       var marker = new H.map.Marker({ lat: lokacija.latitude, lng: lokacija.longitude});
       // add custom data to the marker
       marker.setData(lokacija.ulica);

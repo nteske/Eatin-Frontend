@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //servisi
-import { ErrorService } from '../../constants/error.service';
+import { ErrorService } from '../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 //modeli
 import { Error } from '../../models/error.model';
@@ -23,10 +23,11 @@ export class ErrorComponent implements OnInit {
           /************Rukovanje pristiglim greskama************/
           let msg=error.message;
           let status=parseInt(error.title);
-          if(status==0)msg="Failed to connect to server";
-          if(status==401) msg="Please login first!";
-          if(status==403) msg="Restricted!";
-          if(status==500) this.router.navigate(['/']);
+          if(status==0)msg="Failed to connect to the server";
+          else if(status==401) msg="Please login first!";
+          else if(status==403) msg="Restricted!";
+          else if(status==404) msg="Server can't find a route!";
+          else if(status==500) msg="Server error!";
           this.toastr.error(msg,"Error",{
             closeButton:true,
             positionClass:'toast-bottom-right'
