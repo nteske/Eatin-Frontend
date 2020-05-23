@@ -17,14 +17,14 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 Roles, file: [roles.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/roles.ts)
 ## Routes
 
-Backend url is set to `http-//localhost-7000`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).
+Backend url is set to `http-//localhost:7000`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).
 
 ### 1.Auth
 Value is set to `/auth/`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).<br/> 
 Login is set to `login`.<br/> 
 Register is set to `register`.<br/> <br/> 
 **Login route:**<br/> 
-**Post:** `http://localhost-7000`+`/auth/`+`login`<br/> <br/> 
+**Post:** `http://localhost:7000`+`/auth/`+`login`<br/> <br/> 
 Data sent:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "email_korisnika":"test",`<br/> 
@@ -35,7 +35,7 @@ Data recived:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "token":"Bearer ....."`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> <br/> 
 **Register route:** <br/> 
-**Post:** `http://localhost-7000`+`/auth/`+`register`<br/> <br/> 
+**Post:** `http://localhost:7000`+`/auth/`+`register`<br/> <br/> 
 Data sent:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "email_korisnika":"test",`<br/> 
@@ -52,7 +52,7 @@ Data recived:<br/>
 Value is set to `/restaurant/`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).<br/> 
 Locations of all restaurants, route is set to `locations`.<br/><br/>
 **Locations of all restaurants - route:** <br/> 
-**Get:** `http://localhost-7000`+`/restaurant/`+`locations`<br/> <br/> 
+**Get:** `http://localhost:7000`+`/restaurant/`+`locations`<br/> <br/> 
 Data recived:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`[`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
