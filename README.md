@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http-//localhost-4200/`. The app will automatically reload if you change any of the source files.
+On first start run `npm i`. Run `ng serve` for a dev server. Navigate to `http-//localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Token
 JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.<br/><br/>
