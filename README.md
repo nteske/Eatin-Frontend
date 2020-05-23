@@ -15,7 +15,7 @@ JSON Web Tokens are an open, industry standard RFC 7519 method for representing 
 `   ...`<br/> 
 `}`<br/><br/> 
 Roles, file: [roles.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/roles.ts)
-## Routes
+## Routes for Backend
 
 Backend url is set to `http://localhost:7000`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).
 
@@ -30,7 +30,7 @@ Data sent:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "email_korisnika":"test",`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "lozinka_korisnika":"text"`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
-Data recived:<br/> 
+Data received:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "token":"Bearer ....."`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> <br/> 
@@ -44,7 +44,7 @@ Data sent:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "prezime_korisnika":"test",`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "telefon_korisnika":"test"`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
-Data recived:<br/> 
+Data received:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "token":"Bearer ....."`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
@@ -53,7 +53,7 @@ Value is set to `/restaurant/`, file:[api-urls.ts](https://github.com/nteske/Eat
 Locations of all restaurants, route is set to `locations`.<br/><br/>
 **Locations of all restaurants - route:** <br/> 
 **Get:** `http://localhost:7000`+`/restaurant/`+`locations`<br/> <br/> 
-Data recived:<br/> 
+Data received:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`[`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "id_lokacije":1,`<br/> 
