@@ -10,7 +10,7 @@ export class ApiUrls {
     public static login: string = "login";
 
      //-------------restoran (url backend srv + promenjive)-------------
-     public static restorant: string = "/restorant/";
+     public static restaurant: string = "/restaurant/";
      //nasted putanje
      public static locations: string = "locations";
 }

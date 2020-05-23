@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class MapMarkersService {
-  private readonly API_URL = ApiUrls.backend+ApiUrls.restorant;
+  private readonly API_URL = ApiUrls.backend+ApiUrls.restaurant;
 
   constructor(private httpClient: HttpClient, private errorService: ErrorService) { }
   public getMarkers() {
