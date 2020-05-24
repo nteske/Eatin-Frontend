@@ -1,0 +1,33 @@
+<div>
+    <mat-form-field>
+        <mat-label>Tip hrane</mat-label>
+        <mat-select [(ngModel)]="odabranTip" name="food">
+            <mat-option *ngFor="let food of listTipove" [value]="food">
+                {{food}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Naziv restorana</mat-label>
+        <mat-select [(ngModel)]="odabranRestoran" name="restaurant">
+            <mat-option *ngFor="let restaurant of listRestorane" [value]="restaurant">
+                {{restaurant}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Pretraga</mat-label>
+        <input type="tel" matInput placeholder="naziv obroka">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+<div *ngIf="odabranRestoran!=nazivZaSveRestorane">
+    <img [src]="getMyImage(getMyRestoraunt(odabranRestoran).slika_restorana)" style="width:180px; height:180px; display:inline-block;"> {{odabranRestoran}} {{getMyRestoraunt(odabranRestoran).opis_restorana}} {{getMyRestoraunt(odabranRestoran).telefon_restorana}}
+</div>
+<div *ngFor="let item of list">
+    <i>{{item.opis_tipa_artikla}}</i>
+    <div>
+        <span *ngFor="let artikl of item.artikli" style="margin-right: 10px;">
+            <img [src]="getMyImage(artikl.slika_artikla)" style="width:50px; height:80px; display:inline-block;">{{artikl.naziv_artikla}}</span>
+    </div>
+</div>

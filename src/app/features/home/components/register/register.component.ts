@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void
   {
-    this.authService.registerKorisnik(new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,this.form.value.broj))
+    this.authService.registerKorisnik(new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     .subscribe(data=>{
       localStorage.setItem(Storage.token,data['token']);
       this.dogadjaj.emit();

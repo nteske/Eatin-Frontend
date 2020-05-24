@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatSelectModule} from '@angular/material/select'; 
 import { MatButtonModule } from '@angular/material/button';
 import { HomeRoutingModule } from './home-routing.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
@@ -12,13 +14,16 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HereComponent } from './components/here/here.component';
 import { UserInterfaceComponent } from './components/user-interface/user-interface.component';
+import { ArticlesComponent } from './components/articles/articles.component';
 
 @NgModule({
-  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent],
+  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent],
   imports: [
     CommonModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
+    MatSelectModule,
     HomeRoutingModule,
     ReactiveFormsModule,
     FormsModule,
