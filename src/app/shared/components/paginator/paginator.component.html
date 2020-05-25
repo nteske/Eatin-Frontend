@@ -1,0 +1,5 @@
+<div *ngIf="paginator>1" class="pagination">
+    <a (click)="goLeft()" class="gleda">&laquo;</a>
+    <a *ngFor="let num of pagginationList" [class.boja]="place==num" [class.gleda]="num!='..'" (click)="setMe(num)">{{num}}</a>
+    <a (click)="goRight()" class="gleda">&raquo;</a>
+</div>

@@ -20,6 +20,7 @@ export class ApiUrls {
      public static articles: string = "/articles/";
      //nasted putanje
      public static bytypes: string = "bytypes";
+     public static search: string = "search";
 
      public static getImageUrl(text):string{
          if(text.includes("http"))return text;

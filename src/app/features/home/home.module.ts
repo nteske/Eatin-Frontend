@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatSelectModule} from '@angular/material/select'; 
@@ -15,11 +16,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { HereComponent } from './components/here/here.component';
 import { UserInterfaceComponent } from './components/user-interface/user-interface.component';
 import { ArticlesComponent } from './components/articles/articles.component';
-
 @NgModule({
   declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent],
   imports: [
     CommonModule,
+    SharedModule,
     MatButtonModule,
     MatInputModule,
     MatIconModule,

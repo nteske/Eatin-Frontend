@@ -25,6 +25,7 @@ import { ErrorComponent } from './core/components/error/error.component';
     ToastrModule.forRoot(),
     JwtModule.forRoot({config:{throwNoTokenError: true}})
   ],
+  exports:[],
   providers: [
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,24 @@
+.pagination {
+    display: block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.gleda {
+    cursor: pointer;
+}
+
+.gleda:hover {
+    background-color: rgb(221, 112, 143);
+}
+
+.boja {
+    padding: 2px;
+    background-color: rgb(211, 30, 81)!important;
+    color: white!important;
+}
