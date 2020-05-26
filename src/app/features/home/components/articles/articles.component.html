@@ -1,7 +1,7 @@
 <div>
     <mat-form-field>
         <mat-label>Tip hrane</mat-label>
-        <mat-select [(ngModel)]="odabranTip" (selectionChange)="callForRequest()" name="food">
+        <mat-select [(ngModel)]="odabranTip" (selectionChange)="promena()" name="food">
             <mat-option *ngFor="let food of listTipove" [value]="food">
                 {{food}}
             </mat-option>
@@ -9,7 +9,7 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Naziv restorana</mat-label>
-        <mat-select [(ngModel)]="odabranRestoran" (selectionChange)="callForRequest()" name="restaurant">
+        <mat-select [(ngModel)]="odabranRestoran" (selectionChange)="promena()" name="restaurant">
             <mat-option *ngFor="let restaurant of listRestorane" [value]="restaurant">
                 {{restaurant}}
             </mat-option>
@@ -17,8 +17,18 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Pretraga</mat-label>
-        <input [(ngModel)]="search" type="text" matInput (change)="callForRequest() " placeholder="naziv obroka ">
+        <input [(ngModel)]="search" type="text" matInput (change)="promena() " placeholder="naziv obroka ">
         <mat-icon style="cursor:pointer;" matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+<div>
+    <mat-form-field>
+        <mat-label>Sortiraj</mat-label>
+        <mat-select [(ngModel)]="odabraoSort" (selectionChange)="promena()" name="sort">
+            <mat-option *ngFor="let s of sort" [value]="s.value">
+                {{s.name}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 </div>
 <div *ngIf="odabranRestoran!=nazivZaSveRestorane ">
@@ -28,13 +38,11 @@
     <div *ngFor="let item of list ">
         <i>{{item.opis_tipa_artikla}}</i>
         <div>
-            <span *ngFor="let artikl of item.artikli " style="margin-right: 10px; ">
-            <img [src]="getMyImage(artikl.slika_artikla) " style="width:50px; height:80px; display:inline-block; ">{{artikl.naziv_artikla}}</span>
+            <app-display *ngFor="let artikl of item.artikli " [article]="artikl"></app-display>
         </div>
     </div>
 </div>
 <div *ngIf="!homeList">
-    <span *ngFor="let artikl of secondList" style="margin-right: 10px; ">
-    <img [src]="getMyImage(artikl.slika_artikla) " style="width:50px; height:80px; display:inline-block; ">{{artikl.naziv_artikla}}</span>
+    <app-display *ngFor="let artikl of secondList " [article]="artikl"></app-display>
     <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
 </div>

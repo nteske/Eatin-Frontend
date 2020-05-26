@@ -12,6 +12,12 @@ import { Artikl } from '../../models/artikl.model';
 })
 export class ArticlesComponent implements OnInit {
   homeList:boolean=true;
+  sort=[{value:"",name:"Preporuka"},
+  {value:"dateNew",name:"Datum - najnoviji"},
+  {value:"dateOld",name:"Datum - najstariji"},
+  {value:"priceHigh",name:"Cena - opadajuce"},
+  {value:"priceLow",name:"Cena - rastuce"}];
+  odabraoSort:string=this.sort[0].value;
 
   nazivZaSve="Svi tipovi hrane";
   nazivZaSveRestorane="Svi restorani";
@@ -51,18 +57,23 @@ export class ArticlesComponent implements OnInit {
   }
 
   callForRequest():void{
-    if(this.odabranTip==this.nazivZaSve&&this.odabranRestoran==this.nazivZaSveRestorane&&!this.search)this.homeList=true;
+    if(this.odabranTip==this.nazivZaSve&&this.odabranRestoran==this.nazivZaSveRestorane&&!this.search&&this.odabraoSort==this.sort[0].value)this.homeList=true;
     else{
       let tip="";
       let restoran="";
       if(this.odabranTip!=this.nazivZaSve)tip=this.odabranTip;
       if(this.odabranRestoran!=this.nazivZaSveRestorane)restoran=this.odabranRestoran;
-      this.articlesDisplayService.searchArticles(this.page,tip,restoran,this.search).subscribe(data=>{
+      this.articlesDisplayService.searchArticles(this.page,tip,restoran,this.search,this.odabraoSort).subscribe(data=>{
         this.secondList=data.artikli;
         this.paginator=data.pages;
         this.homeList=false;
       });
     }
+  }
+
+  promena():void{
+    this.paginator=1;
+    this.callForRequest();
   }
 
   getMyImage(text):string{

@@ -5,7 +5,7 @@ import { Component, OnInit,Input,OnChanges,Output, EventEmitter } from '@angular
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit,OnChanges {
   @Input() paginator: number;//broj stranica
   @Output() promena = new EventEmitter();
 
@@ -27,7 +27,7 @@ export class PaginatorComponent implements OnInit {
 
   setMe(num){
     if(num!='..'){
-    this.place=num;
+    this.place=Number(num);
     this.promena.emit(this.place);
     if(this.paginator>=6)this.makePagination();
     }

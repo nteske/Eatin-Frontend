@@ -9,16 +9,23 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { Roles } from '../../../core/constants/roles';
 import { ErrorService } from '../../../core/services/error.service';
-import { throwError } from 'rxjs';
+import { BehaviorSubject,throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly API_URL = ApiUrls.backend+ApiUrls.auth;
+  private messageSource = new BehaviorSubject(0);
+  currentMessage = this.messageSource.asObservable();
 
   constructor(public jwtHelper: JwtHelperService, private errorService: ErrorService,private httpClient: HttpClient,private router:Router) { }
   
+
+  changeMessage() {
+    this.messageSource.next(0);
+  }
+
   public registerKorisnik(register: Register) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json' );
     return this.httpClient.post(this.API_URL+ApiUrls.register, register, { 'headers': headers })

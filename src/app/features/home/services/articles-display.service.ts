@@ -7,6 +7,7 @@ import { throwError, from } from 'rxjs';
 import { Tipizirano } from '../dto/tipizirano';
 import { Restoran } from '../models/restoran.model';
 import { Search } from '../dto/search';
+import { PrikazArtikla } from '../dto/prikazArtikla';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,14 @@ export class ArticlesDisplayService {
       return throwError(error);
   }));
   }
+
+  public getArticleDisplayById(id) {
+    return this.httpClient.get<PrikazArtikla>(this.API_URL+ApiUrls.display+'/'+id)
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
   public getAllRestourants() {
     return this.httpClient.get<Restoran[]>(ApiUrls.backend+ApiUrls.restaurant)
     .pipe(catchError((error: Response) => {
@@ -29,12 +38,13 @@ export class ArticlesDisplayService {
       return throwError(error);
   }));
 }
-  public searchArticles(page,tip,restoran,search){
+  public searchArticles(page,tip,restoran,search,sort){
     let params = new HttpParams();
-    params = params.append('page', page);
-    params = params.append('type', tip);
-    params = params.append('restaurant', restoran);
-    params = params.append('search', search);
+    params = params.append(ApiUrls.searchQuery[0], page);
+    params = params.append(ApiUrls.searchQuery[1], tip);
+    params = params.append(ApiUrls.searchQuery[2], search);
+    params = params.append(ApiUrls.searchQuery[3], sort);
+    params = params.append(ApiUrls.searchQuery[4], restoran);
     return this.httpClient.get<Search>(this.API_URL+ApiUrls.search, {params: params})
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);

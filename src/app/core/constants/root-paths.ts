@@ -1,5 +1,6 @@
 
 export const rootPaths = {
-    settings: 'settings',
-    about: 'about'
+    home: '',
+    all:'**',
+    article: 'article'
   }

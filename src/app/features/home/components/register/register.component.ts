@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
     .subscribe(data=>{
       localStorage.setItem(Storage.token,data['token']);
       this.dogadjaj.emit();
+      this.authService.changeMessage();
     });
   }
 

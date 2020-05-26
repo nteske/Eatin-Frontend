@@ -4,4 +4,5 @@ export class Artikl {
 	tip_artikla: number;
 	naziv_artikla: string;
 	slika_artikla: string;
+	cena_artikla: number;
 }

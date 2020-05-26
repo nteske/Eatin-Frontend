@@ -20,6 +20,7 @@ export class UserInterfaceComponent implements OnInit {
   }
   logOut(): void{
     this.authService.logOut();
+    this.authService.changeMessage();
     this.dogadjaj.emit();
   }
 
