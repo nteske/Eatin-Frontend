@@ -1,12 +1,16 @@
 <div *ngIf="prikazi">
-    <div *ngFor="let element of korpa">
-        {{element.artikl}}
+    <div *ngFor="let element of korpa; let i = index">
+        {{element.artikl.naziv_artikla}}
+        <img [src]="getMyImage(element.artikl.slika_artikla)" style="width:250px; height:250px;">
         <p>Prilozi:</p>
         <div *ngFor="let prilog of element.prilozi">{{prilog.naziv_priloga}}</div>
         <p>Mera:</p>
         <div>{{element.mera[0].opis_mere}}</div>
+        <p>{{element.artikl.cena_artikla}}</p>
+        <button mat-raised-button color="warn" (click)="removeMe(i)">Izbaci iz korpe</button>
     </div>
-    <button mat-raised-button color="primary">Potvrdi porudzbinu</button>
+    <p>Ukupna cena {{ukupnaCena}}</p>
+    <button mat-raised-button color="primary" (click)="posaljiPorudzbinu()">Potvrdi porudzbinu</button>
 </div>
 
 <p *ngIf="!prikazi">Vasa korpa je prazna.</p>

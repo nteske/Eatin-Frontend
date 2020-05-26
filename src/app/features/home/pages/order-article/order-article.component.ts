@@ -7,6 +7,7 @@ import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { BasketService } from '../../../../core/services/basket.service';
 import { AuthService } from '../../services/auth.service';
 import { Roles } from '../../../../core/constants/roles';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-article',
@@ -22,7 +23,7 @@ export class OrderArticleComponent implements OnInit {
   public kolicina;
   public user=Roles.user;
   constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articlesDisplayService:ArticlesDisplayService,
-    private baskerService:BasketService) { }
+    private baskerService:BasketService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params:ParamMap) => {
@@ -45,11 +46,18 @@ export class OrderArticleComponent implements OnInit {
   }
   dodaje():void{
     if(this.user==this.getRole()){
-    var zaKorpu={artikl:this.artikl.id_artikla,
+    var zaKorpu={artikl:this.artikl,
       prilozi:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={id_priloga:item.id_priloga,naziv_priloga:item.naziv_priloga}; return item}),
       mera:this.biraMeru.filter(item=>this.kolicina==item.id_mere)
     };
-    this.baskerService.addToBasket(zaKorpu);
+    if(this.baskerService.addToBasket(zaKorpu)){
+      this.toastr.success("Uspesno ste dodali u korpu!","Uspeh",{
+        closeButton:true,
+        positionClass:'toast-bottom-right'
+      });
+    }
+    this.biraPrilog=this.biraPrilog.map(item=>{item.stanje=false;return item;});
+    this.kolicina=this.biraMeru[0].id_mere;
   }
   }
 }

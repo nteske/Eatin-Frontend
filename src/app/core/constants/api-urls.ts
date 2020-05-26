@@ -24,6 +24,9 @@ export class ApiUrls {
      public static display: string = "display";
      public static search: string = "search";
 
+     //-------------order (url backend srv + promenjive)-------------
+     public static orders: string = "/orders/";
+
      public static getImageUrl(text):string{
          if(text.includes("http"))return text;
          else return this.backend+this.files+text;

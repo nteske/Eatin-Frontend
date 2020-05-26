@@ -8,6 +8,7 @@ import { Tipizirano } from '../dto/tipizirano';
 import { Restoran } from '../models/restoran.model';
 import { Search } from '../dto/search';
 import { PrikazArtikla } from '../dto/prikazArtikla';
+import { Storage } from '../../../core/constants/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,16 @@ export class ArticlesDisplayService {
     params = params.append(ApiUrls.searchQuery[3], sort);
     params = params.append(ApiUrls.searchQuery[4], restoran);
     return this.httpClient.get<Search>(this.API_URL+ApiUrls.search, {params: params})
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  public orderArticle(all){
+    const headers = new HttpHeaders;
+    headers.set("Authorization", localStorage.getItem(Storage.token));
+    return this.httpClient.post(ApiUrls.backend+ApiUrls.orders, all,{ headers: headers })
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
