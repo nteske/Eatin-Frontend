@@ -4,7 +4,7 @@ import { ArticlesDisplayService } from '../../services/articles-display.service'
 import { PrikazArtikla } from '../../dto/prikazArtikla';
 import { Artikl } from '../../models/artikl.model';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
-import { Basket } from '../../../../core/utils/basket';
+import { BasketService } from '../../../../core/services/basket.service';
 import { AuthService } from '../../services/auth.service';
 import { Roles } from '../../../../core/constants/roles';
 
@@ -21,7 +21,8 @@ export class OrderArticleComponent implements OnInit {
   public biraMeru;
   public kolicina;
   public user=Roles.user;
-  constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articlesDisplayService:ArticlesDisplayService) { }
+  constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articlesDisplayService:ArticlesDisplayService,
+    private baskerService:BasketService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params:ParamMap) => {
@@ -48,7 +49,7 @@ export class OrderArticleComponent implements OnInit {
       prilozi:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={id_priloga:item.id_priloga,naziv_priloga:item.naziv_priloga}; return item}),
       mera:this.biraMeru.filter(item=>this.kolicina==item.id_mere)
     };
-    Basket.addToBasket(zaKorpu);
+    this.baskerService.addToBasket(zaKorpu);
   }
   }
 }

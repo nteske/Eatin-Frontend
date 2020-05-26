@@ -2,5 +2,6 @@
 export const rootPaths = {
     home: '',
     all:'**',
-    article: 'article'
+    article: 'article',
+    basket:"basket"
   }

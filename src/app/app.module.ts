@@ -12,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { ErrorComponent } from './core/components/error/error.component';
-import { BasketButtonComponent } from './core/component/basket-button/basket-button.component';
+import { BasketButtonComponent } from './core/components/basket-button/basket-button.component';
 //import { MapServiceProviderFactory } from './core/utils/MapServiceProviderFactory';
 @NgModule({
   declarations: [

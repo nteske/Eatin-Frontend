@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/home/services/auth.service';
 import { Roles } from '../../constants/roles';
+import { Router } from '@angular/router';
+import { rootPaths } from '../../constants/root-paths';
 
 @Component({
   selector: 'app-basket-button',
@@ -10,12 +12,15 @@ import { Roles } from '../../constants/roles';
 export class BasketButtonComponent implements OnInit {
   role:string=Roles.guest;
   user:string=Roles.user;
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.authService.currentMessage.subscribe(message=>{
       this.role=this.authService.getRole();
     });
+  }
+  toBasketGo():void{
+    this.router.navigateByUrl(rootPaths.basket);
   }
 
 }

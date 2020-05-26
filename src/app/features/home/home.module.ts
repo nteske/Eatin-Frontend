@@ -19,8 +19,9 @@ import { UserInterfaceComponent } from './components/user-interface/user-interfa
 import { ArticlesComponent } from './components/articles/articles.component';
 import { OrderArticleComponent } from './pages/order-article/order-article.component';
 import { DisplayComponent } from './components/display/display.component';
+import { BasketComponent } from './pages/basket/basket.component';
 @NgModule({
-  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent],
+  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent, BasketComponent],
   imports: [
     CommonModule,
     SharedModule,

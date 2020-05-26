@@ -1,0 +1,12 @@
+<div *ngIf="prikazi">
+    <div *ngFor="let element of korpa">
+        {{element.artikl}}
+        <p>Prilozi:</p>
+        <div *ngFor="let prilog of element.prilozi">{{prilog.naziv_priloga}}</div>
+        <p>Mera:</p>
+        <div>{{element.mera[0].opis_mere}}</div>
+    </div>
+    <button mat-raised-button color="primary">Potvrdi porudzbinu</button>
+</div>
+
+<p *ngIf="!prikazi">Vasa korpa je prazna.</p>
