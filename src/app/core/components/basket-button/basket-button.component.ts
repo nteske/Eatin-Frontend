@@ -27,7 +27,7 @@ export class BasketButtonComponent implements OnInit ,OnDestroy{
     });
   }
   toBasketGo():void{
-    this.router.navigateByUrl(rootPaths.basket);
+    this.router.navigateByUrl(rootPaths.orders+'/'+rootPaths.basket);
   }
 
 }

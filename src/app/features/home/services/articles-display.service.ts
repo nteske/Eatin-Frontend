@@ -53,13 +53,4 @@ export class ArticlesDisplayService {
   }));
   }
 
-  public orderArticle(all){
-    const headers = new HttpHeaders;
-    headers.set("Authorization", localStorage.getItem(Storage.token));
-    return this.httpClient.post(ApiUrls.backend+ApiUrls.orders, all,{ headers: headers })
-    .pipe(catchError((error: Response) => {
-      this.errorService.handleError(error);
-      return throwError(error);
-  }));
-  }
 }

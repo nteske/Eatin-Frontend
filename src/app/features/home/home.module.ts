@@ -4,11 +4,11 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatSelectModule} from '@angular/material/select'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { MatButtonModule } from '@angular/material/button';
 import { HomeRoutingModule } from './home-routing.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 //komponente
 import { HomeComponent } from './pages/home/home.component';
@@ -19,9 +19,8 @@ import { UserInterfaceComponent } from './components/user-interface/user-interfa
 import { ArticlesComponent } from './components/articles/articles.component';
 import { OrderArticleComponent } from './pages/order-article/order-article.component';
 import { DisplayComponent } from './components/display/display.component';
-import { BasketComponent } from './pages/basket/basket.component';
 @NgModule({
-  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent, BasketComponent],
+  declarations: [HomeComponent, LoginComponent, RegisterComponent, UserInterfaceComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent],
   imports: [
     CommonModule,
     SharedModule,
