@@ -19,11 +19,11 @@ export class ArticlesComponent implements OnInit {
   {value:"priceLow",name:"Cena - rastuce"}];
   odabraoSort:string=this.sort[0].value;
 
-  nazivZaSve="Svi tipovi hrane";
-  nazivZaSveRestorane="Svi restorani";
+  nazivZaSve={name:"Svi tipovi hrane",value:-1};
+  nazivZaSveRestorane={name:"Svi restorani",value:-1};
 
-  listTipove:string[];
-  listRestorane:string[];
+  listTipove;
+  listRestorane;
 
   list:Tipizirano[];
   secondList:Artikl[];
@@ -31,24 +31,24 @@ export class ArticlesComponent implements OnInit {
   paginator:number=1;
   page:number=1;
   search:string='';
-  odabranTip=this.nazivZaSve;
-  odabranRestoran=this.nazivZaSveRestorane;
+  odabranTip=-1;
+  odabranRestoran=-1;
 
   constructor(private articlesDisplayService:ArticlesDisplayService ) { }
 
   ngOnInit(): void {
     this.articlesDisplayService.getArticlesByTypes().subscribe(data=>{
       this.list=data;
-      this.listTipove=[this.nazivZaSve, ...data.map(item=>{return item.opis_tipa_artikla;})];
+      this.listTipove=[this.nazivZaSve, ...data.map(item=>{var s={name:item.opisTipaArtikla,value:item.idTipaArtikla}; return s;})];
     });
     this.articlesDisplayService.getAllRestourants().subscribe(data=>{
       this.ucitaniRestorani=data;
-      this.listRestorane=[this.nazivZaSveRestorane, ...data.map(item=>{return item.naziv_restorana;})];
+      this.listRestorane=[this.nazivZaSveRestorane, ...data.map(item=>{var s={name:item.nazivRestorana,value:item.idRestorana}; return s;})];
     })
   }
 
   getMyRestoraunt(name):Restoran{
-    return this.ucitaniRestorani.find(x => x.naziv_restorana === name);
+    return this.ucitaniRestorani.find(x => x.idRestorana === name);
   }
 
   novaStrana(broj){
@@ -57,15 +57,11 @@ export class ArticlesComponent implements OnInit {
   }
 
   callForRequest():void{
-    if(this.odabranTip==this.nazivZaSve&&this.odabranRestoran==this.nazivZaSveRestorane&&!this.search&&this.odabraoSort==this.sort[0].value)this.homeList=true;
+    if(this.odabranTip==-1&&this.odabranRestoran==-1&&!this.search&&this.odabraoSort==this.sort[0].value)this.homeList=true;
     else{
-      let tip="";
-      let restoran="";
-      if(this.odabranTip!=this.nazivZaSve)tip=this.odabranTip;
-      if(this.odabranRestoran!=this.nazivZaSveRestorane)restoran=this.odabranRestoran;
-      this.articlesDisplayService.searchArticles(this.page,tip,restoran,this.search,this.odabraoSort).subscribe(data=>{
-        this.secondList=data.artikli;
-        this.paginator=data.pages;
+      this.articlesDisplayService.searchArticles(this.page,this.odabranTip,this.odabranRestoran,this.search,this.odabraoSort).subscribe(data=>{
+        this.secondList=data.content;
+        this.paginator=data.totalPages;
         this.homeList=false;
       });
     }

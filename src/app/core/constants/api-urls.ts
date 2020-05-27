@@ -15,7 +15,6 @@ export class ApiUrls {
      //-------------restoran (url backend srv + promenjive)-------------
      public static restaurant: string = "/restaurant/";
      //nasted putanje
-     public static locations: string = "locations";
 
      //-------------articles (url backend srv + promenjive)-------------
      public static articles: string = "/articles/";
@@ -26,6 +25,12 @@ export class ApiUrls {
 
      //-------------order (url backend srv + promenjive)-------------
      public static orders: string = "/orders/";
+
+     //-------------locations (url backend srv + promenjive)-------------
+     public static locations: string = "/locations/";
+     //nasted putanje
+     public static userloc: string = "user";
+     public static restloc: string = "restaurant";
 
      public static getImageUrl(text):string{
          if(text.includes("http"))return text;

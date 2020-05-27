@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SlanjeNarudzbine } from '../../dto/slanjeNarudzbine';
 import { Porudzbina } from '../../dto/porudzbina';
 import { Lokacija } from '../../../home/models/lokacija.model';
+import { LocationService } from '../../services/location.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basket',
@@ -14,20 +16,31 @@ import { Lokacija } from '../../../home/models/lokacija.model';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit {
+  form: FormGroup;
   public korpa;
   public prikazi=false;
   public ukupnaCena=0;
-  constructor(private basketService:BasketService,private router:Router,private orderService:OrdersService,private toastr: ToastrService) { }
+  public locationslist;
+  public odabraoLok=-1;
+  constructor(private basketService:BasketService,private router:Router,
+    private locationService:LocationService,private orderService:OrdersService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      ulica: new FormControl(null, [Validators.required,Validators.minLength(4)]),
+      broj: new FormControl(null, [Validators.required,Validators.minLength(1)]),
+      grad: new FormControl(null, [Validators.required,Validators.minLength(2)]),
+      pBroj: new FormControl(null, [Validators.required,Validators.minLength(4)])
+    });
     this.uzmiIzKorpe();
   }
   uzmiIzKorpe(){
     var uzeto=this.basketService.getFromBasket();
     if(uzeto!=null){
+      this.getUserLocations();
       this.korpa=uzeto;
       this.prikazi=true;
-      this.ukupnaCena=this.korpa.map(item=>{return item.artikl.cena_artikla;}).reduce((acc, cur) => acc + cur, 0);
+      this.ukupnaCena=this.korpa.map(item=>{return item.artikl.cenaArtikla;}).reduce((acc, cur) => acc + cur, 0);
     }
   }
   removeMe(num){
@@ -68,6 +81,24 @@ export class BasketComponent implements OnInit {
     this.orderService.orderArticle(all).subscribe();
     this.prikazi=false;
     this.uzmiIzKorpe();
+  }
+
+  promena(){
+
+  }
+
+  getUserLocations(){
+    var last={name:"+ Dodaj novu lokaciju",value:"-1"};
+    this.locationService.getOldUserLocations().subscribe(data=>{
+      this.locationslist=data.map(item=>{
+        var data={name:item.ulica+' '+item.broj+' , '+item.grad+' , '+item.postanskiBroj
+          ,value:item.idLokacije};
+        return data;
+      }).reverse();
+      this.locationslist.push(last);
+      this.odabraoLok=this.locationslist[0].value;
+    }
+    );
   }
 
 }

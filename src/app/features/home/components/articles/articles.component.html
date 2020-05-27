@@ -2,16 +2,16 @@
     <mat-form-field>
         <mat-label>Tip hrane</mat-label>
         <mat-select [(ngModel)]="odabranTip" (selectionChange)="promena()" name="food">
-            <mat-option *ngFor="let food of listTipove" [value]="food">
-                {{food}}
+            <mat-option *ngFor="let food of listTipove" [value]="food.value">
+                {{food.name}}
             </mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Naziv restorana</mat-label>
         <mat-select [(ngModel)]="odabranRestoran" (selectionChange)="promena()" name="restaurant">
-            <mat-option *ngFor="let restaurant of listRestorane" [value]="restaurant">
-                {{restaurant}}
+            <mat-option *ngFor="let restaurant of listRestorane" [value]="restaurant.value">
+                {{restaurant.name}}
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -31,12 +31,12 @@
         </mat-select>
     </mat-form-field>
 </div>
-<div *ngIf="odabranRestoran!=nazivZaSveRestorane ">
-    <img [src]="getMyImage(getMyRestoraunt(odabranRestoran).slika_restorana) " style="width:180px; height:180px; display:inline-block; "> {{odabranRestoran}} {{getMyRestoraunt(odabranRestoran).opis_restorana}} {{getMyRestoraunt(odabranRestoran).telefon_restorana}}
+<div *ngIf="odabranRestoran!=nazivZaSveRestorane.value ">
+    <img [src]="getMyImage(getMyRestoraunt(odabranRestoran).slikaRestorana) " style="width:180px; height:180px; display:inline-block; "> {{odabranRestoran}} {{getMyRestoraunt(odabranRestoran).opisRestorana}} {{getMyRestoraunt(odabranRestoran).telefonRestorana}}
 </div>
 <div *ngIf="homeList">
     <div *ngFor="let item of list ">
-        <i>{{item.opis_tipa_artikla}}</i>
+        <i>{{item.opisTipaArtikla}}</i>
         <div>
             <app-display *ngFor="let artikl of item.artikli " [article]="artikl"></app-display>
         </div>

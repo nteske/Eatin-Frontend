@@ -31,7 +31,7 @@ export class OrderArticleComponent implements OnInit {
         this.articlesDisplayService.getArticleDisplayById(this.taken).subscribe(data=>{
           this.biraMeru=data.mere;
           this.artikl=data.artikl;
-          this.kolicina=data.mere[0].id_mere;
+          this.kolicina=data.mere[0].idMere;
           let niz=JSON.parse(JSON.stringify(data.prilozi));
           this.biraPrilog=niz.map(item=>{item.stanje=false; return item;});
           this.loaded=true;
@@ -47,8 +47,8 @@ export class OrderArticleComponent implements OnInit {
   dodaje():void{
     if(this.user==this.getRole()){
     var zaKorpu={artikl:this.artikl,
-      prilozi:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={id_priloga:item.id_priloga,naziv_priloga:item.naziv_priloga}; return item}),
-      mera:this.biraMeru.filter(item=>this.kolicina==item.id_mere)
+      prilozi:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}; return item}),
+      mera:this.biraMeru.filter(item=>this.kolicina==item.idMere)
     };
     if(this.baskerService.addToBasket(zaKorpu)){
       this.toastr.success("Uspesno ste dodali u korpu!","Uspeh",{
@@ -57,7 +57,7 @@ export class OrderArticleComponent implements OnInit {
       });
     }
     this.biraPrilog=this.biraPrilog.map(item=>{item.stanje=false;return item;});
-    this.kolicina=this.biraMeru[0].id_mere;
+    this.kolicina=this.biraMeru[0].idMere;
   }
   }
 }

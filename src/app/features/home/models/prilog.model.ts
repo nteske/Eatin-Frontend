@@ -1,4 +1,4 @@
 export class Prilog { 
-    id_priloga: number;
-    naziv_priloga: string;
+    idPriloga: number;
+    nazivPriloga: string;
 }

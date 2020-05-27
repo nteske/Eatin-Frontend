@@ -1,15 +1,77 @@
-<div *ngIf="prikazi">
+<div *ngIf="prikazi" style="text-align: center;">
     <div *ngFor="let element of korpa; let i = index">
-        {{element.artikl.naziv_artikla}}
-        <img [src]="getMyImage(element.artikl.slika_artikla)" style="width:250px; height:250px;">
+        {{element.artikl.nazivArtikla}}
+        <img [src]="getMyImage(element.artikl.slikaArtikla)" style="width:250px; height:250px;">
         <p>Prilozi:</p>
-        <div *ngFor="let prilog of element.prilozi">{{prilog.naziv_priloga}}</div>
+        <div *ngFor="let prilog of element.prilozi">{{prilog.nazivPriloga}}</div>
         <p>Mera:</p>
-        <div>{{element.mera[0].opis_mere}}</div>
-        <p>{{element.artikl.cena_artikla}}</p>
+        <div>{{element.mera[0].opisMere}}</div>
+        <p>{{element.artikl.cenaArtikla}}</p>
         <button mat-raised-button color="warn" (click)="removeMe(i)">Izbaci iz korpe</button>
     </div>
     <p>Ukupna cena {{ukupnaCena}}</p>
+    <mat-form-field>
+        <mat-label>Lokacija</mat-label>
+        <mat-select [(ngModel)]="odabraoLok" (selectionChange)="promena()" name="location">
+            <mat-option *ngFor="let l of locationslist" [value]="l.value">
+                {{l.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field><br/>
+    <form *ngIf="odabraoLok==-1" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Ulica</mat-label>
+            <input formControlName="ulica" matInput type="text" placeholder="Bulevar Oslobodjenja" />
+            <mat-error *ngIf="form.controls.ulica.errors?.required">
+                Potrebno je uneti ulicu.
+            </mat-error>
+            <mat-error *ngIf="
+            !form.controls.ulica.errors?.required &&
+            form.controls.ulica.errors?.minlength
+          ">
+                Unesite validnu ulicu.
+            </mat-error>
+        </mat-form-field><br/>
+        <mat-form-field class="example-full-width">
+            <mat-label>Broj zgrade</mat-label>
+            <input formControlName="broj" matInput type="text" placeholder="bb" />
+            <mat-error *ngIf="form.controls.broj.errors?.required">
+                Potrebno je uneti broj zgrade.
+            </mat-error>
+            <mat-error *ngIf="
+            !form.controls.broj.errors?.required &&
+            form.controls.broj.errors?.minlength
+          ">
+                Unesite validan broj.
+            </mat-error>
+        </mat-form-field><br/>
+        <mat-form-field class="example-full-width">
+            <mat-label>Grad</mat-label>
+            <input formControlName="grad" matInput type="text" placeholder="Novi Sad" />
+            <mat-error *ngIf="form.controls.grad.errors?.required">
+                Potrebno je uneti grad.
+            </mat-error>
+            <mat-error *ngIf="
+            !form.controls.grad.errors?.required &&
+            form.controls.grad.errors?.minlength
+          ">
+                Unesite validan grad.
+            </mat-error>
+        </mat-form-field><br/>
+        <mat-form-field class="example-full-width">
+            <mat-label>Postanski broj</mat-label>
+            <input formControlName="pBroj" matInput type="text" placeholder="21000" />
+            <mat-error *ngIf="form.controls.pBroj.errors?.required">
+                Potrebno je uneti postanski broj.
+            </mat-error>
+            <mat-error *ngIf="
+            !form.controls.pBroj.errors?.required &&
+            form.controls.pBroj.errors?.minlength
+          ">
+                Unesite validan postanski broj.
+            </mat-error>
+        </mat-form-field><br/>
+    </form>
     <button mat-raised-button color="primary" (click)="posaljiPorudzbinu()">Potvrdi porudzbinu</button>
 </div>
 

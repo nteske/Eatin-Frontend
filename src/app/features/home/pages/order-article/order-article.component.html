@@ -1,15 +1,15 @@
 <div *ngIf="loaded">
-    naziv: {{artikl.naziv_artikla}}<br/>
-    <img [src]="getMyImage(artikl.slika_artikla)" style="height: 250px; width: 250px;"><br/> cena: {{artikl.cena_artikla}}
+    naziv: {{artikl.nazivArtikla}}<br/>
+    <img [src]="getMyImage(artikl.slikaArtikla)" style="height: 250px; width: 250px;"><br/> cena: {{artikl.cenaArtikla}}
     <p>Prilozi</p>
     <section class="example-section">
-        <mat-checkbox *ngFor="let prilog of biraPrilog" class="example-margin" style="display: block;" [(ngModel)]="prilog.stanje">{{prilog.naziv_priloga}}</mat-checkbox>
+        <mat-checkbox *ngFor="let prilog of biraPrilog" class="example-margin" style="display: block;" [(ngModel)]="prilog.stanje">{{prilog.nazivPriloga}}</mat-checkbox>
     </section>
     <mat-form-field>
         <mat-label>Kolicina:</mat-label>
         <mat-select [(ngModel)]="kolicina" name="bira">
-            <mat-option *ngFor="let mera of biraMeru" [value]="mera.id_mere">
-                {{mera.opis_mere}}
+            <mat-option *ngFor="let mera of biraMeru" [value]="mera.idMere">
+                {{mera.opisMere}}
             </mat-option>
         </mat-select>
     </mat-form-field>

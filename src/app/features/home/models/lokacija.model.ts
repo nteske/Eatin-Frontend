@@ -1,9 +1,9 @@
 export class Lokacija {
-    id_lokacije: number; 
+    idLokacije: number; 
 	grad: string;
 	ulica: string;
 	broj: string;
-	postanski_broj: string;
+	postanskiBroj: string;
 	longitude: number; 
 	latitude: number; 
 }

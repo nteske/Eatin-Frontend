@@ -7,13 +7,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
-
 import { BasketComponent } from '../orders/pages/basket/basket.component';
 
 @NgModule({
   declarations: [BasketComponent],
   imports: [
     CommonModule,
+    FormsModule,
     OrdersRoutingModule,
     MatCheckboxModule,
     MatButtonModule,
