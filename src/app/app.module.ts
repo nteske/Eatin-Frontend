@@ -13,16 +13,22 @@ import {MatIconModule} from '@angular/material/icon';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { ErrorComponent } from './core/components/error/error.component';
 import { BasketButtonComponent } from './core/components/basket-button/basket-button.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { FooterComponent } from './core/components/footer/footer.component'; 
 //import { MapServiceProviderFactory } from './core/utils/MapServiceProviderFactory';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     ErrorComponent,
-    BasketButtonComponent
+    BasketButtonComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    MatToolbarModule,
     AppRoutingModule,
     MatIconModule,
     MatButtonModule,

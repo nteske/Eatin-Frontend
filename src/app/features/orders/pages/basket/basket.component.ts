@@ -21,11 +21,13 @@ export class BasketComponent implements OnInit {
   public prikazi=false;
   public ukupnaCena=0;
   public locationslist;
+  public ucitaneLokacije:Lokacija[];
   public odabraoLok=-1;
   constructor(private basketService:BasketService,private router:Router,
     private locationService:LocationService,private orderService:OrdersService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.form = new FormGroup({
       ulica: new FormControl(null, [Validators.required,Validators.minLength(4)]),
       broj: new FormControl(null, [Validators.required,Validators.minLength(1)]),
@@ -48,14 +50,21 @@ export class BasketComponent implements OnInit {
     this.prikazi=false;
     this.basketService.removeElement(numb);
     this.uzmiIzKorpe();
+    window.scroll(0,0);
   }
 
   getMyImage(text):string{
     return ApiUrls.getImageUrl(text);
   }
   posaljiPorudzbinu():void{
+    if(this.odabraoLok==-1&&this.form.valid){
     var item:Porudzbina[]=this.basketService.getFromBasket();
     var lok:Lokacija=new Lokacija();
+    lok.idLokacije=this.odabraoLok;
+    lok.grad=this.form.value.grad;
+    lok.postanskiBroj=this.form.value.pBroj;
+    lok.ulica=this.form.value.ulica;
+    lok.broj=this.form.value.broj;
     lok.latitude=0;
     lok.longitude=0;
     var all:SlanjeNarudzbine={location:lok,porudzbina:item};
@@ -70,7 +79,14 @@ export class BasketComponent implements OnInit {
             this.callMeBaby(all);
           }
       );
-  }else{this.callMeBaby(all);}        
+  }else{this.callMeBaby(all);}
+  }
+  else if(this.odabraoLok!=-1){
+    var item:Porudzbina[]=this.basketService.getFromBasket();
+    var lok:Lokacija=this.ucitaneLokacije.find(item=>item.idLokacije==this.odabraoLok);
+    var all:SlanjeNarudzbine={location:lok,porudzbina:item};
+    this.callMeBaby(all);
+  }
   }
   callMeBaby(all:SlanjeNarudzbine){
     this.basketService.clearBasket();
@@ -90,6 +106,7 @@ export class BasketComponent implements OnInit {
   getUserLocations(){
     var last={name:"+ Dodaj novu lokaciju",value:"-1"};
     this.locationService.getOldUserLocations().subscribe(data=>{
+      this.ucitaneLokacije=data;
       this.locationslist=data.map(item=>{
         var data={name:item.ulica+' '+item.broj+' , '+item.grad+' , '+item.postanskiBroj
           ,value:item.idLokacije};

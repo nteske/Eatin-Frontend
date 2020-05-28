@@ -1,4 +1,4 @@
-<div class="example-button-container levo" *ngIf="role==user" (click)="toBasketGo()">
+<div class="example-button-container levo" *ngIf="role==user&&basket" (click)="toBasketGo()">
     <button mat-fab color="warn" aria-label="Example icon button with a home icon">
       <mat-icon>shopping_basket</mat-icon>
     </button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, Input } from '@angular/core';
 import { AuthService } from '../../../features/home/services/auth.service';
 import { Roles } from '../../constants/roles';
 import { Router ,ActivatedRoute} from '@angular/router';
@@ -10,13 +10,18 @@ import { BasketService } from '../../services/basket.service';
   templateUrl: './basket-button.component.html',
   styleUrls: ['./basket-button.component.css']
 })
-export class BasketButtonComponent implements OnInit ,OnDestroy{
+export class BasketButtonComponent implements OnInit ,OnDestroy,OnChanges{
+  @Input() basket;
   role:string=Roles.guest;
   user:string=Roles.user;
 
   constructor(private authService:AuthService,private router:Router,
     private activatedRoute:ActivatedRoute,private basketService:BasketService) { }
+  ngOnChanges(): void {
+    
+  }
   ngOnDestroy(): void {
+    if(this.basket!=false)
     this.basketService.clearBasket();
   }
 

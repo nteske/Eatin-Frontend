@@ -1,18 +1,29 @@
-<div *ngIf="prikazi" style="text-align: center;">
-    <div *ngFor="let element of korpa; let i = index">
-        {{element.artikl.nazivArtikla}}
-        <img [src]="getMyImage(element.artikl.slikaArtikla)" style="width:250px; height:250px;">
-        <p>Prilozi:</p>
-        <div *ngFor="let prilog of element.prilozi">{{prilog.nazivPriloga}}</div>
-        <p>Mera:</p>
-        <div>{{element.mera[0].opisMere}}</div>
-        <p>{{element.artikl.cenaArtikla}}</p>
-        <button mat-raised-button color="warn" (click)="removeMe(i)">Izbaci iz korpe</button>
-    </div>
-    <p>Ukupna cena {{ukupnaCena}}</p>
+<img class="cartImage" src="../../../../../assets/images/shopping_basket.png">
+<div *ngIf="prikazi" class="cartElements">
+    <mat-card *ngFor="let element of korpa; let i = index" class="items">
+        <mat-card-header style="text-align: center!important;">
+            <mat-card-title> {{element.artikl.nazivArtikla}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="getMyImage(element.artikl.slikaArtikla)">
+        <mat-card-content>
+            Prilozi:
+            <span *ngFor="let prilog of element.prilozi">{{prilog.nazivPriloga}}</span>
+            <p>Mera: {{element.mera[0].opisMere}}</p>
+            <p>Cena: {{element.artikl.cenaArtikla}} rsd</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="warn" (click)="removeMe(i)">
+                    Izbaci iz korpe
+                    <mat-icon>delete</mat-icon>
+                </button>
+        </mat-card-actions>
+    </mat-card>
+    <p style="margin-top: 13px;">Ukupna cena {{ukupnaCena}}</p>
+
+
     <mat-form-field>
         <mat-label>Lokacija</mat-label>
-        <mat-select [(ngModel)]="odabraoLok" (selectionChange)="promena()" name="location">
+        <mat-select [(ngModel)]="odabraoLok" name="locati   on">
             <mat-option *ngFor="let l of locationslist" [value]="l.value">
                 {{l.name}}
             </mat-option>
@@ -72,7 +83,7 @@
             </mat-error>
         </mat-form-field><br/>
     </form>
-    <button mat-raised-button color="primary" (click)="posaljiPorudzbinu()">Potvrdi porudzbinu</button>
+    <button style="margin-bottom: 10px;" mat-raised-button color="primary" [disabled]="!form.valid&&odabraoLok==-1" (click)="posaljiPorudzbinu()">Potvrdi porudzbinu</button>
 </div>
 
-<p *ngIf="!prikazi">Vasa korpa je prazna.</p>
+<p *ngIf="!prikazi" style="display: inline-block;">Vasa korpa je prazna.</p>

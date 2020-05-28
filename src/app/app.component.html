@@ -1,3 +1,6 @@
+<app-header *ngIf="showHeader"></app-header>
 <router-outlet></router-outlet>
-<app-basket-button></app-basket-button>
+<span class="Site-content"></span>
+<app-basket-button [basket]="showBasket"></app-basket-button>
 <app-error></app-error>
+<app-footer></app-footer>

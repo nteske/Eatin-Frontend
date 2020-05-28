@@ -1,0 +1,18 @@
+.cartImage {
+    max-width: 75px;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.cartElements {
+    text-align: center;
+    margin: auto;
+    max-width: 800px;
+}
+
+.items {
+    width: 250px;
+    display: inline-block!important;
+    margin: 5px 5px 5px 5px;
+}

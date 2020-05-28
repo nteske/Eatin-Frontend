@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.Site-content {
+    flex: 1;
+}
