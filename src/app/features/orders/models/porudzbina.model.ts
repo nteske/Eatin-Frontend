@@ -1,13 +1,15 @@
-/*import { Lokacija } from './lokacija.model'
+import { Lokacija } from '../../../features/home/models/lokacija.model'
 import { Dostavljac } from './dostavljac.model'
-import { Klijent } from './klijent.model'
+import { PorudzbinaArtikl } from '../dto/PorudzbinaArtikl';
 
 export class Porudzbina { 
 	idPorudzbine: number;
-	klijent: Klijent;
+	klijentId: number;
 	dostavljac: Dostavljac;
 	lokacija: Lokacija;
 	vremePrijemaPorudzbine: Date;
     vremeIsporukePorudzbine: Date;
 	statusPorudzbine: string;
-}*/
+	artikli: PorudzbinaArtikl;
+	ukupna_cena:number;
+}

@@ -1,0 +1,8 @@
+Artikli:
+<div *ngFor="let niz of article">
+    <img [src]="getMyImage(niz.artikl.restoran.slikaRestorana) " style="width:180px; height:180px; display:inline-block; "> {{niz.artikl.restoran.nazivRestorana}} {{niz.artikl.restoran.opisRestorana}} {{niz.artikl.restoran.telefonRestorana}} <br/>{{niz.artikl.nazivArtikla}}
+    <img style="width: 250px;" [src]="getMyImage(niz.artikl.slikaArtikla)"> Prilozi:
+    <span *ngFor="let prilog of niz.prilozi">
+        {{prilog.nazivPriloga}}
+    </span> Mera: {{niz.mera.opisMere}}
+</div>

@@ -25,7 +25,10 @@ export class ApiUrls {
 
      //-------------order (url backend srv + promenjive)-------------
      public static orders: string = "/orders/";
-
+    //nasted putanje
+    public static userOrd: string = "user";
+    public static deliveryOrd: string = "delivery";
+    public static accept: string = "accept";
      //-------------locations (url backend srv + promenjive)-------------
      public static locations: string = "/locations/";
      //nasted putanje

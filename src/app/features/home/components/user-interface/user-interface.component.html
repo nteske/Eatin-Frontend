@@ -4,13 +4,13 @@
 <button *ngIf="checkRole(assigned.employee)" mat-raised-button color="primary" style="display: block;">
   Restoran
 </button>
-<button *ngIf="checkRole(assigned.delivery)" mat-raised-button color="primary" style="display: block;">
+<button *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()" mat-raised-button color="primary" style="display: block;">
   Dostava
 </button>
 <button *ngIf="checkRole(assigned.admin)" mat-raised-button color="primary" style="display: block;">
   Admin panel
 </button>
-<button *ngIf="checkRole(assigned.user)" mat-raised-button color="primary" style="display: block;">
+<button *ngIf="checkRole(assigned.user)" (click)="goForOrders()" mat-raised-button color="primary" style="display: block;">
   Narudzbine
 </button>
 <button (click)="logOut()" mat-raised-button color="primary" style="display: block;">

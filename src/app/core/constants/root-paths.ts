@@ -4,5 +4,7 @@ export const rootPaths = {
     all:'**',
     article: 'article',
     orders:"orders",
-    basket:"basket"
+    basket:"basket",
+    oUser:"user",//orders/user
+    oDelivery:"delivery"
   }

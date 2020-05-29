@@ -1,0 +1,16 @@
+<div *ngIf="prikazi">
+    <div *ngFor="let order of orders; let i = index">
+        Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}<br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija: {{order.lokacija.ulica}}
+        {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
+        <br/> Cena: {{order.ukupna_cena}}
+        <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
+        <div *ngIf="gleda==i">
+            Artikli:
+            <app-article-orders [article]="order.artikli"></app-article-orders>
+            <button mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="orders.length==0">
+    Nema porudzbina za prikazati!
+</div>
