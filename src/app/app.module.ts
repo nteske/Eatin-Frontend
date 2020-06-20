@@ -15,7 +15,8 @@ import { ErrorComponent } from './core/components/error/error.component';
 import { BasketButtonComponent } from './core/components/basket-button/basket-button.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { FooterComponent } from './core/components/footer/footer.component'; 
+import { FooterComponent } from './core/components/footer/footer.component';
+
 //import { MapServiceProviderFactory } from './core/utils/MapServiceProviderFactory';
 @NgModule({
   declarations: [

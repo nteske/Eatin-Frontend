@@ -26,13 +26,13 @@ ngOnInit() {
 modifyHeader(location) {
     if (location.url === '/'+rootPaths.orders+'/'+rootPaths.basket) {
         this.showBasket = false;
-        this.showHeader=true;
+      //  this.showHeader=true;
     }else if(location.url==="/"){
       this.showBasket = true;
-      this.showHeader=false;
+     // this.showHeader=false;
     } 
     else {
-        this.showHeader=true;
+        //this.showHeader=true;
         this.showBasket = true;
     }
 }

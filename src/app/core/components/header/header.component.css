@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
 .mat-toolbar.mat-warn {
-    background-color: #395335!important;
+    background-color: #f8f9fa!important;
+}
+
+span {
+    color: black;
+    font-family: 'Merienda', sans-serif;
 }

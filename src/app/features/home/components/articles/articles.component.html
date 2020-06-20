@@ -1,5 +1,5 @@
-<div>
-    <mat-form-field>
+<div class="levo">
+    <mat-form-field class="prostor">
         <mat-label>Tip hrane</mat-label>
         <mat-select [(ngModel)]="odabranTip" (selectionChange)="promena()" name="food">
             <mat-option *ngFor="let food of listTipove" [value]="food.value">
@@ -7,7 +7,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="prostor">
         <mat-label>Naziv restorana</mat-label>
         <mat-select [(ngModel)]="odabranRestoran" (selectionChange)="promena()" name="restaurant">
             <mat-option *ngFor="let restaurant of listRestorane" [value]="restaurant.value">
@@ -15,14 +15,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Pretraga</mat-label>
-        <input [(ngModel)]="search" type="text" matInput (change)="promena() " placeholder="naziv obroka ">
-        <mat-icon style="cursor:pointer;" matSuffix>search</mat-icon>
-    </mat-form-field>
-</div>
-<div>
-    <mat-form-field>
+    <mat-form-field class="prostor">
         <mat-label>Sortiraj</mat-label>
         <mat-select [(ngModel)]="odabraoSort" (selectionChange)="promena()" name="sort">
             <mat-option *ngFor="let s of sort" [value]="s.value">
@@ -30,7 +23,14 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <mat-form-field class="prostor">
+        <mat-label>Pretraga</mat-label>
+        <input [(ngModel)]="search" type="text" matInput (change)="promena() " placeholder="naziv obroka ">
+        <mat-icon style="cursor:pointer;" matSuffix>search</mat-icon>
+    </mat-form-field>
 </div>
+
+
 <div *ngIf="odabranRestoran!=nazivZaSveRestorane.value ">
     <img [src]="getMyImage(getMyRestoraunt(odabranRestoran).slikaRestorana) " style="width:180px; height:180px; display:inline-block; "> {{odabranRestoran}} {{getMyRestoraunt(odabranRestoran).opisRestorana}} {{getMyRestoraunt(odabranRestoran).telefonRestorana}}
 </div>

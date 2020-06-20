@@ -1,3 +1,8 @@
-<span class="deloPrikaz" (click)="naMene(article.idArtikla)">
-<img [src]="getMyImage(article.slikaArtikla)" class="slika"> {{article.nazivArtikla}}
-</span>
+<mat-card class="example-card" (click)="naMene(article.idArtikla)">
+    <div class="wrapper">
+        <img clas="slika" mat-card-image [src]="getMyImage(article.slikaArtikla)">
+    </div>
+    <mat-card-content>
+        <p>{{article.nazivArtikla}}</p>
+    </mat-card-content>
+</mat-card>

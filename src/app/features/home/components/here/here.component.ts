@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  
-import { MapMarkersService } from '../../services/map-markers.service';
 import { ApiKeys } from '../../../../core/constants/api-keys';
 import { Lokacija } from 'src/app/features/home/models/lokacija.model';
+import { Restoran } from '../../models/restoran.model';
+import { ApiUrls } from 'src/app/core/constants/api-urls';
+
 declare var H: any;  
 
 
@@ -15,7 +17,7 @@ export class HereComponent implements OnInit {
 
   private platform: any;
   private map: any;
-  public nekiUi: any;
+  private nekiUi: any=null;
 
 
   @ViewChild("map")
@@ -32,8 +34,11 @@ export class HereComponent implements OnInit {
   @Input()
   public height: any;
 
+  @Input()
+  public restorani: Restoran[];
 
-  public constructor(private mapMarkersService:MapMarkersService) {
+
+  public constructor() {
       this.platform = new H.service.Platform({
           "appid": ApiKeys.hereId,
           "apikey": ApiKeys.hereKey
@@ -41,6 +46,10 @@ export class HereComponent implements OnInit {
   }
 
   public ngOnInit() { }
+
+  getMyImage(text):string{
+    return ApiUrls.getImageUrl(text);
+  }
 
   public ngAfterViewInit() {
       let defaultLayers = this.platform.createDefaultLayers();
@@ -52,19 +61,29 @@ export class HereComponent implements OnInit {
               center:  { lat: this.lat, lng: this.lng }
           }
       );
-      window.addEventListener('resize', () => this.map.getViewPort().resize());
-     //var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
       this.nekiUi = H.ui.UI.createDefault(this.map, defaultLayers);
-      //var group = new H.map.Group();
+      window.addEventListener('resize', () => this.map.getViewPort().resize());
+      var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
+     // var group = new H.map.Group();
      // this.map.addObject(group);
-      this.mapMarkersService.getMarkers().subscribe(data=>{
-        for(let lokacija of data)this.dropMarker(lokacija);
-      });
+
+      for(let restoran of this.restorani)this.dropMarker(restoran);
   }
-  private dropMarker(lokacija : Lokacija) {
-      var marker = new H.map.Marker({ lat: lokacija.latitude, lng: lokacija.longitude});
-      // add custom data to the marker
-      marker.setData(lokacija.ulica);
+
+  private dropMarker(restoran : Restoran) {
+      var icon = new H.map.Icon('../../../../../assets/images/mappins.png');
+      var marker = new H.map.Marker({ lng: Number(restoran.restoranSeNalazis[0].latitude), lat: Number(restoran.restoranSeNalazis[0].longitude)}, { icon: icon });
+      var html='<a style="cursor:pointer;"><div style="text-align:center;"><b>'+restoran.nazivRestorana+'</b></div>' +
+      '<div style="text-align:center;"><img style="max-width:90px;" src="'+this.getMyImage(restoran.slikaRestorana)+'"></div>'+
+      '<div style="text-align:center;"><i>'+restoran.telefonRestorana +'</i></div></a>';
+      marker.setData(html);
+      var self = this;
+      marker.addEventListener('tap', function (evt) {
+        var bubble =  new H.ui.InfoBubble(evt.target.getGeometry(), {
+          content: evt.target.getData()
+        });
+        self.nekiUi.addBubble(bubble);
+      }, false);
       this.map.addObject(marker);
 
 }

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   {
     this.authService.loginKorisnik(new Login(this.form.value.email,this.form.value.password))
     .subscribe(data=>{
-      localStorage.setItem(Storage.token,data['token']);
+      localStorage.setItem(Storage.token,'Bearer '+data['token']);
       this.dogadjaj.emit();
       this.authService.changeMessage();
     });

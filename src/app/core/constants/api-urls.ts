@@ -1,19 +1,19 @@
 export class ApiUrls {
     //-------------URL backend servera-------------
-    public static backend: string = "http://localhost:7000";
+    public static backend: string = "https://eatin-backend.herokuapp.com";
     public static searchQuery: string[]=["page","type","search","sort","restaurant"];
 
     //-------------putanja ka datotekama-------------
     public static files: string = "/files/";
 
     //-------------prijavljivanje (url backend srv + promenjive)-------------
-    public static auth: string = "/auth/";
+    public static auth: string = "/";//  "/auth"
     //nasted putanje
     public static register: string = "register";
     public static login: string = "login";
 
      //-------------restoran (url backend srv + promenjive)-------------
-     public static restaurant: string = "/restaurant/";
+     public static restaurant: string = "/restoran";
      //nasted putanje
 
      //-------------articles (url backend srv + promenjive)-------------

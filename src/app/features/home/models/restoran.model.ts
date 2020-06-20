@@ -1,3 +1,5 @@
+import { Lokacija } from './lokacija.model';
+
 export class Restoran {
     idRestorana: number;
 	nazivRestorana: string;
@@ -5,4 +7,5 @@ export class Restoran {
 	telefonRestorana: string;
 	opisRestorana: string;
 	slikaRestorana: string;
+	restoranSeNalazis?: Lokacija;
 }

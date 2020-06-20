@@ -1,5 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
 .prijava {
-    display: inline-block;
+    display: block;
     text-align: center;
-    padding: 5px;
+    margin-top: 100px;
+    background-color: #ffbc35;
+    border: 1px solid red;
+    padding: 10px;
+}
+
+.carousel-caption {
+    top: 40%;
+}
+
+h2 {
+    font-family: 'Merienda', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.slider-img {
+    width: 100%!important;
+    height: auto;
+    min-height: 320px;
+    display: block!important;
+    border-style: none;
+}
+
+ngb-carousel {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+app-articles {
+    text-align: center;
 }

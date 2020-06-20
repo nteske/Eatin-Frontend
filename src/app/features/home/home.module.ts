@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HomeRoutingModule } from './home-routing.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+import {MatCardModule} from '@angular/material/card'; 
 
 //komponente
 import { HomeComponent } from './pages/home/home.component';
@@ -30,10 +33,12 @@ import { DisplayComponent } from './components/display/display.component';
     MatIconModule,
     MatSelectModule,
     HomeRoutingModule,
+    MatCardModule,
     ReactiveFormsModule,
     FormsModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    NgbModule
   ]
 })
 export class HomeModule { }
