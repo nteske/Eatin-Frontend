@@ -1,4 +1,4 @@
-<!--- Start Carousel 
+<!--- Start Carousel
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -39,7 +39,6 @@
 </div>
 </div>
 End of Carousel -->
-<div *ngIf="ucitano">
     <ngb-carousel *ngIf="images">
         <ng-template ngbSlide>
             <div class="picsum-img-wrapper">
@@ -66,7 +65,9 @@ End of Carousel -->
     <h2 style="text-align: center;">~ Menu ~</h2>
     <app-articles></app-articles>
     <h2 style="text-align: center; margin-top: 20px;">~ Map ~</h2>
+    <div *ngIf="ucitano">
     <app-here lat="45.2566559" [restorani]="preuzeto.content" lng="19.844614" width="100%" height="500px"></app-here>
+    </div>
     <div *ngIf="!prijava" class="prijava">
         <div *ngIf="!nalog">
             <app-login (dogadjaj)="projavaProvera()"></app-login>
@@ -81,4 +82,3 @@ End of Carousel -->
     <div *ngIf="prijava" class="prijava">
         <app-user-interface (dogadjaj)="projavaProvera()"></app-user-interface>
     </div>
-</div>

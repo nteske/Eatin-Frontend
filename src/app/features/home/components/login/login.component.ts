@@ -1,6 +1,6 @@
 import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Login } from '../../dto/login';  
+import { Login } from '../../dto/login';
 import { Storage } from '../../../../core/constants/storage';
 import { AuthService } from '../../services/auth.service';
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   {
     this.authService.loginKorisnik(new Login(this.form.value.email,this.form.value.password))
     .subscribe(data=>{
-      localStorage.setItem(Storage.token,'Bearer '+data['token']);
+      localStorage.setItem(Storage.token,'Bearer '+data['jwt']);
       this.dogadjaj.emit();
       this.authService.changeMessage();
     });
