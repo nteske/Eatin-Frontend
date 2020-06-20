@@ -5,9 +5,10 @@ import { PrikazArtikla } from '../../dto/prikazArtikla';
 import { Artikl } from '../../models/artikl.model';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { BasketService } from '../../../../core/services/basket.service';
-import { AuthService } from '../../services/auth.service';
+
 import { Roles } from '../../../../core/constants/roles';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../user/services/auth.service';
 
 @Component({
   selector: 'app-order-article',

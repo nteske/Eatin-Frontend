@@ -68,17 +68,4 @@ End of Carousel -->
     <div *ngIf="ucitano">
     <app-here lat="45.2566559" [restorani]="preuzeto.content" lng="19.844614" width="100%" height="500px"></app-here>
     </div>
-    <div *ngIf="!prijava" class="prijava">
-        <div *ngIf="!nalog">
-            <app-login (dogadjaj)="projavaProvera()"></app-login>
-            Nemaš nalog? <span (click)="postavke(!nalog)" style="cursor:pointer; color:green;">Registruj se.</span>
-        </div>
-        <div *ngIf="nalog">
-            <app-register (dogadjaj)="projavaProvera()"></app-register>
-            Imaš nalog? <span (click)="postavke(!nalog)" style="cursor:pointer; color:green;">Prijavi se.</span>
-        </div>
-    </div>
 
-    <div *ngIf="prijava" class="prijava">
-        <app-user-interface (dogadjaj)="projavaProvera()"></app-user-interface>
-    </div>

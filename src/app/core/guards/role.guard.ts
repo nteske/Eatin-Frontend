@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router,CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../features/home/services/auth.service'
+import { AuthService } from '../../features/user/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,5 @@ export class RoleGuard implements CanActivate {
       if(roleExpected!=roleHave){this.router.navigateByUrl("/");return false;}
     return true;
   }
-  
+
 }

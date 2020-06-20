@@ -6,5 +6,8 @@ export const rootPaths = {
     orders:"orders",
     basket:"basket",
     oUser:"user",//orders/user
-    oDelivery:"delivery"
+    oDelivery:"delivery",
+    user:"user",
+    login:"login",
+    register:"register"
   }

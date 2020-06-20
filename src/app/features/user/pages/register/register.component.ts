@@ -1,8 +1,8 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiKeys } from '../../../../core/constants/api-keys';
 import { AuthService } from '../../services/auth.service';
-import { Register } from '../../dto/register';  
+import { Register } from '../../dto/register';
 import { Storage } from '../../../../core/constants/storage';
 
 

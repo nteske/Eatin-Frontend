@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { RestoranService } from '../../services/restoran.service';
 import { RestoranDTO } from '../../dto/RestoranDTO';
 @Component({
@@ -17,18 +16,18 @@ export class HomeComponent implements OnInit {
   "../../../../../assets/images/slider1.jpg",
   "../../../../../assets/images/slider2.jpg"
    ];
-  constructor(private authService:AuthService,private restoranService:RestoranService) { 
+  constructor(private restoranService:RestoranService) {
 
   }
 
   ngOnInit(): void {
-    this.projavaProvera();
+     // this.projavaProvera();
     this.uzmiRestorane();
   }
-
+/*
   projavaProvera(): void{
     this.prijava=this.authService.isLoggedIn();
-  }
+  }*/
 
   postavke(unos):void{
     this.nalog=unos;
