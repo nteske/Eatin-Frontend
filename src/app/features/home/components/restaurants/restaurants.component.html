@@ -1,0 +1,42 @@
+<div class="obuhvat">
+    <div>
+        <mat-form-field class="prostor">
+            <mat-label>Tip restorana</mat-label>
+            <mat-select [(ngModel)]="odabraoTip" (selectionChange)="promena()" name="tip">
+                <mat-option *ngFor="let tip of tipovi" [value]="tip.idTipaRestorana">
+                    {{tip.opisTipaRestorana}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="prostor">
+            <mat-label>Sortiraj</mat-label>
+            <mat-select [(ngModel)]="odabraoSort" (selectionChange)="promena()" name="sort">
+                <mat-option *ngFor="let sr of sort" [value]="sr.value">
+                    {{sr.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-card (click)="pozoviRestoran(restoran)" *ngFor="let restoran of restorani.content" class="example-card">
+            <mat-card-header>
+                <mat-card-subtitle><b>{{restoran.nazivRestorana}}</b></mat-card-subtitle>
+            </mat-card-header>
+            <span class="okvir">
+        <img [ngClass]="[restoran.idRestorana!=selektovan?'over':'odabrao']" [ngClass]="{'hover':restoran.idRestorana!=hover}"  src="../../../../../assets/images/check.png">
+        <img class="slika" [src]="getMyImage(restoran.slikaRestorana)">
+    </span>
+            <mat-card-content>
+                <p>
+                    {{restoran.opisRestorana}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <p style="text-align: center;">
+                    {{restoran.telefonRestorana}}
+                </p>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <app-paginator *ngIf="restorani.totalPages>1" [paginator]="restorani.totalPages" (promena)="novaStrana($event)"></app-paginator>
+</div>

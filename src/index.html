@@ -13,6 +13,13 @@
     <meta name="keywords" content="Dostava, Hrana, Naruči, Jesti, Obrok, Brza hrana, Hamburger, Pomfrit, Ćevapi">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript">
+        function zaRestoran(restoran, state) {
+            window.angularComponentReference.zone.run(() => {
+                window.angularComponentReference.loadAngularFunction(restoran, state);
+            });
+        }
+    </script>
 </head>
 
 <body style="min-width:300px;" class="mat-typography">

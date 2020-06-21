@@ -1,0 +1,62 @@
+.example-card {
+    display: inline-block;
+    width: 280px;
+    height: 360px;
+    overflow: hidden;
+    margin: 7px 7px 7px 7px;
+    cursor: pointer;
+}
+
+.obuhvat {
+    text-align: center;
+}
+
+.okvir {
+    max-width: 280px;
+    height: 200px;
+    text-align: center;
+}
+
+.slika {
+    width: 100%;
+}
+
+.prostor {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.example-card .over {
+    visibility: hidden;
+}
+
+.example-card:hover .over {
+    visibility: visible;
+}
+
+.odabrao {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    height: 170px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+}
+
+.over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    height: 170px;
+    opacity: 0.6;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+}

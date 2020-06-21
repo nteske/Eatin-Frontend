@@ -19,8 +19,9 @@ import { HereComponent } from './components/here/here.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { OrderArticleComponent } from './pages/order-article/order-article.component';
 import { DisplayComponent } from './components/display/display.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
 @NgModule({
-  declarations: [HomeComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent],
+  declarations: [HomeComponent, HereComponent, ArticlesComponent, OrderArticleComponent, DisplayComponent, RestaurantsComponent],
   imports: [
     CommonModule,
     SharedModule,
