@@ -40,13 +40,7 @@ export class RegisterComponent implements OnInit {
     },
     error => {
       if(error.status === 200) {
-        this.authService.loginKorisnik(new Login(this.form.value.email,this.form.value.password))
-        .subscribe(data=>{
-          localStorage.setItem(Storage.token,'Bearer ' + data['jwt']);
-          this.router.navigateByUrl('/');
-          this.dogadjaj.emit();
-          this.authService.changeMessage();
-      });
+        this.router.navigateByUrl('/user/login');
       }
     }
     );
