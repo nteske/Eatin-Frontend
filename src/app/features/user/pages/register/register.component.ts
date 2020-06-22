@@ -4,6 +4,8 @@ import { ApiKeys } from '../../../../core/constants/api-keys';
 import { AuthService } from '../../services/auth.service';
 import { Register } from '../../dto/register';
 import { Storage } from '../../../../core/constants/storage';
+import { Router } from '@angular/router';
+import { Login } from '../../dto/login';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class RegisterComponent implements OnInit {
   token=ApiKeys.recaptchaToken;
   form: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,10 +36,33 @@ export class RegisterComponent implements OnInit {
   {
     this.authService.registerKorisnik(new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     .subscribe(data=>{
-      localStorage.setItem(Storage.token,data['token']);
-      this.dogadjaj.emit();
-      this.authService.changeMessage();
-    });
+
+    },
+    error => {
+      if(error.status === 200) {
+        this.authService.loginKorisnik(new Login(this.form.value.email,this.form.value.password))
+        .subscribe(data=>{
+          localStorage.setItem(Storage.token,'Bearer ' + data['jwt']);
+          this.router.navigateByUrl('/');
+          this.dogadjaj.emit();
+          this.authService.changeMessage();
+      });
+      }
+    }
+    );
+  }
+
+  showHidePwd() {
+    const input = (document.getElementById('myPwdInput') as HTMLInputElement);
+    const icon = (document.getElementById('myPwdIcon'));
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'fa fa-eye-slash';
+    } else {
+      input.type = 'password';
+      icon.className = 'fa fa-eye';
+    }
   }
 
 }

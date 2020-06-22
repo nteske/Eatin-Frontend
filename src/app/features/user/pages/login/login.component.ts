@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Login } from '../../dto/login';
 import { Storage } from '../../../../core/constants/storage';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   @Output() dogadjaj = new EventEmitter();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -26,9 +28,23 @@ export class LoginComponent implements OnInit {
     this.authService.loginKorisnik(new Login(this.form.value.email,this.form.value.password))
     .subscribe(data=>{
       localStorage.setItem(Storage.token,'Bearer '+data['jwt']);
+      this.router.navigateByUrl('/');
       this.dogadjaj.emit();
       this.authService.changeMessage();
     });
+  }
+
+  showHidePwd() {
+    const input = (document.getElementById('myPwdInput') as HTMLInputElement);
+    const icon = (document.getElementById('myPwdIcon'));
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'fa fa-eye-slash';
+    } else {
+      input.type = 'password';
+      icon.className = 'fa fa-eye';
+    }
   }
 
 }

@@ -1,6 +1,11 @@
-<mat-toolbar>
+<div class="topnav" id="myTopnav">
+  <a routerLink="/"><i class="fa fa-home"></i> Home</a>
 
-    <img (click)="goHome()" src="../../../../assets/images/logo.png" style="width: 50px; cursor: pointer;">
-    <span (click)="goHome()" style="margin-left: 5px; cursor: pointer;">Eatin dostava hrane</span>
+  <a *ngIf="!auth.isLoggedIn()" class="w3-right" id="navSignIn" routerLink="/user/login"><i class="fa fa-sign-in"></i> Sign in</a>
 
-</mat-toolbar>
+  <a *ngIf="auth.isLoggedIn()" style="cursor: pointer;" (click)="auth.logOut()" class="w3-right" id="navSignIn"><i class="fa fa-sign-out"></i> Log out</a>
+
+  <a class="icon" (click)="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>

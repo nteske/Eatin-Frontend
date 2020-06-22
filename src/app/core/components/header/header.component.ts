@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../features/user/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,34 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+              public auth: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  myFunction() {
+    const x = document.getElementById('myTopnav');
+    const navSignIn = document.getElementById('navSignIn');
+    const userDropdown = document.getElementById('userDropdown');
+
+    if (x.className === 'topnav') {
+        x.className += ' responsive';
+        if (navSignIn !== null) {
+          navSignIn.className = '';
+        }
+        if (userDropdown !== null) {
+          userDropdown.className = 'dropdown';
+        }
+    } else {
+        x.className = 'topnav';
+        if (navSignIn !== null) {
+          navSignIn.className = 'w3-right';
+        }
+        if (userDropdown !== null) {
+          userDropdown.className = 'dropdown w3-right';
+        }
+    }
   }
 
   goHome(){

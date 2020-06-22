@@ -1,4 +1,4 @@
-<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<!--<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field class="example-full-width">
         <mat-label>Email Adresa</mat-label>
         <input formControlName="email" matInput type="email" placeholder="kredencijali@primer.com" />
@@ -28,4 +28,51 @@
     <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
     Login
   </button>
-</form>
+</form>-->
+
+<div class="center">
+  <mat-card style="background-color: rgb(208, 211, 208)">
+    <h3 class="w3-center">Login</h3>
+    <mat-card-content>
+      <form [formGroup]="form" #formControl="ngForm">
+
+        <mat-form-field >
+          <input matInput formControlName="email" placeholder="Email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="30">
+          <mat-icon matSuffix><i class="fa fa-envelope"></i></mat-icon>
+          <mat-error *ngIf="form.controls.email.errors?.required">
+            Potrebno je uneti email adresu.
+          </mat-error>
+          <mat-error *ngIf="
+          !form.controls.email.errors?.required &&
+          form.controls.email.errors?.minlength
+          ">
+            Unesite validnu email adresu.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field >
+          <input matInput formControlName="password" id="myPwdInput" placeholder="Password" type="password" name="password"  required>
+          <mat-icon matSuffix><i style="cursor: pointer;" id="myPwdIcon" class="fa fa-eye" (click)="showHidePwd()"></i></mat-icon>
+          <mat-error *ngIf="form.controls.password.errors?.required">
+            Potrebno je uneti lozinku.
+        </mat-error>
+        <mat-error *ngIf="
+          !form.controls.password.errors?.required &&
+          form.controls.password.errors?.minlength
+          ">
+            Unesite validnu lozinku.
+        </mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="w3-center">
+      <button mat-raised-button [type]="onSubmit" color="primary" [disabled]="!formControl.valid" (click)="onSubmit()">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="w3-center">
+  <p>Ukoliko nemate nalog, registrujte se sada!</p>
+  <button routerLink="/user/register" style="margin-bottom: 15pt;" mat-raised-button  color="primary">Registracija</button>
+</div>
