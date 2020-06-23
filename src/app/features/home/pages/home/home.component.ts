@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   public preuzeto:RestoranDTO;
   public ucitano=false;
   public selektovan=-1;
+  public postavljenRestoran;
   public hover=-1;
   images = [
   "../../../../../assets/images/slider1.jpg",
@@ -39,19 +40,20 @@ export class HomeComponent implements OnInit,OnDestroy {
   postavke(unos):void{
     this.nalog=unos;
   }
-
+//
   poziv(ev){
     this.uzmiRestorane(ev.desceding,ev.page,ev.sort,ev.odabraoTip);
   }
   pozivIzMape(ev,state){//state 0 klinuo baloncic, 1 naslonio misa na njega, 2 sklonio misa s njega
     if(state==0){
       if(this.selektovan==Number(ev))this.selektovan=-1;
-      else this.selektovan=ev;
+      else{this.postavljenRestoran=this.preuzeto.content.find(el=>el.idRestorana==ev); this.selektovan=ev;}
     }
     if(state==1)this.hover=ev;
     else this.hover=-1;
   }
   odabrao(ev){
+    this.postavljenRestoran=this.preuzeto.content.find(el=>el.idRestorana==ev); 
     this.selektovan=ev;
   }
 

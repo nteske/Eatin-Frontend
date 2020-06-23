@@ -60,3 +60,17 @@
     border: none;
     cursor: pointer;
 }
+
+.spoj {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    visibility: visible;
+    height: 170px;
+    opacity: 0.6;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+}

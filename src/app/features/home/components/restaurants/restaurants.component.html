@@ -23,7 +23,11 @@
                 <mat-card-subtitle><b>{{restoran.nazivRestorana}}</b></mat-card-subtitle>
             </mat-card-header>
             <span class="okvir">
-        <img [ngClass]="[restoran.idRestorana!=selektovan?'over':'odabrao']" [ngClass]="{'hover':restoran.idRestorana!=hover}"  src="../../../../../assets/images/check.png">
+        <img [class.over]="restoran.idRestorana!=hover&&restoran.idRestorana!=selektovan"
+        [class.odabrao]="restoran.idRestorana==selektovan"
+        [class.spoj]="restoran.idRestorana==hover&&restoran.idRestorana!=selektovan"  
+        src="../../../../../assets/images/check.png">
+        
         <img class="slika" [src]="getMyImage(restoran.slikaRestorana)">
     </span>
             <mat-card-content>
