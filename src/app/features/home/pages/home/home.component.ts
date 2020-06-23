@@ -2,6 +2,7 @@ import { Component, OnInit,NgZone ,OnDestroy} from '@angular/core';
 import { RestoranService } from '../../services/restoran.service';
 import { RestoranDTO } from '../../dto/RestoranDTO';
 import { Restoran } from '../../models/restoran.model';
+import { TipArtikla } from '../../models/tip_artikla';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   public selektovan=-1;
   public postavljenRestoran;
   public hover=-1;
+  public tipovi:TipArtikla[];
   images = [
   "../../../../../assets/images/slider1.jpg",
   "../../../../../assets/images/slider2.jpg"
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     window['angularComponentReference'] = { component: this, zone: this.ngZone, loadAngularFunction: (restoran,state) => this.pozivIzMape(restoran,state), };
     this.uzmiRestorane('false','1','ID',-1);
+    this.uzmiTipove();
   }
   ngOnDestroy() {
     window['angularComponentReference']= null;
@@ -62,6 +65,12 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.restoranService.getRestorane(desceding,page,sort,tip).subscribe(data=>{
         this.preuzeto=data;
         this.ucitano=true;
+    });
+  }
+
+  uzmiTipove(){
+    this.restoranService.getTipoveArtikala().subscribe(data=>{
+      this.tipovi=data;
     });
   }
 

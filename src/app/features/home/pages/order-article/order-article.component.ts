@@ -29,14 +29,14 @@ export class OrderArticleComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params:ParamMap) => {
       this.taken = params.get('id');
-        this.articlesDisplayService.getArticleDisplayById(this.taken).subscribe(data=>{
+       /* this.articlesDisplayService.getArticleDisplayById(this.taken).subscribe(data=>{
           this.biraMeru=data.mere;
           this.artikl=data.artikl;
           this.kolicina=data.mere[0].idMere;
           let niz=JSON.parse(JSON.stringify(data.prilozi));
           this.biraPrilog=niz.map(item=>{item.stanje=false; return item;});
           this.loaded=true;
-        });
+        });*/
       });
   }
   getRole():string{

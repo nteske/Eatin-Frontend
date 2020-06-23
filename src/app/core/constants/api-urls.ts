@@ -1,7 +1,8 @@
 export class ApiUrls {
     //-------------URL backend servera-------------
     public static backend: string = "https://eatin-backend.herokuapp.com";
-    public static searchQuery: string[]=["descending","page","sortBy",'tipRestorana'];
+    public static searchQuery: string[]=["descending","page","sortBy",'tipRestorana',
+    'restoran','search','tipArtikla'];
 
     //-------------putanja ka datotekama-------------
     public static files: string = "/files/";
@@ -20,8 +21,10 @@ export class ApiUrls {
     public static tipRestorana: string = "/tip-restorana";
    //nasted putanje
 
+    //-------------tip artikala (url backend srv + promenjive)-------------
+    public static tipArtikala: string = "/tip-artikla";
      //-------------articles (url backend srv + promenjive)-------------
-     public static articles: string = "/articles/";
+     public static articles: string = "/artikl";
      //nasted putanje
      public static bytypes: string = "bytypes";
      public static display: string = "display";

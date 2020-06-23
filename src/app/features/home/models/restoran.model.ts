@@ -7,5 +7,5 @@ export class Restoran {
 	telefonRestorana: string;
 	opisRestorana: string;
 	slikaRestorana: string;
-	restoranSeNalazis?: Lokacija;
+	restoranSeNalazi?: Lokacija;
 }

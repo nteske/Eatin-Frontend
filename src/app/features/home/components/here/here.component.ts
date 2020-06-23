@@ -89,7 +89,7 @@ export class HereComponent implements OnInit ,OnChanges{
 
   private dropMarker(restoran : Restoran) {
       var icon = new H.map.Icon('../../../../../assets/images/mappins.png');
-      var marker = new H.map.Marker({ lng: Number(restoran.restoranSeNalazis[0].latitude), lat: Number(restoran.restoranSeNalazis[0].longitude)}, { icon: icon });
+      var marker = new H.map.Marker({ lng: Number(restoran.restoranSeNalazi[0].latitude), lat: Number(restoran.restoranSeNalazi[0].longitude)}, { icon: icon });
       var html='<div onclick="zaRestoran('+restoran.idRestorana+',0)" onmouseover="zaRestoran('+restoran.idRestorana+',1)" onmouseout="zaRestoran('+restoran.idRestorana+',2)" style="cursor:pointer;"><div style="text-align:center;"><b>'+restoran.nazivRestorana+'</b></div>' +
       '<div style="text-align:center;"><img style="max-width:90px;" src="'+this.getMyImage(restoran.slikaRestorana)+'"></div>'+
       '<div style="text-align:center;"><i>'+restoran.telefonRestorana +'</i></div></div>';

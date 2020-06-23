@@ -6,7 +6,6 @@ import { ErrorService } from '../../../core/services/error.service';
 import { throwError, from } from 'rxjs';
 import { Tipizirano } from '../dto/tipizirano';
 import { Restoran } from '../models/restoran.model';
-import { Search } from '../dto/search';
 import { PrikazArtikla } from '../dto/prikazArtikla';
 import { Storage } from '../../../core/constants/storage';
 
@@ -17,7 +16,7 @@ export class ArticlesDisplayService {
   private readonly API_URL = ApiUrls.backend+ApiUrls.articles;
 
   constructor(private httpClient: HttpClient, private errorService: ErrorService) { }
-  public getArticlesByTypes() {
+ /* public getArticlesByTypes() {
     return this.httpClient.get<Tipizirano[]>(this.API_URL+ApiUrls.bytypes)
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
@@ -50,7 +49,7 @@ export class ArticlesDisplayService {
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
-  }));
+  }));*
   }
-
+*/
 }

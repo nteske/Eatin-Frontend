@@ -1,3 +1,8 @@
+.slicica {
+    max-width: 250px!important;
+    max-height: 160px!important;
+}
+
 .example-card {
     cursor: pointer;
     height: 220px;
@@ -6,13 +11,7 @@
     margin: 5px 5px 5px 5px;
 }
 
-.wrapper {
+.obuhvat {
     width: 280px;
-    height: 280px;
-}
-
-.slika {
-    height: 100%;
-    width: 100%;
-    object-fit: contain
+    height: 320px;
 }
