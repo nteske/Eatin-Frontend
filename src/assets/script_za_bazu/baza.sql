@@ -67,6 +67,9 @@ if object_id ('FK_Moze_biti_mere_Artikl', 'FK') is not null
 if object_id ('FK_Porudzbina_Klijent', 'FK') is not null
     alter table Dostava.Porudzbina
         drop constraint FK_Porudzbina_Klijent;
+if object_id ('FK_Porudzbina_Restoran', 'FK') is not null
+    alter table Dostava.Restoran
+        drop constraint FK_Porudzbina_Restoran;
 if object_id ('FK_Porudzbina_Dostavljac', 'FK') is not null
     alter table Dostava.Porudzbina
         drop constraint FK_Porudzbina_Dostavljac;
@@ -507,12 +510,15 @@ create table Dostava.Porudzbina (
 	vreme_isporuke_porudzbine datetime2(7),
 	status_porudzbine varchar(10) not null,
 	ukupna_cena decimal(10,2) not null,
+	id_restorana int not null,
 	constraint FK_Porudzbina_Klijent foreign key (id_klijenta)
 		references Dostava.Klijent (id_klijenta),
 	constraint FK_Porudzbina_Dostavljac foreign key (id_dostavljaca)
 		references Dostava.Dostavljac (id_dostavljaca),
 	constraint FK_Porudzbina_Lokacija foreign key (id_lokacije)
 		references Dostava.Lokacija (id_lokacije),
+	constraint FK_Porudzbina_Restoran foreign key (id_restorana)
+		references Dostava.Restoran (id_restorana),
 	constraint CH_Porudzbina_vremena check (vreme_prijema_porudzbine < vreme_isporuke_porudzbine),
 	constraint CH_Porudzbina_status_porudzbine check (status_porudzbine in ('Primljena', 'Gotova', 'Preuzeta', 'Dostavljena')),
 	constraint PK_Porudzbina primary key (id_porudzbine)
