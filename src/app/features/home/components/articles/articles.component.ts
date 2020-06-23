@@ -33,7 +33,7 @@ export class ArticlesComponent implements OnInit ,OnChanges{
   search:string='';
   odabranTip=-1;
 
-  constructor(private resotranService:RestoranService ) { }
+  constructor(private resotranService:RestoranService ,private articleDisplayService:ArticlesDisplayService) { }
 
   ngOnInit(): void {
       this.pripremaStanja();
@@ -67,10 +67,9 @@ export class ArticlesComponent implements OnInit ,OnChanges{
   }
 
   callForRequest(desc,page,restoran,search,sort,tip):void{
-      this.resotranService.getArtikle(desc,page,restoran,search,sort,tip).subscribe(data=>{
+      this.articleDisplayService.getArtikle(desc,page,restoran,search,sort,tip).subscribe(data=>{
         this.secondList=data.content;
         this.paginator=data.totalPages;
-        console.log(this.secondList)
       });
   }
 

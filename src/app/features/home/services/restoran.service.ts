@@ -10,6 +10,7 @@ import { RestoranDTO } from '../dto/RestoranDTO';
 import { TipRestorana } from '../models/tip_restorana.model';
 import { TipArtikla } from '../models/tip_artikla';
 import { artiklDTO } from '../dto/artiklDTO';
+import { Artikl } from '../models/artikl.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,21 +58,4 @@ export class RestoranService {
   }
 
 
-  public getArtikle(descending,page,restoran,search:string,sortBy,tipArtikla) {
-    let params = new HttpParams();
-    params = params.append(ApiUrls.searchQuery[0], descending);
-    params = params.append(ApiUrls.searchQuery[1], page);
-    params = params.append(ApiUrls.searchQuery[4], restoran);
-    if(search.length>0)params = params.append(ApiUrls.searchQuery[5], search);
-    params = params.append(ApiUrls.searchQuery[2], sortBy);
-    if(tipArtikla!=-1)params = params.append(ApiUrls.searchQuery[6], tipArtikla);
-    var token=localStorage.getItem(Storage.token);
-    if(token==null)token="";
-    var headers = new HttpHeaders().set('Authorization', token);
-    return this.httpClient.get<artiklDTO>(this.API_URL+ApiUrls.articles, { 'headers': headers,params: params })
-    .pipe(catchError((error: Response) => {
-      this.errorService.handleError(error);
-      return throwError(error);
-  }));
-  }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute,ParamMap } from '@angular/router';
 import { ArticlesDisplayService } from '../../services/articles-display.service';
-import { PrikazArtikla } from '../../dto/prikazArtikla';
 import { Artikl } from '../../models/artikl.model';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { BasketService } from '../../../../core/services/basket.service';
@@ -9,6 +8,7 @@ import { BasketService } from '../../../../core/services/basket.service';
 import { Roles } from '../../../../core/constants/roles';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../user/services/auth.service';
+import { RestoranService } from '../../services/restoran.service';
 
 @Component({
   selector: 'app-order-article',
@@ -23,20 +23,20 @@ export class OrderArticleComponent implements OnInit {
   public biraMeru;
   public kolicina;
   public user=Roles.user;
-  constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articlesDisplayService:ArticlesDisplayService,
+  constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articleDisplayService:ArticlesDisplayService,
     private baskerService:BasketService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params:ParamMap) => {
       this.taken = params.get('id');
-       /* this.articlesDisplayService.getArticleDisplayById(this.taken).subscribe(data=>{
+        this.articleDisplayService.getArtikl(this.taken).subscribe(data=>{
           this.biraMeru=data.mere;
-          this.artikl=data.artikl;
+          this.artikl=data;
           this.kolicina=data.mere[0].idMere;
           let niz=JSON.parse(JSON.stringify(data.prilozi));
           this.biraPrilog=niz.map(item=>{item.stanje=false; return item;});
           this.loaded=true;
-        });*/
+        });
       });
   }
   getRole():string{
