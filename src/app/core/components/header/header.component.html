@@ -3,7 +3,17 @@
 
   <a *ngIf="!auth.isLoggedIn()" class="w3-right" id="navSignIn" routerLink="/user/login"><i class="fa fa-sign-in"></i> Sign in</a>
 
-  <a *ngIf="auth.isLoggedIn()" style="cursor: pointer;" (click)="auth.logOut()" class="w3-right" id="navSignIn"><i class="fa fa-sign-out"></i> Log out</a>
+  <div class="dropdown w3-right" id="userDropdown" *ngIf="auth.isLoggedIn()">
+    <button class="dropbtn"><i class="fa fa-user"></i> User
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a routerLink="/profil"><i class="fa fa-pencil"></i> Profil</a>
+      <a style="cursor: pointer;" (click)="auth.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
+    </div>
+  </div>
+
+  <!--<a *ngIf="auth.isLoggedIn()" style="cursor: pointer;" (click)="auth.logOut()" class="w3-right" id="navSignIn"><i class="fa fa-sign-out"></i> Log out</a>-->
 
   <a class="icon" (click)="myFunction()">
     <i class="fa fa-bars"></i>
