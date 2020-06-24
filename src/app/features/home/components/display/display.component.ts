@@ -23,7 +23,8 @@ export class DisplayComponent implements OnInit {
 
   naMene(num):void{
     let broj=Number(num);
-    this.router.navigateByUrl(rootPaths.article+'/'+broj);
+    this.router.navigate([]).then(result => {  window.open(rootPaths.article+'/'+broj, '_blank'); });
+    //this.router.navigateByUrl(rootPaths.article+'/'+broj);
   }
 
 }

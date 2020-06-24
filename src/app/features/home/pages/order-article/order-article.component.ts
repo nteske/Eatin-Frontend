@@ -55,7 +55,7 @@ export class OrderArticleComponent implements OnInit {
   convert(art:Artikl):ArtiklPorudzbinaDTO{
     var s=new ArtiklPorudzbinaDTO();
     s.idArtikla=art.idArtikla;
-    s.restoranId=art.idArtikla;
+    s.restoranId=art.restoranId;
     s.tipArtikla=this.tipovi.find(el=>el.idTipaArtikla=art.tipArtiklaId);
     s.nazivArtikla=art.nazivArtikla;
     s.slikaArtikla=art.slikaArtikla;

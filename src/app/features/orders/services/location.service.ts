@@ -16,9 +16,21 @@ export class LocationService {
   constructor(private httpClient: HttpClient, private errorService: ErrorService) { }
 
   getOldUserLocations() {
-    const headers = new HttpHeaders;
-    headers.set("Authorization", localStorage.getItem(Storage.token));
-    return this.httpClient.get<Lokacija[]>(this.API_URL+ApiUrls.userloc,{ headers: headers })
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<Lokacija[]>(this.API_URL,{ 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  postNewUserLocations(lok:Lokacija) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post<Lokacija>(this.API_URL,lok,{ 'headers': headers })
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

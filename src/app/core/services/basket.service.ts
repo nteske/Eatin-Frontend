@@ -76,7 +76,10 @@ export class BasketService {
           }catch(e){
           }
           if(data!=null){
-            data.stavkePorudzbine.splice(element,1);
+            var me=data.stavkePorudzbine.find(el=>el.artikl.idArtikla==Number(element));
+            data.ukupnaCena=Number(data.ukupnaCena)-Number(me.artikl.cenaArtikla);
+            var index=data.stavkePorudzbine.indexOf(me);
+            data.stavkePorudzbine.splice(index,1);
             if(data.stavkePorudzbine.length==0)this.clearBasket();
             else{
               var encrt=Crypt.encryptData(JSON.stringify(data));

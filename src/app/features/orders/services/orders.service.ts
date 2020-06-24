@@ -11,14 +11,15 @@ import { Porudzbina } from '../dto/porudzbina';
   providedIn: 'root'
 })
 export class OrdersService {
-  private readonly API_URL = ApiUrls.backend+ApiUrls.orders;
-
+  private readonly API_URL = ApiUrls.backend;
+//
   constructor(private httpClient: HttpClient, private errorService: ErrorService) { }
 
   public orderArticle(all){
-    const headers = new HttpHeaders;
-    headers.set("Authorization", localStorage.getItem(Storage.token));
-    return this.httpClient.post(this.API_URL, all,{ headers: headers })
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post(this.API_URL+ApiUrls.clientOrders, all,{ 'headers': headers })
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

@@ -1,24 +1,24 @@
 <img class="cartImage" src="../../../../../assets/images/shopping_basket.png">
 <div *ngIf="prikazi" class="cartElements">
-    <mat-card *ngFor="let element of korpa; let i = index" class="items">
+    <mat-card *ngFor="let element of korpa.stavkePorudzbine; let i = index" class="items">
         <mat-card-header style="text-align: center!important;">
             <mat-card-title> {{element.artikl.nazivArtikla}}</mat-card-title>
         </mat-card-header>
         <img mat-card-image [src]="getMyImage(element.artikl.slikaArtikla)">
         <mat-card-content>
             Prilozi:
-            <span *ngFor="let prilog of element.prilozi">{{prilog.nazivPriloga}}</span>
-            <p>Mera: {{element.mera[0].opisMere}}</p>
+            <div *ngFor="let prilog of element.imaPriloge.prilog">{{prilog.nazivPriloga}}</div>
+            <p>Mera: {{element.mera.opisMere}}</p>
             <p>Cena: {{element.artikl.cenaArtikla}} rsd</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="warn" (click)="removeMe(i)">
+            <button mat-raised-button color="warn" (click)="removeMe(element.artikl.idArtikla)">
                     Izbaci iz korpe
                     <mat-icon>delete</mat-icon>
                 </button>
         </mat-card-actions>
     </mat-card>
-    <p style="margin-top: 13px;">Ukupna cena {{ukupnaCena}}</p>
+    <p style="margin-top: 13px;">Ukupna cena {{korpa.ukupnaCena}}</p>
 
 
     <mat-form-field>

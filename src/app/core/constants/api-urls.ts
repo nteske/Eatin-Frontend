@@ -21,6 +21,11 @@ export class ApiUrls {
     public static tipRestorana: string = "/tip-restorana";
    //nasted putanje
 
+        //-------------locations (url backend srv + promenjive)-------------
+     public static locations: string = "/lokacija/";
+
+     //-------------order (url backend srv + promenjive)-------------
+     public static clientOrders: string = "/klijent-porudzbina";
     //-------------tip artikala (url backend srv + promenjive)-------------
     public static tipArtikala: string = "/tip-artikla";
      //-------------articles (url backend srv + promenjive)-------------
@@ -30,14 +35,11 @@ export class ApiUrls {
      public static display: string = "display";
      public static search: string = "search";
 
-     //-------------order (url backend srv + promenjive)-------------
-     public static orders: string = "/orders/";
     //nasted putanje
     public static userOrd: string = "user";
     public static deliveryOrd: string = "delivery";
     public static accept: string = "accept";
-     //-------------locations (url backend srv + promenjive)-------------
-     public static locations: string = "/locations/";
+
      //nasted putanje
      public static userloc: string = "user";
      public static restloc: string = "restaurant";

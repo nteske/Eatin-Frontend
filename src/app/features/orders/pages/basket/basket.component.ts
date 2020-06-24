@@ -4,7 +4,6 @@ import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { Router } from '@angular/router';
 import { OrdersService } from '../../services/orders.service';
 import { ToastrService } from 'ngx-toastr';
-import { SlanjeNarudzbine } from '../../dto/slanjeNarudzbine';
 import { Porudzbina } from '../../dto/porudzbina';
 import { Lokacija } from '../../../home/models/lokacija.model';
 import { LocationService } from '../../services/location.service';
@@ -42,7 +41,7 @@ export class BasketComponent implements OnInit {
       this.getUserLocations();
       this.korpa=uzeto;
       this.prikazi=true;
-      this.ukupnaCena=this.korpa.map(item=>{return item.artikl.cenaArtikla;}).reduce((acc, cur) => acc + cur, 0);
+      this.ukupnaCena=this.korpa.stavkePorudzbine.map(item=>{return item.artikl.cenaArtikla;}).reduce((acc, cur) => acc + cur, 0);
     }
   }
   removeMe(num){
@@ -58,7 +57,7 @@ export class BasketComponent implements OnInit {
   }
   posaljiPorudzbinu():void{
     if(this.odabraoLok==-1&&this.form.valid){
-    var item:Porudzbina[]=this.basketService.getFromBasket();
+    var item=this.basketService.getFromBasket();
     var lok:Lokacija=new Lokacija();
     lok.idLokacije=this.odabraoLok;
     lok.grad=this.form.value.grad;
@@ -67,28 +66,31 @@ export class BasketComponent implements OnInit {
     lok.broj=this.form.value.broj;
     lok.latitude=0;
     lok.longitude=0;
-    var all:SlanjeNarudzbine={location:lok,porudzbina:item};
+    item.lokacija=lok;
     if (window.navigator && window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
           position => {
-              all.location.latitude=position.coords.latitude;
-              all.location.longitude=position.coords.longitude;
-              this.callMeBaby(all);
+            item.lokacija.latitude=position.coords.latitude;
+            item.lokacija.longitude=position.coords.longitude;
+            this.locationService.postNewUserLocations(item.lokacija).subscribe(data=>{
+              this.callMeBaby(item);
+            }
+            );
           },
           error => {
-            this.callMeBaby(all);
+            this.callMeBaby(item);
           }
       );
-  }else{this.callMeBaby(all);}
+  }else{this.callMeBaby(item);}
   }
   else if(this.odabraoLok!=-1){
-    var item:Porudzbina[]=this.basketService.getFromBasket();
+    var item=this.basketService.getFromBasket();
     var lok:Lokacija=this.ucitaneLokacije.find(item=>item.idLokacije==this.odabraoLok);
-    var all:SlanjeNarudzbine={location:lok,porudzbina:item};
-    this.callMeBaby(all);
+    item.lokacija=lok;
+    this.callMeBaby(item);
   }
   }
-  callMeBaby(all:SlanjeNarudzbine){
+  callMeBaby(all){
     this.basketService.clearBasket();
     this.toastr.success("Vasa porudzbina je poslata","Uspeh",{
       closeButton:true,
@@ -97,6 +99,7 @@ export class BasketComponent implements OnInit {
     this.orderService.orderArticle(all).subscribe();
     this.prikazi=false;
     this.uzmiIzKorpe();
+    this.router.navigateByUrl('/');
   }
 
   promena(){
