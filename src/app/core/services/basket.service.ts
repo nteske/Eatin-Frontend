@@ -12,7 +12,8 @@ export class BasketService {
   addToBasket(element):boolean {
     var items=localStorage.getItem(Storage.basket);
     if(items==null){
-        var niz=[element];
+        var niz={restoranId:element.artikl.restoranId,stavkePorudzbine:[element],
+          ukupnaCena:Number(element.artikl.cenaArtikla)};
         var encrt=Crypt.encryptData(JSON.stringify(niz));
         if(encrt!="error")
         {
@@ -29,15 +30,19 @@ export class BasketService {
           }catch(e){
           }
           if(data!=null){
-          var niz=[element, ...data];
-          if(niz.length<11){
-              var encrt=Crypt.encryptData(JSON.stringify(niz));
+            ///odavde
+          if(Number(data.restoranId)==Number(element.artikl.restoranId)){
+          data.stavkePorudzbine=[element, ...data.stavkePorudzbine];
+          data.ukupnaCena=Number(data.ukupnaCena)+Number(element.artikl.cenaArtikla);
+          //ovde
+          if(data.stavkePorudzbine.length<11){
+              var encrt=Crypt.encryptData(JSON.stringify(data));
               if(encrt!="error")  {
                 localStorage.setItem(Storage.basket,encrt);
                 return true;
-              }
-              else {this.errorBasket(); return false;}
+              }else {this.errorBasket(); return false;}
             }else {this.premasio();return false;}
+          }else {this.wrongRestaurant(element); return false;}
           }else {this.errorBasket();return false;}
         }else {this.errorBasket();return false;}
     }
@@ -45,6 +50,14 @@ export class BasketService {
   premasio(){
     var error={status:666,error:"Korpa je već puna!"}
     this.errorService.handleError(error);
+  }
+
+
+  wrongRestaurant(element){
+    var error={status:1488,error:"Promenili ste restoran, prethodni artikli su ispraznjeni!"}
+    this.errorService.handleError(error);
+    this.clearBasket();
+    this.addToBasket(element);
   }
 
   errorBasket(){
@@ -63,8 +76,8 @@ export class BasketService {
           }catch(e){
           }
           if(data!=null){
-            data.splice(element,1);
-            if(data.length==0)this.clearBasket();
+            data.stavkePorudzbine.splice(element,1);
+            if(data.stavkePorudzbine.length==0)this.clearBasket();
             else{
               var encrt=Crypt.encryptData(JSON.stringify(data));
               if(encrt!="error")

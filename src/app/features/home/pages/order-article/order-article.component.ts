@@ -9,6 +9,8 @@ import { Roles } from '../../../../core/constants/roles';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../user/services/auth.service';
 import { RestoranService } from '../../services/restoran.service';
+import { ArtiklPorudzbinaDTO } from '../../dto/artiklPorudzbinaDTO';
+import { TipArtikla } from '../../models/tip_artikla';
 
 @Component({
   selector: 'app-order-article',
@@ -22,8 +24,9 @@ export class OrderArticleComponent implements OnInit {
   public biraPrilog;
   public biraMeru;
   public kolicina;
+  public tipovi:TipArtikla[];
   public user=Roles.user;
-  constructor(private authService:AuthService,private router: Router,private route: ActivatedRoute,private articleDisplayService:ArticlesDisplayService,
+  constructor(private restoranService:RestoranService,private authService:AuthService,private router: Router,private route: ActivatedRoute,private articleDisplayService:ArticlesDisplayService,
     private baskerService:BasketService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -38,6 +41,10 @@ export class OrderArticleComponent implements OnInit {
           this.loaded=true;
         });
       });
+
+      this.restoranService.getTipoveArtikala().subscribe(data=>{
+        this.tipovi=data;
+      });
   }
   getRole():string{
     return this.authService.getRole();
@@ -45,12 +52,24 @@ export class OrderArticleComponent implements OnInit {
   getMyImage(text):string{
     return ApiUrls.getImageUrl(text);
   }
+  convert(art:Artikl):ArtiklPorudzbinaDTO{
+    var s=new ArtiklPorudzbinaDTO();
+    s.idArtikla=art.idArtikla;
+    s.restoranId=art.idArtikla;
+    s.tipArtikla=this.tipovi.find(el=>el.idTipaArtikla=art.tipArtiklaId);
+    s.nazivArtikla=art.nazivArtikla;
+    s.slikaArtikla=art.slikaArtikla;
+    s.cenaArtikla=art.cenaArtikla;
+    return s;
+  }
   dodaje():void{
     if(this.user==this.getRole()){
-    var zaKorpu={artikl:this.artikl,
-      prilozi:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}; return item}),
-      mera:this.biraMeru.filter(item=>this.kolicina==item.idMere)
-    };
+    var prilog={idImaPriloge:-1,prilog:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}; return item})}
+    var zaKorpu={artikl:this.convert(this.artikl),
+      idStavkePorudzbine:-1,
+      imaPriloge:prilog,
+      mera:this.biraMeru.find(item=>this.kolicina==item.idMere)
+    };//
     if(this.baskerService.addToBasket(zaKorpu)){
       this.toastr.success("Uspesno ste dodali u korpu!","Uspeh",{
         closeButton:true,
