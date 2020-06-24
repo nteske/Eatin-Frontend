@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from "@auth0/angular-jwt";
 import { ToastrModule } from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu'; 
 
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { ErrorComponent } from './core/components/error/error.component';
@@ -30,6 +31,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
   imports: [
     BrowserModule,
     MatToolbarModule,
+    MatMenuModule,
     AppRoutingModule,
     MatIconModule,
     MatButtonModule,
