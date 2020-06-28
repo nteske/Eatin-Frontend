@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Merienda');
+body {
+  background: lightgray;
+}
 .prijava {
     display: block;
     text-align: center;
@@ -34,4 +37,8 @@ ngb-carousel {
 
 app-articles {
     text-align: center;
+}
+
+.siva {
+  background-color: lightgray
 }

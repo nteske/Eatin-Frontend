@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   public hover=-1;
   public tipovi:TipArtikla[];
   images = [
-  "../../../../../assets/images/slider1.jpg",
+  "../../../../../assets/images/food-table.jpg",
   "../../../../../assets/images/slider2.jpg"
    ];
   constructor(private ngZone: NgZone,  private restoranService:RestoranService) {
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     else this.hover=-1;
   }
   odabrao(ev){
-    this.postavljenRestoran=this.preuzeto.content.find(el=>el.idRestorana==ev); 
+    this.postavljenRestoran=this.preuzeto.content.find(el=>el.idRestorana==ev);
     this.selektovan=ev;
   }
 
@@ -73,5 +73,11 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.tipovi=data;
     });
   }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({
+      behavior: 'smooth'
+    });
+}
 
 }

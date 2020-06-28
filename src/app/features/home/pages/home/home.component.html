@@ -1,3 +1,4 @@
+<div class="siva">
 <ngb-carousel *ngIf="images">
     <ng-template ngbSlide>
         <div class="picsum-img-wrapper">
@@ -21,7 +22,88 @@
         </div>
     </ng-template>
 </ngb-carousel>
-<h2 style="text-align: center;">~ Restaurants ~</h2>
+
+<div class="w3-content" style="max-width:1100px">
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-col m6 w3-padding-large">
+     <img src="../../../../../assets/images/food-delivery.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="500" height="650">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <div class="w3-center w3-padding-64">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Brza dostava!</span>
+      </div>
+      <p class="w3-large">Za realizaciju dostave koristimo različita prevozna sredstva kako bi vreme čekanja bilo što kraće, a hrana topla. Dostavljači koriste najpogodnije prevozno sredstvo za realizaciju dostave, a to mogu biti:</p>
+      <ul class="w3-large">
+        <li>Bicikl</li>
+        <li>Skuter</li>
+        <li>Automobil</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-col m6 w3-padding-large">
+      <div class="w3-center w3-padding-64">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Veliki izbor restorana</span>
+      </div>
+      <p class="w3-large">Nudimo uslugu dostave za različite vrste restorana</p>
+      <ul class="w3-large">
+        <li>Italijanski</li>
+        <li>Francuski</li>
+        <li>Kineski</li>
+        <li>Mađarski</li>
+        <li>Srpski</li>
+        <li>Grčki</li>
+      </ul>
+      <p class="w3-large">Pogledajte ponude restorana za koje vršimo uslugu dostave</p>
+      <div class="w3-center">
+        <button mat-raised-button  color="primary" (click)="scroll(target)">Restorani</button>
+      </div>
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <img src="../../../../../assets/images/restaurant-clipart.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="w3-row-padding" id="about">
+      <div class="w3-center w3-padding-64">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Veliki izbor jela i pića</span>
+      </div>
+
+      <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+          <div class="w3-quarter">
+            <img src="../../../../../assets/images/fast-food.jpg" alt="Fast food" style="width:100%; height:100%;">
+            <h3>Brza hrana</h3>
+            <p>Burgeri, pica, roštilj, pileća krilca...</p>
+          </div>
+          <div class="w3-quarter">
+            <img src="../../../../../assets/images/cooked-food.jpg" alt="Cooked food" style="width:100%; height:100%;">
+            <h3>Kuvana jela</h3>
+            <p>Sarma, musaka, pasulj, punjene paprike...</p>
+          </div>
+          <div class="w3-quarter">
+            <img src="../../../../../assets/images/desert.jpg" alt="Desert" style="width:100%; height:100%;">
+            <h3>Dezerti</h3>
+            <p>Torte, kolači, baklava...</p>
+          </div>
+          <div class="w3-quarter">
+            <img src="../../../../../assets/images/drinks.jpg" alt="Drniks" style="width:100%; height:100%;">
+            <h3>Pića</h3>
+            <p>Vina, piva, sokovi, kokteli...</p>
+          </div>
+        </div>
+
+  <hr>
+
+
+<h2 style="text-align: center;" #target>~ Restaurants ~</h2>
 <div *ngIf="ucitano">
     <app-restaurants [hover]="hover" [selektovan]="selektovan" [restorani]="preuzeto" (restoran)="odabrao($event)" (changes)="poziv($event)"></app-restaurants>
 </div>
@@ -29,4 +111,6 @@
 <h2 style="text-align: center; margin-top: 20px;">~ Map ~</h2>
 <div *ngIf="ucitano">
     <app-here lat="45.2566559" [restorani]="preuzeto.content" lng="19.844614" width="100%" height="500px"></app-here>
+</div>
+
 </div>
