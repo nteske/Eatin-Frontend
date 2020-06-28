@@ -27,26 +27,22 @@ Register is set to `register`.<br/> <br/>
 **Post:** `http://localhost:7000`+`/auth/`+`login`<br/> <br/> 
 Data sent:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "email_korisnika":"test",`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "lozinka_korisnika":"text"`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "username":"test",`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "password":"text"`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
 Data received:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "token":"Bearer ....."`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "jwt":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpdm....."`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> <br/> 
 **Register route:** <br/> 
 **Post:** `http://localhost:7000`+`/auth/`+`register`<br/> <br/> 
 Data sent:<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "email_korisnika":"test",`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "lozinka_korisnika":"text"`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "ime_korisnika":"test",`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "prezime_korisnika":"test",`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "telefon_korisnika":"test"`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
-Data received:<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{`<br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "token":"Bearer ....."`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "emailKorisnika":"test",`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "imeKorisnika":"text"`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "lozinkaKorisnika":"test",`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "prezimeKorisnika":"test",`<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`    "telefonKorisnika":"test"`<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/> 
 ### 2.Restaurant
 Value is set to `/restaurant/`, file:[api-urls.ts](https://github.com/nteske/Eatin-Frontend/blob/master/src/app/core/constants/api-urls.ts).<br/> 
