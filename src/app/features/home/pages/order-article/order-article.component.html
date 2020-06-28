@@ -1,18 +1,21 @@
-<div *ngIf="loaded">
-    naziv: {{artikl.nazivArtikla}}<br/>
-    <img [src]="getMyImage(artikl.slikaArtikla)" style="height: 250px; width: 250px;"><br/> cena: {{artikl.cenaArtikla}}
-    <p>Prilozi</p>
-    <section class="example-section">
-        <mat-checkbox *ngFor="let prilog of biraPrilog" class="example-margin" style="display: block;" [(ngModel)]="prilog.stanje">{{prilog.nazivPriloga}}</mat-checkbox>
+<div *ngIf="loaded" class="card">
+  <img [src]="getMyImage(artikl.slikaArtikla)" style="width:100%">
+  <h1>{{artikl.nazivArtikla}}</h1>
+  <p class="price">{{artikl.cenaArtikla}} RSD</p>
+  <p>Prilozi</p>
+    <section style="padding: 10px;" class="example-section">
+        <mat-checkbox *ngFor="let prilog of biraPrilog" class="example-margin w3-margin" [(ngModel)]="prilog.stanje">{{prilog.nazivPriloga}}</mat-checkbox>
     </section>
+    <div class="w3-margin">
     <mat-form-field>
-        <mat-label>Kolicina:</mat-label>
+        <mat-label>Kolicina</mat-label>
         <mat-select [(ngModel)]="kolicina" name="bira">
             <mat-option *ngFor="let mera of biraMeru" [value]="mera.idMere">
                 {{mera.opisMere}}
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="user!=getRole()" (click)="dodaje()">Dodaj u korpu</button>
-    <p *ngIf="user!=getRole()" style="color: red;">*Morate biti prijavljeni kao "{{user}}" da bi mogli koristiti korpu!</p>
+    </div>
+  <p><button mat-raised-button color="primary" [disabled]="user!=getRole()" (click)="dodaje()">Dodaj u korpu</button></p>
 </div>
+<p *ngIf="user!=getRole()" class="w3-center" style="color: red;">* Morate biti prijavljeni kao "{{user}}" da bi mogli koristiti korpu!</p>
