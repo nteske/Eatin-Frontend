@@ -1,10 +1,8 @@
 <mat-card class="example-card" (click)="naMene(article.idArtikla)">
-    <mat-card-header>
-    </mat-card-header>
-    <span class="obuhvat">
-        <img class="slicica" [src]="getMyImage(article.slikaArtikla)">
-    </span>
+    <mat-card-title>{{article.nazivArtikla}}</mat-card-title>
     <mat-card-content>
-        <p>{{article.nazivArtikla}}</p>
+        <span class="obuhvat">
+            <img class="slicica" [src]="getMyImage(article.slikaArtikla)">
+        </span>
     </mat-card-content>
 </mat-card>
