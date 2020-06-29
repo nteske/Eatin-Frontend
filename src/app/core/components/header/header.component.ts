@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../features/user/services/auth.service';
+import { rootPaths } from '../../../core/constants/root-paths';
+import { Roles } from '../../../core/constants/roles';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +13,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router:Router,
               public auth: AuthService) { }
-
+  role=Roles.guest;
+  assigned=Roles;
   ngOnInit(): void {
+    this.role=this.auth.getRole();
   }
 
   myFunction() {
@@ -39,8 +43,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  checkRole(sent):boolean{
+    if(sent!=this.role)return false;
+    else return true;
+  }
+
   goHome(){
     this.router.navigateByUrl("/");
   }
 
+  goForOrders():void{
+    console.log("pozvan");
+    this.router.navigateByUrl(rootPaths.orders+'/'+rootPaths.oUser)
+  }
+  goForDelivery():void{
+    this.router.navigateByUrl(rootPaths.orders+'/'+rootPaths.oDelivery);
+  }
 }

@@ -5,7 +5,7 @@ import { ApiUrls } from '../../../core/constants/api-urls';
 import { ErrorService } from '../../../core/services/error.service';
 import { throwError, from } from 'rxjs';
 import { Storage } from '../../../core/constants/storage';
-import { Porudzbina } from '../dto/porudzbina';
+import { PorudzbinaDTO } from '../dto/porudzbinaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -25,26 +25,70 @@ export class OrdersService {
       return throwError(error);
   }));
   }
-  public getOrders(){
-    const headers = new HttpHeaders;
-    headers.set("Authorization", localStorage.getItem(Storage.token));
-    return this.httpClient.get<Porudzbina[]>(this.API_URL+ApiUrls.userOrd,{ headers: headers })
+  public getOrders(page,status){//.
+    let params = new HttpParams();
+    params = params.append(ApiUrls.searchQuery[1], page);
+    if(status)params = params.append(ApiUrls.searchQuery[7], status);
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<PorudzbinaDTO>(this.API_URL+ApiUrls.clientOrders,{ 'headers': headers,params: params })
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
   }));
   }
 
-  public getOrdersToDeliver(){
-    const headers = new HttpHeaders;
-    headers.set("Authorization", localStorage.getItem(Storage.token));
-    return this.httpClient.get<Porudzbina[]>(this.API_URL+ApiUrls.deliveryOrd,{ headers: headers })
+  public getOrdersToDeliver(page,status){
+    let params = new HttpParams();
+    params = params.append(ApiUrls.searchQuery[1], page);
+    if(status)params = params.append(ApiUrls.searchQuery[7], status);
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<PorudzbinaDTO>(this.API_URL+ApiUrls.deliveryOrders,{ 'headers': headers,params: params })
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
   }));
   }
 
+  public getAvalibeToDeliver(page){
+    let params = new HttpParams();
+    params = params.append(ApiUrls.searchQuery[1], page);
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<PorudzbinaDTO>(this.API_URL+ApiUrls.deliveryAvalOrders,{ 'headers': headers,params: params })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  public putPrihvataDeliver(id){
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put(this.API_URL+ApiUrls.deliveryPrihvata+id,{ 'headers': headers})
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  
+  public putIsporucujeDeliver(id){
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put(this.API_URL+ApiUrls.deliveryIsporucuje+id,{ 'headers': headers})
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+  
   public acceptOrder(num){
     const headers = new HttpHeaders;
     headers.set("Authorization", localStorage.getItem(Storage.token));

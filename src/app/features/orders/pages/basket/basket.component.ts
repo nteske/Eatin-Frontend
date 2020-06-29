@@ -4,7 +4,6 @@ import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { Router } from '@angular/router';
 import { OrdersService } from '../../services/orders.service';
 import { ToastrService } from 'ngx-toastr';
-import { Porudzbina } from '../../dto/porudzbina';
 import { Lokacija } from '../../../home/models/lokacija.model';
 import { LocationService } from '../../services/location.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

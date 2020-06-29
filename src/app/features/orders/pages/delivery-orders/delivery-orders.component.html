@@ -1,17 +1,48 @@
-<div *ngIf="prikazi">
-    <div *ngFor="let order of orders; let i = index">
-        Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}<br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija: {{order.lokacija.ulica}}
+<div *ngIf="prikazi2" style="text-align: center;">
+    <div *ngFor="let order of dostupno.content; let i = index">
+        <button mat-raised-button (click)="prihvati(order.idPorudzbine)" color="warn">Prihvati</button>
+        <span *ngIf="order.dostavljac">
+        Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija: {{order.lokacija.ulica}}
         {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
-        <br/> Cena: {{order.ukupna_cena}}
-        <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
-        <div *ngIf="gleda==i">
+        <br/> Cena: {{order.ukupnaCena}} rsd
+        <br/><button *ngIf="gleda2!=i" mat-raised-button (click)="pogledaj2(i)" color="primary">Detalji</button>
+        <div *ngIf="gleda2==i">
             Artikli:
-            <app-article-orders [article]="order.artikli"></app-article-orders>
-            <button mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij</button>
+            <app-article-orders [article]="order.stavkePorudzbine"></app-article-orders>
+            <button mat-raised-button (click)="pogledaj2(-1)" color="warn">Sakrij</button>
         </div>
-        <button mat-raised-button (click)="prihvati(i)" color="primary">Prihvati</button>
     </div>
+    <app-paginator *ngIf="paginator2>1" [paginator]="paginator2" (promena)="novaStrana2($event)"></app-paginator>
 </div>
-<div *ngIf="orders.length==0">
-    Nema porudzbina za prikazati!
+<div *ngIf="!prikazi2" style="text-align: center;">
+    Nema dostupnih porudzbina za isporuku!
 </div>
+<div style="text-align: center;">
+    <mat-form-field>
+        <mat-label>Status porudzbine</mat-label>
+        <mat-select [(ngModel)]="status" (selectionChange)="promena()" name="statusi">
+            <mat-option *ngFor="let s of statusi" [value]="s.value">
+                {{s.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>
+    <div *ngIf="prikazi" style="text-align: center;">
+        <div *ngFor="let order of orders.content; let i = index">
+            <button *ngIf="order.statusPorudzbine=='prihvacena'||order.statusPorudzbine=='Prihvacena'" mat-raised-button (click)="dostavljeno(order.idPorudzbine)" color="warn">Dostavljeno</button>
+            <span *ngIf="order.dostavljac">
+            Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija: {{order.lokacija.ulica}}
+            {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
+            <br/> Cena: {{order.ukupnaCena}} rsd
+            <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
+            <div *ngIf="gleda==i">
+                Artikli:
+                <app-article-orders [article]="order.stavkePorudzbine"></app-article-orders>
+                <button mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij</button>
+            </div>
+        </div>
+        <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
+    </div>
+    <div *ngIf="!prikazi" style="text-align: center;">
+        Nema porudzbina za prikazati!
+    </div>

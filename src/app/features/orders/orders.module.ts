@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 import { BasketComponent } from '../orders/pages/basket/basket.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
@@ -27,6 +28,7 @@ import { ArticleOrdersComponent } from './components/article-orders/article-orde
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class OrdersModule { }
