@@ -1,5 +1,7 @@
 --kredencijali: it21g2016; ftnftn2016
 
+use it21g2016;
+
 --kreiranje seme
 if not exists(select * from sys.schemas where name = 'Dostava')
 begin
@@ -7,6 +9,9 @@ begin
 end;
 
 --drop stranih kljuceva
+if object_id ('FK_Token_Korisnik', 'FK') is not null
+    alter table Dostava.Token
+        drop constraint FK_Token_Korisnik;
 if object_id ('FK_Radi_Tip_datuma', 'FK') is not null
     alter table Dostava.Radi
         drop constraint FK_Radi_Tip_datuma;
@@ -94,6 +99,8 @@ if object_id ('FK_Ima_priloge_Prilog', 'FK') is not null
         drop constraint FK_Ima_priloge_Prilog;
 
 --drop tabela
+if object_id ('Dostava.Token', 'U') is not null
+    drop table Dostava.Token;
 if object_id ('Dostava.Radi', 'U') is not null
     drop table Dostava.Radi;
 if object_id ('Dostava.Tip_datuma', 'U') is not null
@@ -140,6 +147,8 @@ if object_id ('Dostava.Uloga', 'U') is not null
     drop table Dostava.Uloga;
 
 --drop sekvenci
+if object_id ('Dostava.Token_sequence', 'SO') is not null
+    drop sequence Dostava.Token_sequence;
 if object_id ('Dostava.Porudzbina_sequence', 'SO') is not null
     drop sequence Dostava.Porudzbina_sequence;
 if object_id ('Dostava.Artikl_sequence', 'SO') is not null
@@ -180,6 +189,8 @@ if object_id ('Dostava.Sadrzi_sequence', 'SO') is not null
     drop sequence Dostava.Sadrzi_sequence;
 
 --kreiranje sekvenci i tabela--
+
+
 
 --RESTORAN
 create sequence Dostava.Restoran_sequence as int
@@ -340,6 +351,7 @@ create table Dostava.Korisnik (
 	ime_korisnika varchar(30) not null,
 	prezime_korisnika varchar(30) not null,
 	telefon_korisnika varchar(15) not null,
+	aktivan bit not null,
 	constraint CH_Korisnik_lozinka_korisnika check (len(lozinka_korisnika) > 7),
 	constraint FK_Korisnik_Uloga foreign key (id_uloge)
 		references Dostava.Uloga(id_uloge),
@@ -564,6 +576,24 @@ create table Dostava.Ima_priloge(
 		references Dostava.Prilog (id_priloga),
 	constraint PK_Ima_priloge primary key (id_ima_priloge)
 )
+
+--CONFIRMATION TOKEN
+create sequence Dostava.Token_sequence as int
+    start with 1
+    increment by 1
+    minvalue 1
+    maxvalue 1000
+    cycle;
+
+create table Dostava.Token (
+	id_tokena int default (next value for Dostava.Token_sequence),
+	token varchar(100) not null,
+	datum_kreiranja datetime2(7) not null,
+	id_korisnika int,
+	constraint PK_Token primary key (id_tokena),
+	constraint FK_Token_Korisnik foreign key (id_korisnika)
+		references Dostava.Korisnik (id_korisnika)
+);
 
 GO
 
