@@ -31,6 +31,9 @@ export class ApiUrls {
 
      public static deliveryPrihvata: string = "/dostavljac-porudzbina-prihvacena/";
      public static deliveryIsporucuje: string = "/dostavljac-porudzbina-isporucena/";
+     
+     public static employeeOrders: string = "/zaposleni-porudzbina";
+     public static employeGotovo: string = "/zaposleni-porudzbina-gotova/";
 
     //-------------tip artikala (url backend srv + promenjive)-------------
     public static tipArtikala: string = "/tip-artikla";

@@ -14,9 +14,10 @@ import { BasketComponent } from '../orders/pages/basket/basket.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { DeliveryOrdersComponent } from './pages/delivery-orders/delivery-orders.component';
 import { ArticleOrdersComponent } from './components/article-orders/article-orders.component';
+import { EmployeOrdersComponent } from './pages/employe-orders/employe-orders.component';
 //
 @NgModule({
-  declarations: [BasketComponent, UserOrdersComponent, DeliveryOrdersComponent, ArticleOrdersComponent],
+  declarations: [BasketComponent, UserOrdersComponent, DeliveryOrdersComponent, ArticleOrdersComponent, EmployeOrdersComponent],
   imports: [
     CommonModule,
     FormsModule,

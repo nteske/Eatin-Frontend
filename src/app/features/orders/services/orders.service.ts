@@ -53,6 +53,31 @@ export class OrdersService {
   }));
   }
 
+  public getEmployeeOrders(page,status){
+    let params = new HttpParams();
+    params = params.append(ApiUrls.searchQuery[1], page);
+    if(status)params = params.append(ApiUrls.searchQuery[7], status);
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<PorudzbinaDTO>(this.API_URL+ApiUrls.employeeOrders,{ 'headers': headers,params: params })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  public putGootovaEmployee(id){
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put(this.API_URL+ApiUrls.employeGotovo+id,{ 'headers': headers})
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
   public getAvalibeToDeliver(page){
     let params = new HttpParams();
     params = params.append(ApiUrls.searchQuery[1], page);

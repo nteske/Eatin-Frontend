@@ -59,4 +59,8 @@ export class HeaderComponent implements OnInit {
   goForDelivery():void{
     this.router.navigateByUrl(rootPaths.orders+'/'+rootPaths.oDelivery);
   }
+
+  goForEmploye():void{
+    this.router.navigateByUrl(rootPaths.orders+'/'+rootPaths.oEmploye);
+  }
 }
