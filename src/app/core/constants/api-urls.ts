@@ -12,6 +12,7 @@ export class ApiUrls {
     //nasted putanje
     public static register: string = "register";
     public static login: string = "login";
+    public static profil: string = "profil";
 
      //-------------restoran (url backend srv + promenjive)-------------
      public static restaurant: string = "/restoran";
@@ -31,7 +32,7 @@ export class ApiUrls {
 
      public static deliveryPrihvata: string = "/dostavljac-porudzbina-prihvacena/";
      public static deliveryIsporucuje: string = "/dostavljac-porudzbina-isporucena/";
-     
+
      public static employeeOrders: string = "/zaposleni-porudzbina";
      public static employeGotovo: string = "/zaposleni-porudzbina-gotova/";
 

@@ -20,7 +20,7 @@ export class AuthService {
   currentMessage = this.messageSource.asObservable();
 
   constructor(public jwtHelper: JwtHelperService, private errorService: ErrorService,private httpClient: HttpClient,private router:Router) { }
-  
+
 
   changeMessage() {
     this.messageSource.next(0);
@@ -61,6 +61,17 @@ export class AuthService {
       return Roles.guest;
     }
     return this.jwtHelper.decodeToken(token).role;
+  }
+
+  public getUserDetails () {
+    var token = localStorage.getItem(Storage.token);
+    if (token == null) token = "";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<Register>(this.API_URL + ApiUrls.profil, { 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
   }
 
   public logOut():void{

@@ -1,0 +1,50 @@
+<div class="center">
+    <mat-card style="background-color: rgb(208, 211, 208)">
+        <h3 class="w3-center">Profil</h3>
+        <mat-card-content>
+<form class="example-form" #formControl="ngForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+        <input  matInput placeholder="Ime" name="IME_KORISNIKA" required pattern="[A-Za-zčćžšđČĆŽŠĐ]+" minlength="2" maxlength="20">
+        <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+      </mat-form-field>
+
+    <mat-form-field >
+        <input  matInput placeholder="Prezime" name="PREZ_KORISNIKA"  required pattern="[A-Za-zčćžšđČĆŽŠĐ]+" minlength="2" maxlength="20">
+        <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+      </mat-form-field>
+
+  <mat-form-field >
+      <input matInput  placeholder="Email" name="EMAIL" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="30">
+      <mat-icon matSuffix><i class="fa fa-envelope"></i></mat-icon>
+      <mat-hint>Format: neko@domen.domen</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field >
+        <span matPrefix>+381 &nbsp;</span>
+        <input  matInput placeholder="Telefon" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" name="TELEFON" required pattern="[0-9]+" minlength="8" maxlength="25">
+        <mat-icon matSuffix><i class="fa fa-phone"></i></mat-icon>
+        <mat-hint>Format: 63515524</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field >
+          <input  matInput id="myPwdInputNew" placeholder="Nova lozinka" type="password" name="NEW_PASSWORD"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$" maxlength="20">
+          <mat-icon matSuffix><i style="cursor: pointer;" id="myPwdIconNew" class="fa fa-eye" (click)="showHidePwdNew()"></i></mat-icon>
+          <mat-hint>Minimum 8, a najviše 20 karaktera. Mora sadržati bar jedno malo i veliko slovo, cifru kao i specijalni karakter.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field style="margin-top: 25pt;">
+            <input matInput id="myPwdInput" placeholder="Postojeća šifra" type="password" name="PASSWORD" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$" maxlength="20">
+            <mat-icon matSuffix><i style="cursor: pointer;" id="myPwdIcon" class="fa fa-eye" (click)="showHidePwd()"></i></mat-icon>
+            <mat-hint>Kako bi se sačuvale promene, neophodne je uneti trenutnu lozinku.</mat-hint>
+          </mat-form-field>
+
+    <mat-card-actions class="w3-center">
+    <button mat-raised-button color="primary" [disabled]="!formControl.valid" type="submit">
+    Ažuriraj
+  </button>
+</mat-card-actions>
+</form>
+</mat-card-content>
+</mat-card>
+</div>

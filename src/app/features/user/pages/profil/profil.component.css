@@ -1,0 +1,16 @@
+.center {
+  padding-top: 15pt;
+  padding-bottom: 15pt;
+  padding-left: 5pt;
+  padding-left: 5pt;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+  overflow: hidden;
+  width: 30%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 5pt;
+}

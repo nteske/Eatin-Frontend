@@ -10,5 +10,6 @@ export const rootPaths = {
     oEmploye:"employee",
     user:"user",
     login:"login",
-    register:"register"
+    register:"register",
+    profil: "profil"
   }
