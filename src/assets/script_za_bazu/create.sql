@@ -520,7 +520,7 @@ create table Dostava.Porudzbina (
 	id_lokacije int not null,
 	vreme_prijema_porudzbine datetime2(7) default(current_timestamp),
 	vreme_isporuke_porudzbine datetime2(7),
-	status_porudzbine varchar(10) not null,
+	status_porudzbine varchar(20) not null,
 	ukupna_cena decimal(10,2) not null,
 	id_restorana int not null,
 	constraint FK_Porudzbina_Klijent foreign key (id_klijenta)
