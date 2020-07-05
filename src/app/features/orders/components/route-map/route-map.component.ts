@@ -30,7 +30,7 @@ export class RouteMapComponent implements OnInit {
   public lat: any;
 
   @Input()
-  public lng: any;
+  public lng: any;                                          
   
   @Input()
   public width: any;
@@ -43,7 +43,6 @@ export class RouteMapComponent implements OnInit {
 
   @Input()
   public korisnik: Lokacija;
-
 
   
   public constructor() {
@@ -97,8 +96,8 @@ export class RouteMapComponent implements OnInit {
 public route() {
   let params = {
       "mode": "fastest;car",
-      "waypoint0": "geo!" + this.restoran.lokacije.longitude+','+Number(this.restoran.lokacije.latitude),
-      "waypoint1": "geo!" + Number(this.korisnik.longitude)+','+ Number(this.korisnik.latitude),
+      "waypoint0": "geo!" + this.restoran.lokacije.latitude+','+Number(this.restoran.lokacije.longitude),
+      "waypoint1": "geo!" + Number(this.korisnik.latitude)+','+ Number(this.korisnik.longitude),
       "representation": "display"
   }
   this.map.removeObjects(this.map.getObjects());
@@ -130,11 +129,11 @@ public route() {
               }
             );
           var icon = new H.map.Icon('../../../../../assets/images/mappins.png');
-          var startMarker = new H.map.Marker({ lng: Number(this.restoran.lokacije.latitude), lat: Number(this.restoran.lokacije.longitude)}, { icon: icon });
+          var startMarker = new H.map.Marker({ lat: Number(this.restoran.lokacije.latitude), lng: Number(this.restoran.lokacije.longitude)}, { icon: icon });
 
 
           var icon = new H.map.Icon('../../../../../assets/images/usermappins.png');
-          var finishMarker = new H.map.Marker({ lng: Number(this.korisnik.latitude), lat: Number(this.korisnik.longitude)}, { icon: icon });
+          var finishMarker = new H.map.Marker({ lat: Number(this.korisnik.latitude), lng: Number(this.korisnik.longitude)}, { icon: icon });
 
 
           this.map.addObjects([routeLine, routeArrows,startMarker,finishMarker]);
