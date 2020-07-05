@@ -28,10 +28,17 @@ export class ErrorComponent implements OnInit {
           else if(status==403) msg="Restricted!";
           else if(status==404) msg="Server can't find a route!";
           else if(status==500) msg="Server error!";
-          this.toastr.error(msg,"Error",{
-            closeButton:true,
-            positionClass:'toast-bottom-right'
-          });
+          if (status != 200) {
+            this.toastr.error(msg,"Error",{
+              closeButton:true,
+              positionClass:'toast-bottom-right'
+            });
+          } else {
+            this.toastr.success("Aktivirajte nalog pomoću email poruke koju smo Vam poslali","Uspeh",{
+              closeButton:true,
+              positionClass:'toast-bottom-right'
+            });
+          }
         }
     );
   }
