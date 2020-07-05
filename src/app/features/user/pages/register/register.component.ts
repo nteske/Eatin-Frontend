@@ -24,18 +24,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      ime: new FormControl(null, [Validators.required,Validators.minLength(2)]),
-      prezime: new FormControl(null, [Validators.required,Validators.minLength(2)]),
-      email: new FormControl(null, [Validators.required,Validators.minLength(6)]),
-      password: new FormControl(null, [Validators.required,Validators.minLength(7)]),
-      broj: new FormControl(null, [Validators.required,Validators.minLength(6)]),
+      ime: new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(20)]),
+      prezime: new FormControl(null, [Validators.required,Validators.minLength(2),Validators.maxLength(20)]),
+      email: new FormControl(null, [Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
+      password: new FormControl(null, [Validators.required,Validators.minLength(7),Validators.maxLength(20)]),
+      broj: new FormControl(null, [Validators.required,Validators.minLength(6),Validators.maxLength(9)]),
       kapcaProvera: new FormControl(null, [Validators.required]),
     });
   }
 
   onSubmit(): void
   {
-    console.log("Registracija",new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
+   // console.log("Registracija",new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     this.authService.registerKorisnik(new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     .subscribe(data=>{
       this.toastr.success("Aktivirajte nalog pomoću email poruke koju smo Vam poslali","Uspeh",{

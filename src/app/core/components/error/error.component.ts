@@ -24,7 +24,7 @@ export class ErrorComponent implements OnInit {
           let msg=error.message;
           let status=parseInt(error.title);
           if(status==0)msg="Failed to connect to the server!";
-          else if(status==400&&msg=="OK")msg="User already exists or data validation failed.";
+          else if(status==400&&msg=="OK")msg="User already exists!";
           else if(status==401) msg="Please sing in first!";
           else if(status==403) msg="Restricted!";
           else if(status==404) msg="Server can't find a route!";
