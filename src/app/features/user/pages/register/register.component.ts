@@ -6,6 +6,7 @@ import { Register } from '../../dto/register';
 import { Storage } from '../../../../core/constants/storage';
 import { Router } from '@angular/router';
 import { Login } from '../../dto/login';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -34,16 +35,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void
   {
+    console.log("Registracija",new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     this.authService.registerKorisnik(new Register(this.form.value.email,this.form.value.password,this.form.value.ime,this.form.value.prezime,"+381"+this.form.value.broj))
     .subscribe(data=>{
-
-    },
-    error => {
-      if(error.status === 200) {
+      this.toastr.success("Aktivirajte nalog pomoću email poruke koju smo Vam poslali","Uspeh",{
+        closeButton:true,
+        timeOut: 10000,
+        positionClass:'toast-bottom-right'
+      });
         this.router.navigateByUrl('/user/login');
-      }
-    }
-    );
+
+    });
   }
 
   showHidePwd() {

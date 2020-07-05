@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   public registerKorisnik(register: Register) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json' );
-    return this.httpClient.post(this.API_URL+ApiUrls.register, register, { 'headers': headers })
+   // const headers = new HttpHeaders().set('Content-Type', 'application/json' );
+    return this.httpClient.post(this.API_URL+ApiUrls.register, register, { responseType: 'text' } )
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

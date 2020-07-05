@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PorudzbinaDTO } from '../../dto/porudzbinaDTO';
 import { OrdersService } from '../../services/orders.service';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
+import { Restoran } from 'src/app/features/home/models/restoran.model';
+import { Lokacija } from 'src/app/features/home/models/lokacija.model';
 
 @Component({
   selector: 'app-employe-orders',
@@ -20,9 +22,22 @@ export class EmployeOrdersComponent implements OnInit {
   {value:"PRIHVACENA",name:"Prihvacene porudzbine"},
   {value:"ISPORUCENA",name:"Isporucene porudzbine"}];
   public status=this.statusi[0].value;
+
+  public restoran:Restoran;
+  public lokacija:Lokacija;
   constructor(public orderService:OrdersService) { }
 
   ngOnInit(): void {
+    this.lokacija=new Lokacija();
+    this.lokacija.idLokacije=1;
+    this.lokacija.grad="aaa";
+    this.lokacija.broj="22";
+    this.lokacija.ulica="saddasd";
+    this.lokacija.postanskiBroj="";
+    this.lokacija.latitude= 19.846112;
+    this.lokacija.longitude= 45.254689;
+    this.restoran=new Restoran();
+    this.restoran.lokacije=this.lokacija;
     this.pocetak();
   }
 

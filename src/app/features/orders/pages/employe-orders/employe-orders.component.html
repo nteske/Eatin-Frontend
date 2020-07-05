@@ -12,13 +12,16 @@
     <div *ngFor="let order of orders.content; let i = index">
         <button *ngIf="order.statusPorudzbine!='gotova'&&order.statusPorudzbine!='Gotova'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
         <span *ngIf="order.dostavljac">
-            Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija:
-        {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
+            Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine| date:'d.MM.yyyy HH:mm'}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine|
+        date:'d.MM.yyyy HH:mm'}}
+        <br/> Lokacija: {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
         <br/> Cena: {{order.ukupnaCena}} rsd
         <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
         <div *ngIf="gleda==i">
             Artikli:
             <app-article-orders [article]="order.stavkePorudzbine"></app-article-orders>
+            <app-route-map [restoran]="restoran" [korisnik]="order.lokacija" lat="45.2566559" lng="19.844614" width="100%" height="500px"></app-route-map>
+
             <button mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij</button>
         </div>
     </div>
