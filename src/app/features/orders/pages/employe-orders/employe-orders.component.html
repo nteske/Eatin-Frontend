@@ -1,22 +1,3 @@
-<div *ngIf="prikazi2" style="text-align: center;">
-    <div *ngFor="let order of dostupno.content; let i = index">
-        <button mat-raised-button (click)="prihvati(order.idPorudzbine)" color="warn">Prihvati</button>
-        <span *ngIf="order.dostavljac">
-        Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija:
-        {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
-        <br/> Cena: {{order.ukupnaCena}} rsd
-        <br/><button *ngIf="gleda2!=i" mat-raised-button (click)="pogledaj2(i)" color="primary">Detalji</button>
-        <div *ngIf="gleda2==i">
-            Artikli:
-            <app-article-orders [article]="order.stavkePorudzbine"></app-article-orders>
-            <button mat-raised-button (click)="pogledaj2(-1)" color="warn">Sakrij</button>
-        </div>
-    </div>
-    <app-paginator *ngIf="paginator2>1" [paginator]="paginator2" (promena)="novaStrana2($event)"></app-paginator>
-</div>
-<div *ngIf="!prikazi2" style="text-align: center;">
-    Nema dostupnih porudzbina za isporuku!
-</div>
 <div style="text-align: center;">
     <mat-form-field>
         <mat-label>Status porudzbine</mat-label>
@@ -29,7 +10,7 @@
 </div>
 <div *ngIf="prikazi" style="text-align: center;">
     <div *ngFor="let order of orders.content; let i = index">
-        <button *ngIf="order.statusPorudzbine=='prihvacena'||order.statusPorudzbine=='Prihvacena'" mat-raised-button (click)="dostavljeno(order.idPorudzbine)" color="warn">Dostavljeno</button>
+        <button *ngIf="order.statusPorudzbine!='gotova'&&order.statusPorudzbine!='Gotova'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
         <span *ngIf="order.dostavljac">
             Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija:
         {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}

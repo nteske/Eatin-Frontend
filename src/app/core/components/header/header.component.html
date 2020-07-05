@@ -10,8 +10,9 @@
       </button>
         <div class="dropdown-content">
             <a routerLink="/profil"><i class="fa fa-pencil"></i> Profil</a>
-            <a *ngIf="checkRole(assigned.user)" (click)="goForOrders()" > Porudzbine</a>
+            <a *ngIf="checkRole(assigned.user)" (click)="goForOrders()"> Porudzbine</a>
             <a *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"> Dostava</a>
+            <a *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"> Porudzbine</a>
             <a style="cursor: pointer;" (click)="auth.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
     </div>

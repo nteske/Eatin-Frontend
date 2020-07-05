@@ -1,6 +1,6 @@
 import { ArtiklPorudzbinaDTO } from '../../home/dto/artiklPorudzbinaDTO';
 import { Mera } from '../../home/models/mera.model';
-import { ImaPrilogeDTO } from './ImaPrilogeDTO';
+import { ImaPrilogeDTO } from './imaPrilogeDTO';
 
 export class StavkaDTO { 
     artikl:ArtiklPorudzbinaDTO;
