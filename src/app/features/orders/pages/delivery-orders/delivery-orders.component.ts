@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../services/orders.service';
 import { PorudzbinaDTO } from '../../dto/porudzbinaDTO';
 import { ApiUrls } from '../../../../core/constants/api-urls';
+import { Restoran } from 'src/app/features/home/models/restoran.model';
+import { Lokacija } from 'src/app/features/home/models/lokacija.model';
+import { RestoranService } from 'src/app/features/home/services/restoran.service';
 
 @Component({
   selector: 'app-delivery-orders',
@@ -25,7 +28,11 @@ export class DeliveryOrdersComponent implements OnInit {
   {value:"PRIHVACENA",name:"Prihvacene porudzbine"},
   {value:"ISPORUCENA",name:"Isporucene porudzbine"}];
   public status=this.statusi[0].value;
-  constructor(public orderService:OrdersService) { }
+  public korisnik:Lokacija=null;
+
+  public restoran:Restoran=null;
+
+  constructor(public orderService:OrdersService,private restoranService:RestoranService) { }
 
   ngOnInit(): void {
     this.pocetak();
@@ -34,10 +41,12 @@ export class DeliveryOrdersComponent implements OnInit {
     this.paginator=1;
     this.page=1;
     this.prikazi=false;
+    this.pogledaj(-1);
     this.uzmiPoruzbine(1,this.status);
   }
   novaStrana(broj){
     this.page=broj;
+    this.pogledaj(-1);
     this.uzmiPoruzbine(this.page,this.status);
   }
   uzmiPoruzbine(page,status){
@@ -56,6 +65,7 @@ export class DeliveryOrdersComponent implements OnInit {
   }
   novaStrana2(broj){
     this.page2=broj;
+    this.pogledaj2(-1);
     this.pogledajDostupne(this.page2);
   }
   gledajSliku(test){
@@ -63,10 +73,26 @@ export class DeliveryOrdersComponent implements OnInit {
   }
 
   pogledaj(num){
+    this.gleda2=-1;
+    this.korisnik=null;
+    this.restoran=null;
     this.gleda=num;
+    if(Number(num)!=-1)
+    this.restoranService.getRestoran(this.orders.content[num].restoranId).subscribe(data=>{
+      this.restoran=data;
+      this.korisnik=this.orders.content[num].lokacija;
+    });
   }
   pogledaj2(num){
+    this.gleda=-1;
+    this.korisnik=null;
+    this.restoran=null;
     this.gleda2=num;
+    if(Number(num)!=-1)
+    this.restoranService.getRestoran(this.dostupno.content[num].restoranId).subscribe(data=>{
+      this.restoran=data;
+      this.korisnik=this.dostupno.content[num].lokacija;
+    });
   }
 
   public pocetak(){
@@ -80,11 +106,15 @@ export class DeliveryOrdersComponent implements OnInit {
 
   prihvati(num){
     this.orderService.putPrihvataDeliver(num).subscribe(data=>{
+      this.pogledaj(-1);
+      this.pogledaj2(-1);
       this.pocetak();
     });
   }
   dostavljeno(num){
     this.orderService.putIsporucujeDeliver(num).subscribe(data=>{
+      this.pogledaj(-1);
+      this.pogledaj2(-1);
       this.pocetak();
     });
   }

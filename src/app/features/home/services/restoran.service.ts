@@ -11,6 +11,7 @@ import { TipRestorana } from '../models/tip_restorana.model';
 import { TipArtikla } from '../models/tip_artikla';
 import { artiklDTO } from '../dto/artiklDTO';
 import { Artikl } from '../models/artikl.model';
+import { Restoran } from '../models/restoran.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,20 @@ export class RestoranService {
     params = params.append(ApiUrls.searchQuery[2], sortBy);
     if(tip!=-1){params = params.append(ApiUrls.searchQuery[3], tip);}
     var token=localStorage.getItem(Storage.token);
-    if(token==null)token="";
+    if(token==null)token="";//
     var headers = new HttpHeaders().set('Authorization', token);
     return this.httpClient.get<RestoranDTO>(this.API_URL+ApiUrls.restaurant, { 'headers': headers,params: params })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
+
+  public getRestoran(id) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";//
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<Restoran>(this.API_URL+ApiUrls.restaurant+'/'+id, { 'headers': headers})
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

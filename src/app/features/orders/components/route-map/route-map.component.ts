@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { Restoran } from 'src/app/features/home/models/restoran.model';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { ApiKeys } from 'src/app/core/constants/api-keys';
@@ -14,7 +14,7 @@ declare var H: any;
   templateUrl: './route-map.component.html',
   styleUrls: ['./route-map.component.css']
 })
-export class RouteMapComponent implements OnInit {
+export class RouteMapComponent implements OnInit,OnChanges {
   public directions: any;
   private platform: any;
   private map: any;
@@ -39,11 +39,15 @@ export class RouteMapComponent implements OnInit {
   public height: any;
 
   @Input()
-  public restoran: Restoran;
+  public restoran: Restoran=null;
 
   @Input()
-  public korisnik: Lokacija;
+  public korisnik: Lokacija=null;
 
+  public startMarker; 
+  public finishMarker
+  public routeLine;
+  public routeArrows;
   
   public constructor() {
       this.platform = new H.service.Platform({
@@ -59,12 +63,24 @@ export class RouteMapComponent implements OnInit {
 
    }
 
-  ngOnChanges(){
-   /* if(this.first){
-    for(let marker of this.markeri)this.map.removeObject(marker);
-    this.markeri=[];
-    this.dropMarker(this.restoran);
-  }*/
+  public ngOnChanges(){
+    if(this.korisnik==null||this.restoran==null){
+      if(this.startMarker==null&&this.finishMarker==null&&this.routeLine==null&&this.routeArrows==null)
+      {
+
+      }else{
+        this.map.removeObject(this.startMarker);
+        this.map.removeObject(this.finishMarker);
+        this.map.removeObject(this.routeLine);
+        this.map.removeObject(this.routeArrows);
+        this.startMarker=null;
+        this.finishMarker=null;
+        this.routeLine=null;
+        this.routeArrows=null;
+      }
+    }else{
+      this.route();
+    }
   }
 
 
@@ -87,8 +103,8 @@ export class RouteMapComponent implements OnInit {
       window.addEventListener('resize', () => this.map.getViewPort().resize());
       var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
 
-      this.route();
-      this.first=true;
+      //this.route();
+      //this.first=true;
   }
 
 
@@ -96,7 +112,7 @@ export class RouteMapComponent implements OnInit {
 public route() {
   let params = {
       "mode": "fastest;car",
-      "waypoint0": "geo!" + this.restoran.lokacije.latitude+','+Number(this.restoran.lokacije.longitude),
+      "waypoint0": "geo!" + this.restoran.lokacije[0].latitude+','+Number(this.restoran.lokacije[0].longitude),
       "waypoint1": "geo!" + Number(this.korisnik.latitude)+','+ Number(this.korisnik.longitude),
       "representation": "display"
   }
@@ -110,7 +126,7 @@ public route() {
               let parts = point.split(",");
               lineString.pushLatLngAlt(parts[0], parts[1]);
           });
-          let routeLine = new H.map.Polyline(lineString, {
+          this.routeLine = new H.map.Polyline(lineString, {
              style: {
               lineWidth: 10,
               strokeColor: 'rgba(0, 128, 255, 0.7)',
@@ -118,7 +134,7 @@ public route() {
               lineHeadCap: 'arrow-head'
             }});
 
-            var routeArrows = new H.map.Polyline(lineString, {
+            this.routeArrows = new H.map.Polyline(lineString, {
               style: {
                 lineWidth: 10,
                 fillColor: 'white',
@@ -129,15 +145,15 @@ public route() {
               }
             );
           var icon = new H.map.Icon('../../../../../assets/images/mappins.png');
-          var startMarker = new H.map.Marker({ lat: Number(this.restoran.lokacije.latitude), lng: Number(this.restoran.lokacije.longitude)}, { icon: icon });
+          this.startMarker = new H.map.Marker({ lat: Number(this.restoran.lokacije[0].latitude), lng: Number(this.restoran.lokacije[0].longitude)}, { icon: icon });
 
 
           var icon = new H.map.Icon('../../../../../assets/images/usermappins.png');
-          var finishMarker = new H.map.Marker({ lat: Number(this.korisnik.latitude), lng: Number(this.korisnik.longitude)}, { icon: icon });
+          this.finishMarker = new H.map.Marker({ lat: Number(this.korisnik.latitude), lng: Number(this.korisnik.longitude)}, { icon: icon });
 
 
-          this.map.addObjects([routeLine, routeArrows,startMarker,finishMarker]);
-          this.map.setViewBounds(routeLine.getBounds());
+          this.map.addObjects([this.routeLine, this.routeArrows,this.startMarker,this.finishMarker]);
+          this.map.setViewBounds(this.routeLine.getBounds());
       }
   }, error => {
       console.error(error);
