@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../features/user/services/auth.service';
 import { rootPaths } from '../../../core/constants/root-paths';
 import { Roles } from '../../../core/constants/roles';
+import { Register } from '../../../features/user/dto/register';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +12,24 @@ import { Roles } from '../../../core/constants/roles';
 })
 export class HeaderComponent implements OnInit {
 
+  public loaded = false;
+  korisnik: Register;
+
   constructor(private router:Router,
               public auth: AuthService) { }
   role=Roles.guest;
   assigned=Roles;
   ngOnInit(): void {
     this.role=this.auth.getRole();
+    this.auth.getUserDetails().subscribe({
+      next: res => {
+        this.korisnik = res;
+        this.loaded = true;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
   myFunction() {
