@@ -13,7 +13,7 @@ import { Register } from '../../../features/user/dto/register';
 export class HeaderComponent implements OnInit {
 
   public loaded = false;
-  korisnik: Register;
+  korisnik: Register = new Register('','','','','');
 
   constructor(private router:Router,
               public auth: AuthService) { }
@@ -21,15 +21,20 @@ export class HeaderComponent implements OnInit {
   assigned=Roles;
   ngOnInit(): void {
     this.role=this.auth.getRole();
-    this.auth.getUserDetails().subscribe({
-      next: res => {
-        this.korisnik = res;
-        this.loaded = true;
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
+      if(this.role == Roles.user) {
+      this.auth.getUserDetails().subscribe({
+        next: res => {
+          this.korisnik = res;
+          this.loaded = true;
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+    } else {
+      this.korisnik.imeKorisnika = this.role;
+      this.loaded = true;
+    }
   }
 
   myFunction() {

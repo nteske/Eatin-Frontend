@@ -9,10 +9,10 @@
         <i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-content">
-            <a routerLink="/user/profil"><i class="fa fa-pencil"></i> Profil</a>
-            <a *ngIf="checkRole(assigned.user)" (click)="goForOrders()"> Porudzbine</a>
-            <a *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"> Dostava</a>
-            <a *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"> Porudzbine</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.user)" routerLink="/user/profil"><i class="fa fa-pencil"></i> Profil</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.user)" (click)="goForOrders()"><i class="fa fa-list-alt"></i> Porudzbine</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"><i class="fa fa-list-alt"></i> Dostava</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"><i class="fa fa-list-alt"></i> Porudzbine</a>
             <a style="cursor: pointer;" (click)="auth.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
     </div>

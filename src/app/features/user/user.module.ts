@@ -18,10 +18,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { UserInterfaceComponent } from './pages/user-interface/user-interface.component';
 import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
 import { ProfilComponent } from './pages/profil/profil.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 @NgModule({
-  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent],
+  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
