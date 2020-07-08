@@ -1,0 +1,7 @@
+.example-card {
+  cursor: pointer;
+  height: 220px;
+  width: 280px;
+  display: inline-block;
+  margin: 5px 5px 5px 5px;
+}

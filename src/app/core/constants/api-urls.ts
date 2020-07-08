@@ -13,6 +13,8 @@ export class ApiUrls {
     public static register: string = "register";
     public static login: string = "login";
     public static profil: string = "profil";
+    public static korisnici: string = "/korisnik";
+
 
      //-------------restoran (url backend srv + promenjive)-------------
      public static restaurant: string = "/restoran";
