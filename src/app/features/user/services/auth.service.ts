@@ -74,6 +74,17 @@ export class AuthService {
     }));
   }
 
+  public updateProfile(updatedKorisnik: Register) {
+    var token = localStorage.getItem(Storage.token);
+    if (token == null) token = "";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put<Register>(this.API_URL + ApiUrls.profil, updatedKorisnik, { 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
   public logOut():void{
     localStorage.clear();
     this.router.navigateByUrl('/');

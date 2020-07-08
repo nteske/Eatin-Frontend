@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     .subscribe(data=>{
       localStorage.setItem(Storage.token,'Bearer '+data['jwt']);
       this.router.navigateByUrl('/');
+      window.location.reload();
       this.dogadjaj.emit();
       this.authService.changeMessage();
     });

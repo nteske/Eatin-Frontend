@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Korisnik } from '../../models/korisnik.model';
 import { AuthService } from '../../services/auth.service';
+import { Register } from '../../dto/register';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profil',
@@ -9,15 +11,52 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProfilComponent implements OnInit {
 
+  public loaded = false;
+  korisnik: Register;
+  currentPassword: '';
+  newPassword: '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    console.log(this.auth.getUserDetails());
+    this.auth.getUserDetails().subscribe({
+      next: res => {
+        this.korisnik = res;
+        this.loaded = true;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
-  onSubmit(): void
+  update(): void
   {
+    if(this.korisnik.lozinkaKorisnika !== this.currentPassword) {
+      this.toastr.error("Ažuriranje neuspešno!","Error",{
+        closeButton:true,
+        positionClass:'toast-bottom-right'
+      });
+    } else {
+      if(Boolean(this.newPassword)) {
+        this.korisnik.lozinkaKorisnika = this.newPassword;
+      }
+      this.auth.updateProfile(this.korisnik).subscribe({
+        next: res => {
+          this.toastr.success("Ažuriranje uspešno!","Uspeh",{
+            closeButton:true,
+            positionClass:'toast-bottom-right'
+          });
+          window.location.reload();
+        },
+        error: err => {
+          this.toastr.error("Ažuriranje neuspešno!","Error",{
+            closeButton:true,
+            positionClass:'toast-bottom-right'
+          });
+        }
+      })
+    }
   }
 
   showHidePwd() {

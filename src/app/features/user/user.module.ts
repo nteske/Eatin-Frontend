@@ -6,6 +6,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -18,10 +20,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { UserInterfaceComponent } from './pages/user-interface/user-interface.component';
 import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
 import { ProfilComponent } from './pages/profil/profil.component';
+import { UsersComponent } from './pages/users/users.component';
 
 
 @NgModule({
-  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent],
+  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -33,6 +36,8 @@ import { ProfilComponent } from './pages/profil/profil.component';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
     RecaptchaModule,
     RecaptchaFormsModule
   ]

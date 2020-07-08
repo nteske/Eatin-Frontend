@@ -1,22 +1,24 @@
 <div class="topnav" id="myTopnav">
     <a routerLink="/"><i class="fa fa-home"></i> Home</a>
 
+    <a *ngIf="auth.isLoggedIn() && checkRole(assigned.admin)" routerLink="/user/users"><i class="fa fa-users"></i> Korisnici</a>
+
+
     <a *ngIf="!auth.isLoggedIn()" class="w3-right" id="navSignIn" routerLink="/user/login"><i class="fa fa-sign-in"></i> Sign in</a>
 
 
-    <div class="dropdown w3-right" id="userDropdown" *ngIf="auth.isLoggedIn()">
-        <button class="dropbtn"><i class="fa fa-user"></i> User
+    <div class="dropdown w3-right" id="userDropdown" *ngIf="auth.isLoggedIn() && loaded">
+        <button class="dropbtn"><i class="fa fa-user"></i> {{ korisnik.imeKorisnika + ' ' + korisnik.prezimeKorisnika }}
         <i class="fa fa-caret-down"></i>
       </button>
         <div class="dropdown-content">
-            <a routerLink="/user/profil"><i class="fa fa-pencil"></i> Profil</a>
-            <a *ngIf="checkRole(assigned.user)" (click)="goForOrders()"> Porudzbine</a>
-            <a *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"> Dostava</a>
-            <a *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"> Porudzbine</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.user)" routerLink="/user/profil"><i class="fa fa-pencil"></i> Profil</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.user)" (click)="goForOrders()"><i class="fa fa-list-alt"></i> Porudzbine</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"><i class="fa fa-list-alt"></i> Dostava</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"><i class="fa fa-list-alt"></i> Porudzbine</a>
             <a style="cursor: pointer;" (click)="auth.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
     </div>
-    <!--<a *ngIf="auth.isLoggedIn()" style="cursor: pointer;" (click)="auth.logOut()" class="w3-right" id="navSignIn"><i class="fa fa-sign-out"></i> Log out</a>-->
 
     <a class="icon" (click)="myFunction()">
         <i class="fa fa-bars"></i>
