@@ -64,7 +64,13 @@ export class OrderArticleComponent implements OnInit {
   }
   dodaje():void{
     if(this.user==this.getRole()){
-    var prilog={idImaPriloge:-1,prilog:this.biraPrilog.filter(item=>item.stanje).map(item=>{item={idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}; return item})}
+    var prilog=this.biraPrilog.filter(item=>item.stanje)
+      .map(item=>
+        {
+          item={idImaPriloge:-1,prilog:{idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}}; 
+        return item
+       })
+      //}
     var zaKorpu={artikl:this.convert(this.artikl),
       idStavkePorudzbine:-1,
       imaPriloge:prilog,
