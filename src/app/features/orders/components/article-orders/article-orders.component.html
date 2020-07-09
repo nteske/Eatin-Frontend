@@ -1,8 +1,15 @@
-Artikli:
-<div *ngFor="let niz of article">
-    {{niz.artikl.nazivArtikla}}
-    <img style="width: 250px;" [src]="getMyImage(niz.artikl.slikaArtikla)"> Prilozi:
-    <span *ngFor="let pr of niz.imaPriloge">
-        {{pr.prilog.nazivPriloga}}
-    </span> Mera: {{niz.mera.opisMere}}
+<p style="margin-top: 7px;"><b>Artikli:</b></p>
+<div style="max-width: 700px; text-align: center; margin: auto;">
+    <div *ngFor="let niz of article" style="display: inline-block; margin: 5px 5px 5px 5px; ">
+        <div class="card" style="width: 18rem; margin:auto; display: inline-block;">
+            <div class="card-header">
+                {{niz.artikl.nazivArtikla}}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item square"><img style="width: 250px;" [src]="getMyImage(niz.artikl.slikaArtikla)"></li>
+                <li class="list-group-item">Prilozi: <span *ngFor="let pr of niz.imaPriloge">{{pr.prilog.nazivPriloga}}</span></li>
+                <li class="list-group-item">Mera: {{niz.mera.opisMere}}</li>
+            </ul>
+        </div>
+    </div>
 </div>

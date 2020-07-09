@@ -1,18 +1,24 @@
-<div style="text-align: center;">
-<mat-form-field>
-    <mat-label>Status porudzbine</mat-label>
-    <mat-select [(ngModel)]="status" (selectionChange)="promena()" name="statusi">
-        <mat-option *ngFor="let s of statusi" [value]="s.value">
-            {{s.name}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+<h1 style="text-align: center;">Porudzbine korisnika</h1>
+
+<div style="text-align: center; margin-top: 7px;">
+    <mat-form-field>
+        <mat-label>Status porudzbine</mat-label>
+        <mat-select [(ngModel)]="status" (selectionChange)="promena()" name="statusi">
+            <mat-option *ngFor="let s of statusi" [value]="s.value">
+                {{s.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 <div *ngIf="prikazi" style="text-align: center;">
     <div *ngFor="let order of orders.content; let i = index">
-        <span *ngIf="order.dostavljac">
-        Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}<br/> Lokacija: {{order.lokacija.ulica}}
-        {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
+
+
+        <br/> Stanje: {{order.statusPorudzbine}}
+        <br/> Vreme prijema: {{order.vremePrijemaPorudzbine}}
+        <br/> Vreme isporuke: {{order.vremeIsporukePorudzbine}}
+        <span *ngIf="order.dostavljac">Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span>
+        <br/> Lokacija: {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
         <br/> Cena: {{order.ukupnaCena}} rsd
         <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
         <div *ngIf="gleda==i">

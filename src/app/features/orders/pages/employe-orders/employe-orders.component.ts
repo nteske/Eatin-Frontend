@@ -4,6 +4,7 @@ import { OrdersService } from '../../services/orders.service';
 import { ApiUrls } from 'src/app/core/constants/api-urls';
 import { Restoran } from 'src/app/features/home/models/restoran.model';
 import { Lokacija } from 'src/app/features/home/models/lokacija.model';
+import { RestoranService } from 'src/app/features/home/services/restoran.service';
 
 @Component({
   selector: 'app-employe-orders',
@@ -22,22 +23,12 @@ export class EmployeOrdersComponent implements OnInit {
   {value:"PRIHVACENA",name:"Prihvacene porudzbine"},
   {value:"ISPORUCENA",name:"Isporucene porudzbine"}];
   public status=this.statusi[0].value;
+  public korisnik:Lokacija=null;
 
-  public restoran:Restoran;
-  public lokacija:Lokacija;
-  constructor(public orderService:OrdersService) { }
-
+  public restoran:Restoran=null;
+  constructor(public orderService:OrdersService,private restoranService:RestoranService) { }
+///
   ngOnInit(): void {
-    this.lokacija=new Lokacija();
-    this.lokacija.idLokacije=1;
-    this.lokacija.grad="aaa";
-    this.lokacija.broj="22";
-    this.lokacija.ulica="saddasd";
-    this.lokacija.postanskiBroj="";
-    this.lokacija.latitude= 19.846112;
-    this.lokacija.longitude= 45.254689;
-    this.restoran=new Restoran();
-    this.restoran.lokacije=this.lokacija;
     this.pocetak();
   }
 
@@ -50,15 +41,18 @@ export class EmployeOrdersComponent implements OnInit {
     this.paginator=1;
     this.page=1;
     this.prikazi=false;
+    this.pogledaj(-1);
     this.uzmiPoruzbine(1,this.status);
   }
   novaStrana(broj){
     this.page=broj;
+    this.pogledaj(-1);
     this.uzmiPoruzbine(this.page,this.status);
   }
   uzmiPoruzbine(page,status){
     this.orderService.getEmployeeOrders(page,status).subscribe(data=>{
       this.orders=data;
+      console.log(this.orders);
       this.paginator=data.totalPages;
       if(this.orders.content.length!=0)this.prikazi=true;
     })
@@ -68,7 +62,14 @@ export class EmployeOrdersComponent implements OnInit {
   }
 
   pogledaj(num){
+    this.korisnik=null;
+    this.restoran=null;
     this.gleda=num;
+    if(Number(num)!=-1)
+    this.restoranService.getRestoran(this.orders.content[num].restoranId).subscribe(data=>{
+      this.restoran=data;
+      this.korisnik=this.orders.content[num].lokacija;
+    });
   }
 
   gotovo(num){
@@ -76,5 +77,6 @@ export class EmployeOrdersComponent implements OnInit {
       this.pocetak();
     });
   }
+
 
 }

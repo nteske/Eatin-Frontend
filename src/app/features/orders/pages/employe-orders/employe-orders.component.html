@@ -1,4 +1,5 @@
-<div style="text-align: center;">
+<h1 style="text-align: center;">Porudzbine restorana</h1>
+<div style="text-align: center; margin-top: 7px;">
     <mat-form-field>
         <mat-label>Status porudzbine</mat-label>
         <mat-select [(ngModel)]="status" (selectionChange)="promena()" name="statusi">
@@ -8,24 +9,28 @@
         </mat-select>
     </mat-form-field>
 </div>
+
 <div *ngIf="prikazi" style="text-align: center;">
     <div *ngFor="let order of orders.content; let i = index">
-        <button *ngIf="order.statusPorudzbine!='gotova'&&order.statusPorudzbine!='Gotova'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
-        <span *ngIf="order.dostavljac">
-            Prevozno strestvo dostavljaca: {{order.dostavljac.prevoznoSredstvo}}</span><br/> Stanje: {{order.statusPorudzbine}}<br/> Vreme prijema: {{order.vremePrijemaPorudzbine| date:'d.MM.yyyy HH:mm'}}<br/> Vreme isporuke: {{order.vremeIsporukePorudzbine|
-        date:'d.MM.yyyy HH:mm'}}
-        <br/> Lokacija: {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}
-        <br/> Cena: {{order.ukupnaCena}} rsd
-        <br/><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji</button>
+        <div class="card" style="width: 18rem; margin:auto;">
+            <div class="card-header">
+                Stanje: {{order.statusPorudzbine}}
+                <button style="margin-left: 7px;" *ngIf="order.statusPorudzbine!='gotova'&&order.statusPorudzbine!='Gotova'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Vreme prijema: {{order.vremePrijemaPorudzbine| date:'d.MM.yyyy HH:mm'}}</li>
+                <li class="list-group-item">Vreme isporuke: {{order.vremeIsporukePorudzbine| date:'d.MM.yyyy HH:mm'}}</li>
+                <li class="list-group-item">Lokacija: {{order.lokacija.ulica}} {{order.lokacija.broj}}, {{order.lokacija.grad}}, {{order.lokacija.postanskiBroj}}</li>
+                <li class="list-group-item">Cena: {{order.ukupnaCena}} rsd</li>
+                <li class="list-group-item"> <button *ngIf="gleda==i" mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij detalje</button><button *ngIf="gleda!=i" mat-raised-button (click)="pogledaj(i)" color="primary">Detalji porudzbine</button></li>
+            </ul>
+        </div>
         <div *ngIf="gleda==i">
-            Artikli:
             <app-article-orders [article]="order.stavkePorudzbine"></app-article-orders>
-            <app-route-map [restoran]="restoran" [korisnik]="order.lokacija" lat="45.2566559" lng="19.844614" width="100%" height="500px"></app-route-map>
-
-            <button mat-raised-button (click)="pogledaj(-1)" color="warn">Sakrij</button>
         </div>
     </div>
     <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
+    <app-route-map [restoran]="restoran" [korisnik]="korisnik" lat="45.2566559" lng="19.844614" width="100%" height="500px"></app-route-map>
 </div>
 <div *ngIf="!prikazi" style="text-align: center;">
     Nema porudzbina za prikazati!

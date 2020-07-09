@@ -1,0 +1,11 @@
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.square {
+    height: 205px!important;
+    width: 235px!important;
+    text-align: center;
+    margin: auto;
+}
