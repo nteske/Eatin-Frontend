@@ -71,7 +71,7 @@ export class OrdersService {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
-    return this.httpClient.put(this.API_URL+ApiUrls.employeGotovo+id,{ 'headers': headers})
+    return this.httpClient.put(this.API_URL+ApiUrls.employeGotovo+id,{},{ 'headers': headers})
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
@@ -95,7 +95,7 @@ export class OrdersService {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
-    return this.httpClient.put(this.API_URL+ApiUrls.deliveryPrihvata+id,{ 'headers': headers})
+    return this.httpClient.put(this.API_URL+ApiUrls.deliveryPrihvata+id,{},{ 'headers': headers})
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
@@ -107,7 +107,7 @@ export class OrdersService {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
-    return this.httpClient.put(this.API_URL+ApiUrls.deliveryIsporucuje+id,{ 'headers': headers})
+    return this.httpClient.put(this.API_URL+ApiUrls.deliveryIsporucuje+id,{},{ 'headers': headers})
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
