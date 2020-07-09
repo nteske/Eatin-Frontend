@@ -35,4 +35,15 @@ export class UserService {
   }));
   }
 
+  public registerAdmin(admin: Register) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/admin/register/admin', admin, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
 }

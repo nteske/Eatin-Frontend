@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -22,10 +23,11 @@ import { UserInterfaceComponent } from './pages/user-interface/user-interface.co
 import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { UsersComponent } from './pages/users/users.component';
+import { KlijentDialogComponent } from './components/dialogs/klijent-dialog/klijent-dialog.component';
 
 
 @NgModule({
-  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent],
+  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent, KlijentDialogComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -39,9 +41,13 @@ import { UsersComponent } from './pages/users/users.component';
     ReactiveFormsModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     MatPaginatorModule,
     RecaptchaModule,
     RecaptchaFormsModule
+  ],
+  entryComponents: [
+    KlijentDialogComponent
   ]
 })
 export class UserModule { }

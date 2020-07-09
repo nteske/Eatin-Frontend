@@ -3,6 +3,8 @@ import { UserService } from '../../services/user.service';
 import { Register } from '../../dto/register';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { KlijentDialogComponent } from '../../components/dialogs/klijent-dialog/klijent-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -15,13 +17,14 @@ export class UsersComponent implements OnInit {
   korisnici: Register[];
   uloga = '';
 
-  displayedColumns: string[] = ['ime', 'email', 'telefon'];
+  displayedColumns: string[] = ['ime', 'email', 'telefon', 'actions'];
   dataSource = new MatTableDataSource<Register>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private userService: UserService,
-              private cdr: ChangeDetectorRef) { }
+              private cdr: ChangeDetectorRef,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userService.getKorisnici('').subscribe({
@@ -57,4 +60,20 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  public openDialog(flag: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string) {
+    const dialogRef = this.dialog.open(KlijentDialogComponent,
+      { data: {  imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika} });
+    dialogRef.componentInstance.flag = flag;
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.refresh();
+      }
+    });
+  }
+
+  refresh() {
+    return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+      this.selectChanged();
+    });
+  }
 }
