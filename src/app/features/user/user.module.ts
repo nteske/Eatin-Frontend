@@ -8,6 +8,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -37,6 +38,7 @@ import { UsersComponent } from './pages/users/users.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     MatPaginatorModule,
     RecaptchaModule,
     RecaptchaFormsModule

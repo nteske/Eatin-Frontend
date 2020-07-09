@@ -39,6 +39,9 @@ export class UsersComponent implements OnInit {
   }
 
   selectChanged() {
+    this.dataSource = new MatTableDataSource([]);
+    this.cdr.detectChanges()
+    this.dataSource.paginator = this.paginator;
     this.loaded = false;
     this.userService.getKorisnici(this.uloga).subscribe({
       next: res => {
