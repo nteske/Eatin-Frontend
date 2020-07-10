@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { KlijentDialogComponent } from '../../components/dialogs/klijent-dialog/klijent-dialog.component';
 import { Dostavljac } from '../../models/dostavljac.model';
 import { DostavljacDialogComponent } from '../../components/dialogs/dostavljac-dialog/dostavljac-dialog.component';
+import { Zaposleni } from '../../models/zaposleni.model';
+import { ZaposleniDialogComponent } from '../../components/dialogs/zaposleni-dialog/zaposleni-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -18,6 +20,7 @@ export class UsersComponent implements OnInit {
   loaded = false;
   korisnici: Register[];
   dostavljaci: Dostavljac[];
+  zaposleni: Zaposleni[];
   uloga = '1';
 
   dataSource = new MatTableDataSource<Register>();
@@ -25,6 +28,9 @@ export class UsersComponent implements OnInit {
 
   dataSourceDostavljaci = new MatTableDataSource<Dostavljac>();
   displayedColumnsDostavljaci: string[] = ['ime', 'email', 'telefon', 'prevoznoSredstvo', 'actions'];
+
+  dataSourceZaposleni = new MatTableDataSource<Zaposleni>();
+  displayedColumnsZaposleni: string[] = ['ime', 'email', 'telefon', 'funkcijaZaposlenog', 'actions'];
 
 
 
@@ -52,6 +58,7 @@ export class UsersComponent implements OnInit {
   selectChanged() {
     this.dataSource = new MatTableDataSource([]);
     this.dataSourceDostavljaci = new MatTableDataSource([]);
+    this.dataSourceZaposleni = new MatTableDataSource([]);
     this.cdr.detectChanges()
     this.dataSource.paginator = this.paginator;
     this.loaded = false;
@@ -80,6 +87,18 @@ export class UsersComponent implements OnInit {
           console.log(err);
         }
       })
+    } else if (this.uloga === '2') {
+      this.userService.getZaposleni().subscribe({
+        next: res => {
+          this.loaded = true;
+          this.dataSourceZaposleni = new MatTableDataSource(res);
+          this.cdr.detectChanges()
+          this.dataSourceZaposleni.paginator = this.paginator;
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
     }
 
   }
@@ -98,6 +117,17 @@ export class UsersComponent implements OnInit {
   public openDialogDostavljac(flag: number, idDostavljaca: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string, prevoznoSredstvo: string) {
     const dialogRef = this.dialog.open(DostavljacDialogComponent,
       { data: { idDostavljaca, korisnik: { imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika }, prevoznoSredstvo } });
+    dialogRef.componentInstance.flag = flag;
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.refresh();
+      }
+    });
+  }
+
+  public openDialogZaposleni(flag: number, idZaposlenog: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string, funkcijaZaposlenog: string, restoranId: number) {
+    const dialogRef = this.dialog.open(ZaposleniDialogComponent,
+      { data: { idZaposlenog, korisnik: { imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika }, funkcijaZaposlenog, restoranId } });
     dialogRef.componentInstance.flag = flag;
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {

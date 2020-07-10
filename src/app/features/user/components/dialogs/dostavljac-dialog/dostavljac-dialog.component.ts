@@ -39,9 +39,36 @@ export class DostavljacDialogComponent implements OnInit {
   }
 
   public update(): void {
+    if(this.newPassword != null) {
+      this.data.korisnik.lozinkaKorisnika = this.newPassword;
+    }
+    this.userService.updateDostavljac(this.data).subscribe({
+      next: data => {
+        this.toastr.success("Uspešno modifikovan dostavljac","Uspeh",{
+          closeButton:true,
+          timeOut: 10000,
+          positionClass:'toast-bottom-right'
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   public delete(): void {
+    this.userService.deleteUser(this.data.idDostavljaca).subscribe({
+      next: data => {
+        this.toastr.success("Uspešno obrisan dostavljac","Uspeh",{
+          closeButton:true,
+          timeOut: 10000,
+          positionClass:'toast-bottom-right'
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   public cancel(): void {

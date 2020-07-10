@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -45,6 +46,7 @@ import { DostavljacDialogComponent } from './components/dialogs/dostavljac-dialo
     MatTableModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     RecaptchaModule,
     RecaptchaFormsModule

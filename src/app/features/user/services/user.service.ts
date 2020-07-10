@@ -9,6 +9,7 @@ import { Storage } from '../../../core/constants/storage';
 import { Register } from '../dto/register';
 import { catchError } from 'rxjs/operators';
 import { Dostavljac } from '../models/dostavljac.model';
+import { Zaposleni } from '../models/zaposleni.model';
 
 
 
@@ -47,6 +48,17 @@ export class UserService {
     }));
   }
 
+  public getZaposleni() {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<Zaposleni[]>('https://eatin-backend.herokuapp.com/admin/zaposleni', { 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
   public registerAdmin(admin: Register) {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
@@ -63,6 +75,39 @@ export class UserService {
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
     return this.httpClient.post('https://eatin-backend.herokuapp.com/admin/register/dostavljac', dostavljac, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public registerZaposleni(zaposleni: any) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/admin/register/zaposleni', zaposleni, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public updateDostavljac(dostavljac: Dostavljac) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put('https://eatin-backend.herokuapp.com/admin/update/dostavljac/' + dostavljac.idDostavljaca, dostavljac, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public deleteUser(id: number) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.delete('https://eatin-backend.herokuapp.com/admin/delete/korisnici/' + id, { headers: headers, responseType: 'text' } )
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
