@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Storage } from '../../../core/constants/storage';
 import { Register } from '../dto/register';
 import { catchError } from 'rxjs/operators';
+import { Dostavljac } from '../models/dostavljac.model';
 
 
 
@@ -35,11 +36,33 @@ export class UserService {
   }));
   }
 
+  public getDostavljaci() {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<Dostavljac[]>('https://eatin-backend.herokuapp.com/admin/dostavljac', { 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
   public registerAdmin(admin: Register) {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
     return this.httpClient.post('https://eatin-backend.herokuapp.com/admin/register/admin', admin, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public registerDostavljac(dostavljac: Dostavljac) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/admin/register/dostavljac', dostavljac, { headers: headers, responseType: 'text' } )
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

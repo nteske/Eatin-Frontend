@@ -1,0 +1,61 @@
+<div class="container">
+    <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje dostavljača</h3>
+    <h3 mat-dialog-title *ngIf="flag == 2">Modifikacija dostavljača</h3>
+    <h3 mat-dialog-title *ngIf="flag == 3">Brisanje dostavljača</h3>
+    <form class="mat-dialog-content" #formControl="ngForm">
+      <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Ime" [(ngModel)]="data.korisnik.imeKorisnika" name="IME_KORISNIKA" required [disabled]="flag == 3" pattern="[A-Za-zčćžšđČĆŽŠĐ]+" minlength="2" maxlength="20">
+        <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div class="form">
+      <mat-form-field >
+        <input matInput placeholder="Prezime" [(ngModel)]="data.korisnik.prezimeKorisnika" name="PREZ_KORISNIKA"  required [disabled]="flag == 3" pattern="[A-Za-zčćžšđČĆŽŠĐ]+" minlength="2" maxlength="20">
+        <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div class="form">
+      <mat-form-field >
+        <input matInput placeholder="Email" [(ngModel)]="data.korisnik.emailKorisnika" name="EMAIL" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  [disabled]="flag == 3" maxlength="30">
+        <mat-icon matSuffix><i class="fa fa-envelope"></i></mat-icon>
+        <mat-hint>Format: neko@domen.domen</mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div class="form">
+      <mat-form-field >
+        <input matInput placeholder="Telefon" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" [(ngModel)]="data.korisnik.telefonKorisnika"  [disabled]="flag == 3" name="TELEFON" required pattern="[0-9]+" minlength="9" maxlength="25">
+        <mat-icon matSuffix><i class="fa fa-phone"></i></mat-icon>
+        <mat-hint>Format: 38163515524</mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div class="form">
+          <mat-form-field >
+            <input matInput placeholder="Prevozno sredstvo" [(ngModel)]="data.prevoznoSredstvo" name="PREVOZNO_SREDSTVO"  required [disabled]="flag == 3" pattern="[A-Za-zčćžšđČĆŽŠĐ]+" minlength="2" maxlength="20">
+            <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+          </mat-form-field>
+          </div>
+
+      <div class="form">
+      <mat-form-field >
+        <input matInput id="myPwdInput" placeholder="Password" [(ngModel)]="newPassword" type="password" name="PASSWORD" [required]="flag == 1" [disabled]="flag == 3" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$" maxlength="20">
+        <mat-icon matSuffix><i style="cursor: pointer;" id="myPwdIcon" class="fa fa-eye" (click)="showHidePwd()"></i></mat-icon>
+        <mat-hint>Minimum 8, a najviše 20 karaktera. Mora sadržati bar jedno malo i veliko slovo, cifru kao i specijalni karakter.</mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-button *ngIf="flag == 1" [mat-dialog-close]="1"
+          (click)="add()" [disabled]="!formControl.valid">Sačuvaj</button>
+        <button mat-button *ngIf="flag == 2" [mat-dialog-close]="1"
+          (click)="update()" [disabled]="!formControl.valid">Sačuvaj</button>
+        <button mat-button *ngIf="flag == 3" [mat-dialog-close]="1"
+          (click)="delete()">Obriši</button>
+        <button mat-button (click)="cancel()">Poništi</button>
+      </div>
+    </form>
+  </div>

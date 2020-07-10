@@ -24,10 +24,13 @@ import { RecaptchaModule,RecaptchaFormsModule} from 'ng-recaptcha';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { UsersComponent } from './pages/users/users.component';
 import { KlijentDialogComponent } from './components/dialogs/klijent-dialog/klijent-dialog.component';
+import { AdminDialogComponent } from './components/dialogs/admin-dialog/admin-dialog.component';
+import { ZaposleniDialogComponent } from './components/dialogs/zaposleni-dialog/zaposleni-dialog.component';
+import { DostavljacDialogComponent } from './components/dialogs/dostavljac-dialog/dostavljac-dialog.component';
 
 
 @NgModule({
-  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent, KlijentDialogComponent],
+  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent, KlijentDialogComponent, AdminDialogComponent, ZaposleniDialogComponent, DostavljacDialogComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -47,7 +50,10 @@ import { KlijentDialogComponent } from './components/dialogs/klijent-dialog/klij
     RecaptchaFormsModule
   ],
   entryComponents: [
-    KlijentDialogComponent
+    KlijentDialogComponent,
+    AdminDialogComponent,
+    ZaposleniDialogComponent,
+    DostavljacDialogComponent
   ]
 })
 export class UserModule { }
