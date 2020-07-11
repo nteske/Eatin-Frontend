@@ -81,7 +81,7 @@ export class UserService {
     }));
   }
 
-  public registerZaposleni(zaposleni: any) {
+  public registerZaposleni(zaposleni: Zaposleni) {
     var token=localStorage.getItem(Storage.token);
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
@@ -97,6 +97,17 @@ export class UserService {
     if(token==null)token="";
     var headers = new HttpHeaders().set('Authorization', token);
     return this.httpClient.put('https://eatin-backend.herokuapp.com/admin/update/dostavljac/' + dostavljac.idDostavljaca, dostavljac, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public updateZaposleni(zaposleni: Zaposleni) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put('http://eatin-backend.herokuapp.com/admin/update/zaposleni/' + zaposleni.idZaposlenog, zaposleni, { headers: headers, responseType: 'text' } )
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);

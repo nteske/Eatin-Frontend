@@ -59,12 +59,8 @@ export class ZaposleniDialogComponent implements OnInit {
 
   public add(): void {
     this.data.korisnik.lozinkaKorisnika = this.newPassword
-    const req = {
-      funkcijaZaposlenog: this.data.funkcijaZaposlenog,
-      korisnik: this.data.korisnik,
-      restoran: this.myControl.value.idRestorana
-    };
-    this.userService.registerZaposleni(req).subscribe({
+    this.data.restoranId = this.myControl.value.idRestorana;
+    this.userService.registerZaposleni(this.data).subscribe({
       next: data => {
         this.toastr.success("Uspešno dodat zaposleni","Uspeh",{
           closeButton:true,
@@ -79,9 +75,37 @@ export class ZaposleniDialogComponent implements OnInit {
   }
 
   public update(): void {
+    if(this.newPassword != null) {
+      this.data.korisnik.lozinkaKorisnika = this.newPassword
+    }
+    this.data.restoranId = this.myControl.value.idRestorana;
+    this.userService.updateZaposleni(this.data).subscribe({
+      next: data => {
+        this.toastr.success("Uspešno modifikovan zaposleni","Uspeh",{
+          closeButton:true,
+          timeOut: 10000,
+          positionClass:'toast-bottom-right'
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   public delete(): void {
+    this.userService.deleteUser(this.data.idZaposlenog).subscribe({
+      next: data => {
+        this.toastr.success("Uspešno obrisan zaposleni","Uspeh",{
+          closeButton:true,
+          timeOut: 10000,
+          positionClass:'toast-bottom-right'
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   public cancel(): void {
