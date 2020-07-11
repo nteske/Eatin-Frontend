@@ -117,6 +117,17 @@ export class UsersComponent implements OnInit {
 
   }
 
+  public openDialogKlijent(flag: number, idKorisnika: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string) {
+    const dialogRef = this.dialog.open(KlijentDialogComponent,
+      { data: { idKorisnika, imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika} });
+    dialogRef.componentInstance.flag = flag;
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.refresh();
+      }
+    });
+  }
+
   public openDialogAdmin(flag: number, idKorisnika: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string) {
     const dialogRef = this.dialog.open(AdminDialogComponent,
       { data: { idKorisnika, imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika} });

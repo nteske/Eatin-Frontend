@@ -9,13 +9,10 @@
       <mat-option value="2">Zaposleni</mat-option>
     </mat-select>
 </mat-form-field>
-<!--
+
 <div class="mat-elevation-z8" *ngIf="uloga == '1'">
     <div class="w3-bar w3-xlarge w3-indigo">
         <div class="w3-bar-item">Klijenti</div>
-        <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge">
-          <i class="fa fa-plus"></i>
-        </button>
       </div>
         <table mat-table [dataSource]="dataSourceKlijent">
           <ng-container matColumnDef="ime">
@@ -41,15 +38,12 @@
 
           <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>
-                <button mat-icon-button color="primary" (click)="openDialog(1, null, null, null, null, null)">
-                  <i class="fa fa-plus"></i>
-                </button>
               </th>
               <td mat-cell *matCellDef="let row; let i=index;">
-                <button mat-icon-button color="primary"  (click)="openDialog(2, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
+                <button mat-icon-button color="primary"  (click)="openDialogKlijent(2, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button mat-icon-button color="primary"  (click)="openDialog(3, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
+                <button mat-icon-button color="primary"  (click)="openDialogKlijent(3, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-trash"></i>
                 </button>
               </td>
@@ -67,7 +61,6 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
       </div>
-      -->
 
       <div class="mat-elevation-z8" *ngIf="uloga == '4'">
 

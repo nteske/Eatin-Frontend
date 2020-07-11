@@ -23,12 +23,26 @@ export class KlijentDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public add(): void {
-    /*
-    this.data.lozinkaKorisnika = this.newPassword;
-    this.userService.(this.data).subscribe({
+  public update(): void {
+    this.userService.updateKlijent(this.data).subscribe({
+      next: res => {
+        this.toastr.success("Uspešno modifikovan klijent","Uspeh",{
+          closeButton:true,
+          timeOut: 10000,
+          positionClass:'toast-bottom-right'
+        });
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
+
+  public delete(): void {
+    this.userService.deleteUser(this.data.idKorisnika).subscribe({
       next: data => {
-        this.toastr.success("Uspešno dodat korisnik","Uspeh",{
+        this.toastr.success("Uspešno obrisan klijent","Uspeh",{
           closeButton:true,
           timeOut: 10000,
           positionClass:'toast-bottom-right'
@@ -37,13 +51,7 @@ export class KlijentDialogComponent implements OnInit {
       error: error => {
         console.log(error);
       }
-    });*/
-  }
-
-  public update(): void {
-  }
-
-  public delete(): void {
+    });
   }
 
   public cancel(): void {

@@ -21,20 +21,15 @@ export class HeaderComponent implements OnInit {
   assigned=Roles;
   ngOnInit(): void {
     this.role=this.auth.getRole();
-      if(this.role == Roles.user) {
-      this.auth.getUserDetails().subscribe({
-        next: res => {
-          this.korisnik = res;
-          this.loaded = true;
-        },
-        error: err => {
-          console.log(err);
-        }
-      })
-    } else {
-      this.korisnik.imeKorisnika = this.role;
-      this.loaded = true;
-    }
+    this.auth.getUserDetails().subscribe({
+      next: res => {
+        this.korisnik = res;
+        this.loaded = true;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   myFunction() {
