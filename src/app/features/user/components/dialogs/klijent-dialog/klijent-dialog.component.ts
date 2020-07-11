@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Register } from '../../../dto/register';
 import { UserService } from '../../../services/user.service';
+import { Klijent } from '../../../models/klijent.model';
 
 @Component({
   selector: 'app-klijent-dialog',
@@ -16,15 +17,16 @@ export class KlijentDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<KlijentDialogComponent>,
               private userService: UserService,
-              @Inject (MAT_DIALOG_DATA) public data: Register,
+              @Inject (MAT_DIALOG_DATA) public data: Klijent,
               private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
 
   public add(): void {
+    /*
     this.data.lozinkaKorisnika = this.newPassword;
-    this.userService.registerAdmin(this.data).subscribe({
+    this.userService.(this.data).subscribe({
       next: data => {
         this.toastr.success("Uspešno dodat korisnik","Uspeh",{
           closeButton:true,
@@ -35,7 +37,7 @@ export class KlijentDialogComponent implements OnInit {
       error: error => {
         console.log(error);
       }
-    });
+    });*/
   }
 
   public update(): void {

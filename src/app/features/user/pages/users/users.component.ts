@@ -9,6 +9,9 @@ import { Dostavljac } from '../../models/dostavljac.model';
 import { DostavljacDialogComponent } from '../../components/dialogs/dostavljac-dialog/dostavljac-dialog.component';
 import { Zaposleni } from '../../models/zaposleni.model';
 import { ZaposleniDialogComponent } from '../../components/dialogs/zaposleni-dialog/zaposleni-dialog.component';
+import { Klijent } from '../../models/klijent.model';
+import { Admin } from '../../models/admin.model';
+import { AdminDialogComponent } from '../../components/dialogs/admin-dialog/admin-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -18,13 +21,13 @@ import { ZaposleniDialogComponent } from '../../components/dialogs/zaposleni-dia
 export class UsersComponent implements OnInit {
 
   loaded = false;
-  korisnici: Register[];
-  dostavljaci: Dostavljac[];
-  zaposleni: Zaposleni[];
   uloga = '1';
 
-  dataSource = new MatTableDataSource<Register>();
-  displayedColumns: string[] = ['ime', 'email', 'telefon', 'actions'];
+  dataSourceKlijent = new MatTableDataSource<Klijent>();
+  displayedColumnsKlijent: string[] = ['ime', 'email', 'telefon', 'actions'];
+
+  dataSourceAdmin = new MatTableDataSource<Klijent>();
+  displayedColumnsAdmin: string[] = ['ime', 'email', 'telefon', 'actions'];
 
   dataSourceDostavljaci = new MatTableDataSource<Dostavljac>();
   displayedColumnsDostavljaci: string[] = ['ime', 'email', 'telefon', 'prevoznoSredstvo', 'actions'];
@@ -41,13 +44,12 @@ export class UsersComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.userService.getKorisnici(this.uloga).subscribe({
+    this.userService.getKlijenti().subscribe({
       next: res => {
-        this.korisnici = res;
         this.loaded = true;
-        this.dataSource = new MatTableDataSource(res);
+        this.dataSourceKlijent = new MatTableDataSource(res);
         this.cdr.detectChanges()
-        this.dataSource.paginator = this.paginator;
+        this.dataSourceKlijent.paginator = this.paginator;
       },
       error: err => {
         console.log(err);
@@ -56,20 +58,20 @@ export class UsersComponent implements OnInit {
   }
 
   selectChanged() {
-    this.dataSource = new MatTableDataSource([]);
+    this.dataSourceKlijent = new MatTableDataSource([]);
+    this.dataSourceAdmin = new MatTableDataSource([]);
     this.dataSourceDostavljaci = new MatTableDataSource([]);
     this.dataSourceZaposleni = new MatTableDataSource([]);
     this.cdr.detectChanges()
-    this.dataSource.paginator = this.paginator;
+    this.dataSourceKlijent.paginator = this.paginator;
     this.loaded = false;
-    if(this.uloga === '1' || this.uloga === '4') {
-      this.userService.getKorisnici(this.uloga).subscribe({
+    if(this.uloga === '4') {
+      this.userService.getAdmini().subscribe({
         next: res => {
-          this.korisnici = res;
           this.loaded = true;
-          this.dataSource = new MatTableDataSource(res);
+          this.dataSourceAdmin = new MatTableDataSource(res);
           this.cdr.detectChanges()
-          this.dataSource.paginator = this.paginator;
+          this.dataSourceAdmin.paginator = this.paginator;
         },
         error: err => {
           console.log(err);
@@ -99,13 +101,25 @@ export class UsersComponent implements OnInit {
           console.log(err);
         }
       })
+    } else if (this.uloga === '1') {
+      this.userService.getKlijenti().subscribe({
+        next: res => {
+          this.loaded = true;
+          this.dataSourceKlijent = new MatTableDataSource(res);
+          this.cdr.detectChanges()
+          this.dataSourceKlijent.paginator = this.paginator;
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
     }
 
   }
 
-  public openDialog(flag: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string) {
-    const dialogRef = this.dialog.open(KlijentDialogComponent,
-      { data: {  imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika} });
+  public openDialogAdmin(flag: number, idKorisnika: number, imeKorisnika: string, prezimeKorisnika: string, emailKorisnika: string, telefonKorisnika: string, lozinkaKorisnika: string) {
+    const dialogRef = this.dialog.open(AdminDialogComponent,
+      { data: { idKorisnika, imeKorisnika, prezimeKorisnika, emailKorisnika, telefonKorisnika, lozinkaKorisnika} });
     dialogRef.componentInstance.flag = flag;
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
