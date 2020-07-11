@@ -203,7 +203,7 @@ create sequence Dostava.Restoran_sequence as int
 create table Dostava.Restoran (
 	id_restorana int default (next value for Dostava.Restoran_sequence),
 	naziv_restorana varchar(50) not null,
-	pib_restorana int unique not null,
+	pib_restorana varchar(9) unique not null,
 	telefon_restorana varchar(15) not null,
 	opis_restorana varchar(200),
 	slika_restorana varchar(200) not null,

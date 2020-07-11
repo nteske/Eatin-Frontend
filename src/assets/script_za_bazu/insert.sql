@@ -1,8 +1,8 @@
 --restoran
 INSERT INTO Dostava.Restoran(naziv_restorana, pib_restorana, telefon_restorana, opis_restorana, slika_restorana)
-VALUES('Caribic Pizza', 101629981, '0666611800', 'Caribic je picerija osnovana 2005. godine.', 'https://www.caribic.rs/uploads/files/images/logo.svg');
+VALUES('Caribic Pizza', '101629981', '0666611800', 'Caribic je picerija osnovana 2005. godine.', 'https://www.caribic.rs/uploads/files/images/logo.svg');
 INSERT INTO Dostava.Restoran(naziv_restorana, pib_restorana, telefon_restorana, opis_restorana, slika_restorana)
-VALUES('Minuta', 104258197, '+381216339300', '2006. godine zapoceli smo ideju da ljudima ponudimo sirok asortiman nasih proizvoda (peciva, sendvici, salate, pice, rostilj, palacinke, sladoled)', 'https://minuta.rs/wp-content/uploads/2016/12/minuta-web-logo-test.png');
+VALUES('Minuta', '104258197', '+381216339300', '2006. godine zapoceli smo ideju da ljudima ponudimo sirok asortiman nasih proizvoda (peciva, sendvici, salate, pice, rostilj, palacinke, sladoled)', 'https://minuta.rs/wp-content/uploads/2016/12/minuta-web-logo-test.png');
 
 select * from Dostava.Restoran;
 
@@ -54,7 +54,7 @@ select * from Dostava.Je_tipa;
 INSERT INTO Dostava.Tip_artikla(opis_tipa_artikla)
 VALUES('Pice'); --piĆe
 INSERT INTO Dostava.Tip_artikla(opis_tipa_artikla)
-VALUES('Pica');
+VALUES('Pizza');
 INSERT INTO Dostava.Tip_artikla(opis_tipa_artikla)
 VALUES('Glavno jelo');
 INSERT INTO Dostava.Tip_artikla(opis_tipa_artikla)
@@ -153,6 +153,7 @@ INSERT INTO Dostava.Moze_sadrzati_priloge(id_priloga, id_artikla)
 VALUES (7, 7);
 INSERT INTO Dostava.Moze_sadrzati_priloge(id_priloga, id_artikla)
 VALUES (8, 7);
+
 
 select * from Dostava.Moze_sadrzati_priloge;
 
@@ -322,16 +323,8 @@ select * from Dostava.Sadrzi;
 
 --ima_priloge
 INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(1, 1);
-INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(2, 3);
-INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(2, 4);
-INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(2, 5);
-INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(2, 6);
-INSERT INTO Dostava.Ima_priloge(id_sadrzi, id_priloga)
-VALUES(2, 9);
+VALUES(2, 1);
 
 select * from Dostava.Ima_priloge;
+
+select * from Dostava.Sadrzi s full outer join Dostava.Artikl a on (s.id_artikla = a.id_artikla) full outer join Dostava.Ima_priloge i on (s.id_sadrzi = i.id_sadrzi) full outer join Dostava.Prilog p on (i.id_priloga = p.id_priloga);
