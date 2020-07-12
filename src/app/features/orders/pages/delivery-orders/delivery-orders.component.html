@@ -6,7 +6,7 @@
         <div class="card" style="width: 18rem; margin:auto;">
             <div class="card-header">
                 Stanje: {{order.statusPorudzbine}}
-                <button style="margin-left: 7px;" mat-raised-button (click)="prihvati(order.idPorudzbine)" color="warn">Prihvati</button>
+                <button *ngIf="order.statusPorudzbine=='gotova'||order.statusPorudzbine=='Gotova'" style="margin-left: 7px;" mat-raised-button (click)="prihvati(order.idPorudzbine)" color="warn">Prihvati</button>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Vreme prijema: {{order.vremePrijemaPorudzbine| date:'d.MM.yyyy HH:mm'}}</li>

@@ -25,5 +25,7 @@
 
 <div>
     <app-display *ngFor="let artikl of secondList " [article]="artikl"></app-display>
-    <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
+    <div style="display: inline-block; margin: auto; text-align: center;">
+        <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
+    </div>
 </div>

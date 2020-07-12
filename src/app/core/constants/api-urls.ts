@@ -57,7 +57,8 @@ export class ApiUrls {
      public static restloc: string = "restaurant";
 
      public static getImageUrl(text):string{
-         if(text.includes("http"))return text;
+         if(text.includes("http")|| text.includes("www"))return text;
+         else if(text.length < 8 )return "../../../assets/images/placeholder.png";
          else return this.backend+this.files+text;
      }
 }

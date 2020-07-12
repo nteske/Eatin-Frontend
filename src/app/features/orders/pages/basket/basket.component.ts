@@ -24,7 +24,7 @@ export class BasketComponent implements OnInit {
   constructor(private basketService:BasketService,private router:Router,
     private locationService:LocationService,private orderService:OrdersService,private toastr: ToastrService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {//
     window.scroll(0,0);
     this.form = new FormGroup({
       ulica: new FormControl(null, [Validators.required,Validators.minLength(4)]),
@@ -95,6 +95,7 @@ export class BasketComponent implements OnInit {
       closeButton:true,
       positionClass:'toast-bottom-right'
     });
+    //console.log("SVE",all);
     this.orderService.orderArticle(all).subscribe();
     this.prikazi=false;
     this.uzmiIzKorpe();

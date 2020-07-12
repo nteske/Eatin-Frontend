@@ -67,12 +67,12 @@ export class OrderArticleComponent implements OnInit {
     var prilog=this.biraPrilog.filter(item=>item.stanje)
       .map(item=>
         {
-          item={idImaPriloge:-1,prilog:{idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}}; 
+          item={idImaPriloge:0,prilog:{idPriloga:item.idPriloga,nazivPriloga:item.nazivPriloga}}; 
         return item
        })
       //}
     var zaKorpu={artikl:this.convert(this.artikl),
-      idStavkePorudzbine:-1,
+      idStavkePorudzbine:0,
       imaPriloge:prilog,
       mera:this.biraMeru.find(item=>this.kolicina==item.idMere)
     };//

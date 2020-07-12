@@ -110,6 +110,7 @@ export class RouteMapComponent implements OnInit,OnChanges {
 
 
 public route() {
+  if(this.restoran.lokacije[0]&&Number(this.korisnik.latitude)>10&&Number(this.korisnik.longitude)>10){
   let params = {
       "mode": "fastest;car",
       "waypoint0": "geo!" + this.restoran.lokacije[0].latitude+','+Number(this.restoran.lokacije[0].longitude),
@@ -153,11 +154,14 @@ public route() {
 
 
           this.map.addObjects([this.routeLine, this.routeArrows,this.startMarker,this.finishMarker]);
-          this.map.setViewBounds(this.routeLine.getBounds());
+         // this.map.setViewBounds(this.routeLine.getBounds());
       }
   }, error => {
       console.error(error);
   });
 }
+}
+
+
 }
 //

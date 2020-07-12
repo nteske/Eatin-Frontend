@@ -14,6 +14,7 @@ export class BasketService {
     if(items==null){
         var niz={restoranId:element.artikl.restoranId,stavkePorudzbine:[element],
           ukupnaCena:Number(element.artikl.cenaArtikla)};
+             // console.log("PRVI",niz);
         var encrt=Crypt.encryptData(JSON.stringify(niz));
         if(encrt!="error")
         {
@@ -27,6 +28,7 @@ export class BasketService {
           var data=null;
           try{
           data=JSON.parse(dec);
+         // console.log("PRE DODATKA",data);
           }catch(e){
           }
           if(data!=null){
@@ -36,6 +38,7 @@ export class BasketService {
           data.ukupnaCena=Number(data.ukupnaCena)+Number(element.artikl.cenaArtikla);
           //ovde
           if(data.stavkePorudzbine.length<11){
+            //console.log("POSLE DODATKA",data);
               var encrt=Crypt.encryptData(JSON.stringify(data));
               if(encrt!="error")  {
                 localStorage.setItem(Storage.basket,encrt);

@@ -56,7 +56,9 @@ export class HereComponent implements OnInit ,OnChanges{
     for(let marker of this.markeri)this.map.removeObject(marker);
     this.markeri=[];
     this.baloni=[];
-    for(let restoran of this.restorani)this.dropMarker(restoran);
+    for(let restoran of this.restorani)
+      if(restoran.lokacije[0])
+        this.dropMarker(restoran);
   }
   }
 
@@ -82,7 +84,10 @@ export class HereComponent implements OnInit ,OnChanges{
      // var group = new H.map.Group();
      // this.map.addObject(group);
 
-      for(let restoran of this.restorani)this.dropMarker(restoran);
+      for(let restoran of this.restorani){
+        if(restoran.lokacije[0])
+          this.dropMarker(restoran);
+      }
       this.first=true;
   }
 

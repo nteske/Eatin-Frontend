@@ -15,7 +15,7 @@
         <div class="card" style="width: 18rem; margin:auto;">
             <div class="card-header">
                 Stanje: {{order.statusPorudzbine}}
-                <button style="margin-left: 7px;" *ngIf="order.statusPorudzbine!='gotova'&&order.statusPorudzbine!='Gotova'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
+                <button style="margin-left: 7px;" *ngIf="order.statusPorudzbine=='primljena'||order.statusPorudzbine=='Primljena'" mat-raised-button (click)="gotovo(order.idPorudzbine)" color="warn">Gotovo</button>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Vreme prijema: {{order.vremePrijemaPorudzbine| date:'d.MM.yyyy HH:mm'}}</li>

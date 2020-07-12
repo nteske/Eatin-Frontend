@@ -42,5 +42,7 @@
             </mat-card-actions>
         </mat-card>
     </div>
-    <app-paginator *ngIf="restorani.totalPages>1" [paginator]="restorani.totalPages" (promena)="novaStrana($event)"></app-paginator>
+    <div style="display: inline-block; margin: auto; text-align: center;">
+        <app-paginator  *ngIf="restorani.totalPages>1" [paginator]="restorani.totalPages" (promena)="novaStrana($event)"></app-paginator>
+    </div>
 </div>
