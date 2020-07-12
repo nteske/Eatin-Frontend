@@ -43,7 +43,7 @@
     <div class="form">
         <mat-form-field>
             <mat-label>Restoran</mat-label>
-            <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <input type="text" [readonly]="flag == 3" required matInput [formControl]="myControl" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.nazivRestorana}}

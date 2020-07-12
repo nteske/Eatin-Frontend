@@ -12,6 +12,7 @@ import { Dostavljac } from '../models/dostavljac.model';
 import { Zaposleni } from '../models/zaposleni.model';
 import { Admin } from '../models/admin.model';
 import { Klijent } from '../models/klijent.model';
+import { RestoraniSimple } from '../models/restoraniSimple.model';
 
 
 
@@ -25,6 +26,17 @@ export class UserService {
   currentMessage = this.messageSource.asObservable();
 
   constructor(public jwtHelper: JwtHelperService, private errorService: ErrorService,private httpClient: HttpClient,private router:Router) { }
+
+  public getRestorani() {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.get<RestoraniSimple[]>('https://eatin-backend.herokuapp.com/restoran-admin', { 'headers': headers })
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+  }));
+  }
 
   public getKorisnici(uloga: string) {
     let params = new HttpParams();

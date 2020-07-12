@@ -3,11 +3,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Zaposleni } from '../../../models/zaposleni.model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../services/user.service';
-import { RestoranService } from '../../../../home/services/restoran.service';
-import { Restoran } from '../../../../home/models/restoran.model';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { RestoraniSimple } from '../../../models/restoraniSimple.model';
 
 @Component({
   selector: 'app-zaposleni-dialog',
@@ -18,20 +17,19 @@ export class ZaposleniDialogComponent implements OnInit {
 
   public flag: number;
   public newPassword: string;
-  public restorani: Restoran[];
+  public restorani: RestoraniSimple[];
   myControl = new FormControl();
-  filteredOptions: Observable<Restoran[]>;
+  filteredOptions: Observable<RestoraniSimple[]>;
 
   constructor(public dialogRef: MatDialogRef<ZaposleniDialogComponent>,
               private userService: UserService,
-              private restoranService: RestoranService,
               @Inject (MAT_DIALOG_DATA) public data: Zaposleni,
               private toastr:ToastrService) { }
 
   ngOnInit(): void {
-    this.restoranService.getRestorane(false, 1, 'ID', '').subscribe({
+    this.userService.getRestorani().subscribe({
       next: data => {
-        this.restorani = data.content;
+        this.restorani = data;
         this.filteredOptions = this.myControl.valueChanges
           .pipe(
             startWith(''),
@@ -40,6 +38,10 @@ export class ZaposleniDialogComponent implements OnInit {
           );
         if (this.flag === 2 || this.flag === 3) {
           this.myControl.setValue(this.restorani.find(x => x.idRestorana == this.data.restoranId))
+        } else {
+          if(this.restorani.length > 0) {
+            this.myControl.setValue(this.restorani[0]);
+          }
         }
       },
       error: error => {
@@ -48,11 +50,11 @@ export class ZaposleniDialogComponent implements OnInit {
     });
   }
 
-  displayFn(restoran: Restoran): string {
+  displayFn(restoran: RestoraniSimple): string {
     return restoran && restoran.nazivRestorana ? restoran.nazivRestorana : '';
   }
 
-  private _filter(name: string): Restoran[] {
+  private _filter(name: string): RestoraniSimple[] {
     const filterValue = name.toLowerCase();
     return this.restorani.filter(option => option.nazivRestorana.toLowerCase().indexOf(filterValue) === 0);
   }
