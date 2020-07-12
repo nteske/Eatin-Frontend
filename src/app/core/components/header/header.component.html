@@ -15,6 +15,7 @@
             <a style="cursor: pointer;" routerLink="/user/profil"><i class="fa fa-pencil"></i> Profil</a>
             <a style="cursor: pointer;" *ngIf="checkRole(assigned.user)" (click)="goForOrders()"><i class="fa fa-list-alt"></i> Porudzbine</a>
             <a style="cursor: pointer;" *ngIf="checkRole(assigned.delivery)" (click)="goForDelivery()"><i class="fa fa-list-alt"></i> Dostava</a>
+            <a style="cursor: pointer;" *ngIf="checkRole(assigned.employee)" (click)="goForRestoran()"><i class="fa fa-list-alt"></i> Restoran</a>
             <a style="cursor: pointer;" *ngIf="checkRole(assigned.employee)" (click)="goForEmploye()"><i class="fa fa-list-alt"></i> Porudzbine</a>
             <a style="cursor: pointer;" (click)="auth.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>

@@ -56,6 +56,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  goForRestoran():void{
+    this.router.navigateByUrl(rootPaths.restaurants+'/'+rootPaths.restaurantsView);
+  }
+
   checkRole(sent):boolean{
     if(sent!=this.role)return false;
     else return true;
