@@ -50,6 +50,9 @@ export class UsersComponent implements OnInit {
         this.dataSourceKlijent = new MatTableDataSource(res);
         this.cdr.detectChanges()
         this.dataSourceKlijent.paginator = this.paginator;
+        this.dataSourceKlijent.filterPredicate = (data: Klijent, filter: string) => {
+          return (data.imeKorisnika + ' ' + data.prezimeKorisnika).toLocaleLowerCase().includes(filter);
+        };
       },
       error: err => {
         console.log(err);
@@ -58,6 +61,7 @@ export class UsersComponent implements OnInit {
   }
 
   selectChanged() {
+    (document.getElementById('fiterFiled') as HTMLInputElement).value = '';
     this.dataSourceKlijent = new MatTableDataSource([]);
     this.dataSourceAdmin = new MatTableDataSource([]);
     this.dataSourceDostavljaci = new MatTableDataSource([]);
@@ -72,6 +76,9 @@ export class UsersComponent implements OnInit {
           this.dataSourceAdmin = new MatTableDataSource(res);
           this.cdr.detectChanges()
           this.dataSourceAdmin.paginator = this.paginator;
+          this.dataSourceAdmin.filterPredicate = (data: Admin, filter: string) => {
+            return (data.imeKorisnika + ' ' + data.prezimeKorisnika).toLocaleLowerCase().includes(filter);
+          };
         },
         error: err => {
           console.log(err);
@@ -84,6 +91,9 @@ export class UsersComponent implements OnInit {
           this.dataSourceDostavljaci = new MatTableDataSource(res);
           this.cdr.detectChanges()
           this.dataSourceDostavljaci.paginator = this.paginator;
+          this.dataSourceDostavljaci.filterPredicate = (data: Dostavljac, filter: string) => {
+            return (data.korisnik.imeKorisnika + ' ' + data.korisnik.prezimeKorisnika).toLocaleLowerCase().includes(filter);
+          };
         },
         error: err => {
           console.log(err);
@@ -96,6 +106,9 @@ export class UsersComponent implements OnInit {
           this.dataSourceZaposleni = new MatTableDataSource(res);
           this.cdr.detectChanges()
           this.dataSourceZaposleni.paginator = this.paginator;
+          this.dataSourceZaposleni.filterPredicate = (data: Zaposleni, filter: string) => {
+            return (data.korisnik.imeKorisnika + ' ' + data.korisnik.prezimeKorisnika).toLocaleLowerCase().includes(filter);
+          };
         },
         error: err => {
           console.log(err);
@@ -108,6 +121,9 @@ export class UsersComponent implements OnInit {
           this.dataSourceKlijent = new MatTableDataSource(res);
           this.cdr.detectChanges()
           this.dataSourceKlijent.paginator = this.paginator;
+          this.dataSourceKlijent.filterPredicate = (data: Klijent, filter: string) => {
+            return (data.imeKorisnika + ' ' + data.prezimeKorisnika).toLocaleLowerCase().includes(filter);
+          };
         },
         error: err => {
           console.log(err);
@@ -159,6 +175,19 @@ export class UsersComponent implements OnInit {
         this.refresh();
       }
     });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.toLocaleLowerCase();
+    if(this.uloga === '4') {
+      this.dataSourceAdmin.filter = filterValue;
+    } else if (this.uloga === '1') {
+      this.dataSourceKlijent.filter = filterValue;
+    } else if (this.uloga === '3') {
+      this.dataSourceDostavljaci.filter = filterValue;
+    } else if (this.uloga === '2') {
+      this.dataSourceZaposleni.filter = filterValue;
+    }
   }
 
   refresh() {

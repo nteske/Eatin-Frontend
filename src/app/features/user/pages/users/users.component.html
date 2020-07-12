@@ -9,49 +9,52 @@
       <mat-option value="2">Zaposleni</mat-option>
     </mat-select>
 </mat-form-field>
+<mat-form-field class="w3-margin-left">
+    <input id='fiterFiled' matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraga po punom imenu">
+  </mat-form-field>
 
 <div class="mat-elevation-z8" *ngIf="uloga == '1'">
     <div class="w3-bar w3-xlarge w3-indigo">
         <div class="w3-bar-item">Klijenti</div>
       </div>
-        <table mat-table [dataSource]="dataSourceKlijent">
+        <mat-table #table mat-table [dataSource]="dataSourceKlijent" class="mat-cell w3-card">
           <ng-container matColumnDef="ime">
-            <th mat-header-cell *matHeaderCellDef> Ime </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Ime </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let korisnik">
               <span class="mobile-label">Ime:</span>
-              {{korisnik.imeKorisnika + ' ' + korisnik.prezimeKorisnika}} </td>
+              {{korisnik.imeKorisnika + ' ' + korisnik.prezimeKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let korisnik">
                 <span class="mobile-label">Email:</span>
-              {{korisnik.emailKorisnika}} </td>
+              {{korisnik.emailKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="telefon">
-            <th mat-header-cell *matHeaderCellDef> Telefon </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let korisnik">
                 <span class="mobile-label">Telefon:</span>
-              {{korisnik.telefonKorisnika}} </td>
+              {{korisnik.telefonKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>
-              </th>
-              <td mat-cell *matCellDef="let row; let i=index;">
+              <mat-header-cell *matHeaderCellDef>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i=index;">
                 <button mat-icon-button color="primary"  (click)="openDialogKlijent(2, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button mat-icon-button color="primary"  (click)="openDialogKlijent(3, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-trash"></i>
                 </button>
-              </td>
+              </mat-cell>
               </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsKlijent"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsKlijent;"></tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumnsKlijent"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsKlijent;"></mat-row>
+        </mat-table>
         <mat-card *ngIf="!loaded" style="z-index: 1; display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner
             color="primary"
@@ -66,52 +69,52 @@
 
           <div class="w3-bar w3-xlarge w3-indigo">
               <div class="w3-bar-item">Admini</div>
-              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge">
+              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge" (click)="openDialogAdmin(1, null, null, null, null, null, null)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
 
-        <table mat-table [dataSource]="dataSourceAdmin">
+        <mat-table mat-table [dataSource]="dataSourceAdmin" class="mat-cell w3-card">
           <ng-container matColumnDef="ime">
-            <th mat-header-cell *matHeaderCellDef> Ime </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Ime </mat-header-cell>
+            <mat-cell *matCellDef="let korisnik">
               <span class="mobile-label">Ime:</span>
-              {{korisnik.imeKorisnika + ' ' + korisnik.prezimeKorisnika}} </td>
+              {{korisnik.imeKorisnika + ' ' + korisnik.prezimeKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let korisnik">
                 <span class="mobile-label">Email:</span>
-              {{korisnik.emailKorisnika}} </td>
+              {{korisnik.emailKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="telefon">
-            <th mat-header-cell *matHeaderCellDef> Telefon </th>
-            <td mat-cell *matCellDef="let korisnik">
+            <mat-header-cell *matHeaderCellDef> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let korisnik">
                 <span class="mobile-label">Telefon:</span>
-              {{korisnik.telefonKorisnika}} </td>
+              {{korisnik.telefonKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>
+              <mat-header-cell *matHeaderCellDef>
                 <button mat-icon-button color="primary" (click)="openDialogAdmin(1, null, null, null, null, null, null)">
                   <i class="fa fa-plus"></i>
                 </button>
-              </th>
-              <td mat-cell *matCellDef="let row; let i=index;">
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i=index;">
                 <button mat-icon-button color="primary"  (click)="openDialogAdmin(2, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button mat-icon-button color="primary"  (click)="openDialogAdmin(3, row.idKorisnika, row.imeKorisnika, row.prezimeKorisnika, row.emailKorisnika, row.telefonKorisnika, row.lozinkaKorisnika)">
                   <i class="fa fa-trash"></i>
                 </button>
-              </td>
+              </mat-cell>
               </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsAdmin"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsAdmin;"></tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumnsAdmin"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsAdmin;"></mat-row>
+          </mat-table>
         <mat-card *ngIf="!loaded" style="z-index: 1; display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner
             color="primary"
@@ -126,59 +129,59 @@
 
           <div class="w3-bar w3-xlarge w3-indigo">
               <div class="w3-bar-item">Zaposleni</div>
-              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge">
+              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge" (click)="openDialogZaposleni(1, null, null, null, null, null, null, null, null)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
 
-        <table mat-table [dataSource]="dataSourceZaposleni">
+        <mat-table mat-table [dataSource]="dataSourceZaposleni" class="mat-cell w3-card">
           <ng-container matColumnDef="ime">
-            <th mat-header-cell *matHeaderCellDef> Ime </th>
-            <td mat-cell *matCellDef="let zaposleni">
+            <mat-header-cell *matHeaderCellDef> Ime </mat-header-cell>
+            <mat-cell *matCellDef="let zaposleni">
               <span class="mobile-label">Ime:</span>
-              {{zaposleni.korisnik.imeKorisnika + ' ' + zaposleni.korisnik.prezimeKorisnika}} </td>
+              {{zaposleni.korisnik.imeKorisnika + ' ' + zaposleni.korisnik.prezimeKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let zaposleni">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let zaposleni">
                 <span class="mobile-label">Email:</span>
-              {{zaposleni.korisnik.emailKorisnika}} </td>
+              {{zaposleni.korisnik.emailKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="telefon">
-            <th mat-header-cell *matHeaderCellDef> Telefon </th>
-            <td mat-cell *matCellDef="let zaposleni">
+            <mat-header-cell *matHeaderCellDef> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let zaposleni">
                 <span class="mobile-label">Telefon:</span>
-              {{zaposleni.korisnik.telefonKorisnika}} </td>
+              {{zaposleni.korisnik.telefonKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="funkcijaZaposlenog">
-            <th mat-header-cell *matHeaderCellDef> Funkcija </th>
-            <td mat-cell *matCellDef="let zaposleni">
+            <mat-header-cell *matHeaderCellDef> Funkcija </mat-header-cell>
+            <mat-cell *matCellDef="let zaposleni">
                 <span class="mobile-label">Funkcija:</span>
-              {{zaposleni.funkcijaZaposlenog}} </td>
+              {{zaposleni.funkcijaZaposlenog}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>
+              <mat-header-cell *matHeaderCellDef>
                 <button mat-icon-button color="primary" (click)="openDialogZaposleni(1, null, null, null, null, null, null, null, null)">
                   <i class="fa fa-plus"></i>
                 </button>
-              </th>
-              <td mat-cell *matCellDef="let row; let i=index;">
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i=index;">
                 <button mat-icon-button color="primary"  (click)="openDialogZaposleni(2, row.idZaposlenog, row.korisnik.imeKorisnika, row.korisnik.prezimeKorisnika, row.korisnik.emailKorisnika, row.korisnik.telefonKorisnika, row.korisnik.lozinkaKorisnika, row.funkcijaZaposlenog, row.restoranId)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button mat-icon-button color="primary"  (click)="openDialogZaposleni(3, row.idZaposlenog, row.korisnik.imeKorisnika, row.korisnik.prezimeKorisnika, row.korisnik.emailKorisnika, row.korisnik.telefonKorisnika, row.korisnik.lozinkaKorisnika, row.funkcijaZaposlenog, row.restoranId)">
                   <i class="fa fa-trash"></i>
                 </button>
-              </td>
+              </mat-cell>
               </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsZaposleni"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsZaposleni;"></tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumnsZaposleni"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsZaposleni;"></mat-row>
+        </mat-table>
         <mat-card *ngIf="!loaded" style="z-index: 1; display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner
             color="primary"
@@ -194,59 +197,59 @@
 
           <div class="w3-bar w3-xlarge w3-indigo">
               <div class="w3-bar-item">Dostavljaci</div>
-              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge">
+              <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge" (click)="openDialogDostavljac(1, null, null, null, null, null, null, null)">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
 
-        <table mat-table [dataSource]="dataSourceDostavljaci">
+        <mat-table mat-table [dataSource]="dataSourceDostavljaci" class="mat-cell w3-card">
           <ng-container matColumnDef="ime">
-            <th mat-header-cell *matHeaderCellDef> Ime </th>
-            <td mat-cell *matCellDef="let dostavljac">
+            <mat-header-cell *matHeaderCellDef> Ime </mat-header-cell>
+            <mat-cell *matCellDef="let dostavljac">
               <span class="mobile-label">Ime:</span>
-              {{dostavljac.korisnik.imeKorisnika + ' ' + dostavljac.korisnik.prezimeKorisnika}} </td>
+              {{dostavljac.korisnik.imeKorisnika + ' ' + dostavljac.korisnik.prezimeKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let dostavljac">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let dostavljac">
                 <span class="mobile-label">Email:</span>
-              {{dostavljac.korisnik.emailKorisnika}} </td>
+              {{dostavljac.korisnik.emailKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="telefon">
-            <th mat-header-cell *matHeaderCellDef> Telefon </th>
-            <td mat-cell *matCellDef="let dostavljac">
+            <mat-header-cell *matHeaderCellDef> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let dostavljac">
                 <span class="mobile-label">Telefon:</span>
-              {{dostavljac.korisnik.telefonKorisnika}} </td>
+              {{dostavljac.korisnik.telefonKorisnika}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="prevoznoSredstvo">
-              <th mat-header-cell *matHeaderCellDef> Prevozno sredstvo </th>
-              <td mat-cell *matCellDef="let korisnik">
+              <mat-header-cell *matHeaderCellDef> Prevozno sredstvo </mat-header-cell>
+              <mat-cell *matCellDef="let korisnik">
                   <span class="mobile-label">Prevozno sredstvo:</span>
-                {{korisnik.prevoznoSredstvo}} </td>
+                {{korisnik.prevoznoSredstvo}} </mat-cell>
             </ng-container>
 
           <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>
+              <mat-header-cell *matHeaderCellDef>
                 <button mat-icon-button color="primary" (click)="openDialogDostavljac(1, null, null, null, null, null, null, null)">
                   <i class="fa fa-plus"></i>
                 </button>
-              </th>
-              <td mat-cell *matCellDef="let row; let i=index;">
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i=index;">
                 <button mat-icon-button color="primary"  (click)="openDialogDostavljac(2, row.idDostavljaca, row.korisnik.imeKorisnika, row.korisnik.prezimeKorisnika, row.korisnik.emailKorisnika, row.korisnik.telefonKorisnika, row.korisnik.lozinkaKorisnika, row.prevoznoSredstvo)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button mat-icon-button color="primary"  (click)="openDialogDostavljac(3, row.idDostavljaca, row.korisnik.imeKorisnika, row.korisnik.prezimeKorisnika, row.korisnik.emailKorisnika, row.korisnik.telefonKorisnika, row.korisnik.lozinkaKorisnika, row.prevoznoSredstvo)">
                   <i class="fa fa-trash"></i>
                 </button>
-              </td>
+              </mat-cell>
               </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsDostavljaci"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsDostavljaci;"></tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumnsDostavljaci"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsDostavljaci;"></mat-row>
+        </mat-table>
         <mat-card *ngIf="!loaded" style="z-index: 1; display: flex; justify-content: center; align-items: center">
           <mat-progress-spinner
             color="primary"
