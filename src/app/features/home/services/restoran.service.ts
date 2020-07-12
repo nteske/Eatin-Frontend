@@ -12,6 +12,7 @@ import { TipArtikla } from '../models/tip_artikla';
 import { artiklDTO } from '../dto/artiklDTO';
 import { Artikl } from '../models/artikl.model';
 import { Restoran } from '../models/restoran.model';
+import { PostRestoran } from '../../user/models/postResotan.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,15 @@ export class RestoranService {
   }));
   }
 
+  public postRestoran(restoran: PostRestoran) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/restoran-admin', restoran, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
 
 }

@@ -1,0 +1,33 @@
+<div class="center">
+  <mat-card style="background-color: rgb(208, 211, 208)">
+    <h3 class="w3-center">Kreiranje restorana</h3>
+    <mat-card-content>
+      <form [formGroup]="form" #formControl="ngForm">
+          <mat-form-field >
+              <input matInput formControlName="nazivRestorana" placeholder="Naziv restorana" name="naziv" required>
+            </mat-form-field>
+          <mat-form-field >
+              <input matInput formControlName="opisRestorana" placeholder="Opis restorana" name="opis" required>
+            </mat-form-field>
+          <mat-form-field >
+              <input matInput formControlName="pibRestorana" placeholder="PIB restorana" name="pib" required>
+            </mat-form-field>
+          <mat-form-field >
+              <input matInput formControlName="telefonRestorana" placeholder="Telefon restorana" name="telefon" required>
+            </mat-form-field>
+          <mat-form-field >
+              <input matInput formControlName="slikaRestorana" placeholder="URL slike restorana" name="slika" required>
+            </mat-form-field>
+            <p>Odaberite kojih je tipova restoran</p>
+            <section style="padding: 10px;" class="example-section">
+                <mat-checkbox *ngFor="let tip of tipoviRestorana" class="example-margin w3-margin" (change)="promena(tip)">{{tip.opisTipaRestorana}}</mat-checkbox>
+            </section>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="w3-center">
+      <button mat-raised-button [type]="onSubmit" color="primary" [disabled]="!formControl.valid" (click)="onSubmit()">Kreiraj</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

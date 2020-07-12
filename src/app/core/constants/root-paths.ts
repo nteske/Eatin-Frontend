@@ -14,5 +14,6 @@ export const rootPaths = {
     profil: "profil",
     users: "users",
     restaurants: "restaurants",
-    restaurantsView: "view"
+    restaurantsView: "view",
+    restaurantAdmin: "restaurant-admin"
   }
