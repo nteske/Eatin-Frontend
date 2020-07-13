@@ -125,7 +125,7 @@ export class ArticlesEditComponent implements OnInit {
     }
     else {
       this.odabranTip=this.secondList.find(el=>el.idArtikla==num).tipArtikla.idTipaArtikla;
-      this.menja=num;}
+      this.menja=Number(num);}
   }
 
   dodaj(){
