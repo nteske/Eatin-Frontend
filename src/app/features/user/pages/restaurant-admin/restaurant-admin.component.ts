@@ -109,7 +109,6 @@ export class RestaurantAdminComponent implements OnInit {
         console.log(err);
       }
     })
-    console.log(req);
   }
 
   dodajLokaciju(): void {
@@ -123,6 +122,15 @@ export class RestaurantAdminComponent implements OnInit {
     }
     this.lokacije.push(lok);
     this.formLokacija.reset();
+  }
+
+  klik() {
+    const startTime = document.getElementById('startTimeRD') as HTMLInputElement;
+    const endTime = document.getElementById('endTimeRD') as HTMLInputElement;
+    console.log(startTime.value);
+    console.log(endTime.value);
+    //TO DO
+
   }
 
 }
