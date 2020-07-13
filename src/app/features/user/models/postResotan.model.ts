@@ -1,16 +1,8 @@
 import { TipRestorana } from '../../home/models/tip_restorana.model';
+import { LokacijaAdmin } from './lokacijaAdmin.model';
 
 export class PostRestoran {
-  lokacije: [
-    {
-      broj: string;
-      grad: string;
-      latitude: number;
-      longitude: number;
-      postanskiBroj: string;
-      ulica: string;
-    }
-  ];
+  lokacije: LokacijaAdmin[];
   nazivRestorana: string;
   opisRestorana: string;
   pibRestorana: string;

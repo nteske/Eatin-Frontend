@@ -37,7 +37,10 @@ export class ZaposleniDialogComponent implements OnInit {
             map(name => name ? this._filter(name) : this.restorani.slice())
           );
         if (this.flag === 2 || this.flag === 3) {
-          this.myControl.setValue(this.restorani.find(x => x.idRestorana == this.data.restoranId))
+          console.log(this.data);
+          console.log(this.restorani);
+          this.myControl.setValue(this.restorani.find(x => { return x.idRestorana === this.data.restoranId } ));
+          console.log(this.restorani.find(x => { return x.idRestorana === this.data.restoranId } ));
         } else {
           if(this.restorani.length > 0) {
             this.myControl.setValue(this.restorani[0]);

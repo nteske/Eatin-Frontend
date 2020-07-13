@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostRestoran } from '../../models/postResotan.model';
 import { RestoranService } from '../../../home/services/restoran.service';
 import { TipRestorana } from '../../../home/models/tip_restorana.model';
 import { ToastrService } from 'ngx-toastr';
+import { LokacijaAdmin } from '../../models/lokacijaAdmin.model';
 
 @Component({
   selector: 'app-restaurant-admin',
@@ -12,15 +13,28 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RestaurantAdminComponent implements OnInit {
 
+  @ViewChildren('checkboxes') private checkboxes: QueryList<any>;
+
   form: FormGroup;
+  formLokacija: FormGroup;
   tipoviRestorana: TipRestorana[];
   odabraniTipoviRestorana: TipRestorana[] = [];
+  lokacije: LokacijaAdmin[] = [];
 
   constructor(private restoranService: RestoranService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.formLokacija = new FormGroup({
+      ulica: new FormControl(null, [Validators.required,Validators.minLength(4)]),
+      broj: new FormControl(null, [Validators.required,Validators.minLength(1)]),
+      grad: new FormControl(null, [Validators.required,Validators.minLength(2)]),
+      pBroj: new FormControl(null, [Validators.required,Validators.minLength(5),Validators.maxLength(5)]),
+
+    });
+
     this.form = new FormGroup({
+
       nazivRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       opisRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       telefonRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
@@ -43,16 +57,22 @@ export class RestaurantAdminComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if(this.lokacije.length === 0) {
+      this.toastr.error("Restoran mora imati bar jednu lokaciju!","Neuspeh",{
+        closeButton:true,
+        positionClass:'toast-bottom-right'
+      });
+      return;
+    }
+    if(this.odabraniTipoviRestorana.length === 0) {
+      this.toastr.error("Restoran mora biti bar jednog tipa!","Neuspeh",{
+        closeButton:true,
+        positionClass:'toast-bottom-right'
+      });
+      return;
+    }
     let req: PostRestoran = {
-      lokacije: [ {
-          broj: '5',
-          grad: 'Novi Sad',
-          latitude: 19.827260000,
-          longitude: 45.281864000,
-          postanskiBroj: '21000',
-          ulica: 'Bulevar Oslobodjenja'
-        }
-      ],
+      lokacije: this.lokacije,
       nazivRestorana: this.form.value.nazivRestorana,
       opisRestorana: this.form.value.opisRestorana,
       pibRestorana: this.form.value.pibRestorana,
@@ -76,12 +96,33 @@ export class RestaurantAdminComponent implements OnInit {
           closeButton:true,
           positionClass:'toast-bottom-right'
         });
+        this.odabraniTipoviRestorana = [];
+        this.lokacije = [];
+        this.formLokacija.reset();
+        this.form.reset();
+        let myCheckboxes = this.checkboxes.toArray();
+        myCheckboxes.forEach((element) => {
+          element.checked = false;
+        });
       },
       error: err => {
         console.log(err);
       }
     })
     console.log(req);
+  }
+
+  dodajLokaciju(): void {
+    let lok: LokacijaAdmin = {
+      broj: this.formLokacija.value.broj,
+      grad: this.formLokacija.value.grad,
+      latitude: 19.827260000,
+      longitude: 45.281864000,
+      postanskiBroj: this.formLokacija.value.pBroj,
+      ulica: this.formLokacija.value.ulica
+    }
+    this.lokacije.push(lok);
+    this.formLokacija.reset();
   }
 
 }
