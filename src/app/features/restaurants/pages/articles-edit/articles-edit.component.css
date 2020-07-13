@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+h2 {
+    font-family: 'Merienda', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+.pagination {
+    display: block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.desno {
+    position: relative;
+    float: right;
+    margin-right: 40px;
+}
+
+.prostor {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.delet{
+    position: absolute;
+    top: 0%;
+    left: 96%;
+    width: 34px;
+    height: 34px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+}
+
+.crvena{
+    background-color: #c82333;
+    color: white;
+}

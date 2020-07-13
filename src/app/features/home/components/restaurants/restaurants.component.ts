@@ -69,4 +69,5 @@ export class RestaurantsComponent implements OnInit,OnChanges {
       this.odabraoTip=this.tipovi[0].idTipaRestorana;
     });
   }
+  
 }

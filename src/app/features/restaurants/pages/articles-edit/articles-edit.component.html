@@ -1,0 +1,87 @@
+<div style="text-align: center; margin: auto;">
+    <mat-form-field class="prostor">
+        <mat-label>Sortiraj</mat-label>
+        <mat-select [(ngModel)]="odabraoSort" (selectionChange)="promena()" name="sort">
+            <mat-option *ngFor="let s of sort" [value]="s.value">
+                {{s.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="prostor">
+        <mat-label>Pretraga</mat-label>
+        <input [(ngModel)]="search" type="text" matInput (change)="promena() " placeholder="naziv obroka ">
+        <mat-icon style="cursor:pointer;" matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+
+<div style="text-align: center; margin: auto; max-width: 600px;">
+    <div class="card" style="width: 18rem; display: inline-block; margin: 5px;" *ngFor="let el of secondList">
+    <div *ngIf="menja!=el.idArtikla" style="width: 100%; height: 230px; overflow: hidden;">
+        <img class="card-img-top"  [src]="getMyImage(el.slikaArtikla)" alt="Card image cap">
+    </div>
+
+    <div *ngIf="menja==el.idArtikla" style="width: 100%; height: 191px; overflow: hidden;">
+        <img class="card-img-top"  [src]="getMyImage(el.slikaArtikla)" alt="Card image cap">
+    </div>
+
+    <input [class.crvena]="el.slikaArtikla.length==0||el.slikaArtikla.length>199" style="width: 100%;" *ngIf="menja==el.idArtikla" type="text"
+    id="slikaArtikla" name="slikaArtikla" [(ngModel)]="el.slikaArtikla">
+        <div class="card-body">
+          <h5 *ngIf="menja!=el.idArtikla" class="card-title">{{el.nazivArtikla}}</h5>
+          <input [class.crvena]="el.nazivArtikla.length==0||el.nazivArtikla.length>50" *ngIf="menja==el.idArtikla" type="text"
+              id="nazivArtikla" name="nazivArtikla" [(ngModel)]="el.nazivArtikla">
+
+          <p *ngIf="menja!=el.idArtikla" class="card-text">{{el.cenaArtikla}}</p>
+          <input [class.crvena]="el.cenaArtikla<1" *ngIf="menja==el.idArtikla" type="text"
+              id="cenaArtikla" name="cenaArtikla" [(ngModel)]="el.cenaArtikla">
+
+              <p *ngIf="menja!=el.idArtikla" class="card-text">Tip artikla: {{el.tipArtikla.opisTipaArtikla}}</p>
+            
+           <mat-form-field *ngIf="menja==el.idArtikla">
+                <mat-select [(ngModel)]="odabranTip" name="tipart">
+                    <mat-option *ngFor="let tip of tipovi" [value]="tip.idTipaArtikla">
+                        {{tip.opisTipaArtikla}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+          <a (click)="izmeni(el.idArtikla)" class="btn btn-primary" style="color: white;">Izmeni</a>
+          <a (click)="priloziIMere(el.idArtikla)"  class="btn btn-warning" style="margin-top: 7px;display: block; color: white;">Prilozi i mere</a>
+        </div>
+
+      </div>
+
+      <div class="card" style="width: 18rem; display: inline-block; margin: 5px;">
+  
+        <div style="width: 100%; height: 191px; overflow: hidden;">
+            <img class="card-img-top"  [src]="getMyImage(novi.slikaArtikla)" alt="Card image cap">
+        </div>
+    
+        <input [class.crvena]="novi.slikaArtikla.length==0||novi.slikaArtikla.length>199" style="width: 100%;" type="text"
+        id="slikaArtikla" name="slikaArtikla" [(ngModel)]="novi.slikaArtikla">
+    
+            <div class="card-body">
+              <input [class.crvena]="novi.nazivArtikla.length==0||novi.nazivArtikla.length>50" type="text"
+                  id="nazivArtikla" name="nazivArtikla" [(ngModel)]="novi.nazivArtikla">
+    
+              <input [class.crvena]="novi.cenaArtikla<1" type="text"
+                  id="cenaArtikla" name="cenaArtikla" [(ngModel)]="novi.cenaArtikla">
+           
+               <mat-form-field >
+                    <mat-select [(ngModel)]="odabranTip2" name="tipart2">
+                        <mat-option *ngFor="let tip of tipovi" [value]="tip.idTipaArtikla">
+                            {{tip.opisTipaArtikla}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              <a (click)="dodaj()" class="btn btn-primary" style=" color: white;">Dodaj</a>
+              <a  class="btn btn-warning" style="margin-top: 7px;display: block; color: white; visibility: hidden;">Prilozi i mere</a>
+            </div>
+          </div>
+      
+
+
+    <div style="display: inline-block; margin: auto; text-align: center;">
+        <app-paginator *ngIf="paginator>1" [paginator]="paginator" (promena)="novaStrana($event)"></app-paginator>
+    </div>
+</div>

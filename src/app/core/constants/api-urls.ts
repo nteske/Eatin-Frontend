@@ -41,6 +41,24 @@ export class ApiUrls {
     //-------------tip artikala (url backend srv + promenjive)-------------
     public static tipArtikala: string = "/tip-artikla";
      //-------------articles (url backend srv + promenjive)-------------
+
+
+     //zaposleni
+     public static zaposleniRestoran: string = "/restoran-zaposleni";
+     public static zaposleniRestoranTip: string = "/restoran-tip";
+     
+     public static zaposleniTipDatuma: string = "/tip-datuma";
+     public static zaposleniVreme: string = "/restoran-vreme";
+     public static zaposleniLokacije: string = "/restoran-lokacije";
+     public static zaposleniArtikli: string = "/artikl-zaposleni";
+
+
+     public static zaposleniPrilog: string = "/artikl-prilog";
+     public static zaposleniMera: string = "/artikl-mera";
+
+     public static mera: string = "/mera";
+     public static prilog: string = "/prilog";
+
      public static articles: string = "/artikl";
      //nasted putanje
      public static bytypes: string = "bytypes";
@@ -58,7 +76,7 @@ export class ApiUrls {
 
      public static getImageUrl(text):string{
          if(text.includes("http")|| text.includes("www"))return text;
-         else if(text.length < 8 )return "../../../assets/images/placeholder.png";
-         else return this.backend+this.files+text;
+         else return "../../../assets/images/placeholder.png";
+        // else return this.backend+this.files+text;
      }
 }

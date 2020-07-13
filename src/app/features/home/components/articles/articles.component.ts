@@ -65,7 +65,7 @@ export class ArticlesComponent implements OnInit ,OnChanges{
     if(this.odabraoSort=="priceLow"){call.desc="true";call.sort="CENA"};
     this.callForRequest(call.desc,this.page,this.restoran.idRestorana,this.search,call.sort,this.odabranTip);
   }
-
+//
   callForRequest(desc,page,restoran,search,sort,tip):void{
       this.articleDisplayService.getArtikle(desc,page,restoran,search,sort,tip).subscribe(data=>{
         this.secondList=data.content;

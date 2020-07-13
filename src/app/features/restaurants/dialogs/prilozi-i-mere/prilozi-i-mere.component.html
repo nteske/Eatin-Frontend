@@ -1,0 +1,29 @@
+<div *ngIf="ucitano">
+    <h2>Prilozi</h2>
+    <mat-form-field>
+        <mat-select required [(ngModel)]="odabraoPrilog" placeholder="Prilozi" name="prilozi">
+          <mat-option *ngFor="let prom of prilozi" [value]="prom.idPriloga">
+            {{ prom.nazivPriloga}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a (click)="dodajPrilog()" style="color: white;" class="btn btn-primary">Dodaj</a>
+<div *ngFor="let prilog of artikl.prilozi">
+  <p style="width: 150px!important; display: inline-block;">{{prilog.nazivPriloga}}</p>
+  <a (click)="obrisiPrilog(prilog.idPriloga)" style="color: white;" class="btn btn-danger">Obrisi</a>
+</div>
+    <h2>Mere</h2>
+    <mat-form-field>
+        <mat-select required [(ngModel)]="odabraoMeru" placeholder="Mere" name="mere">
+          <mat-option *ngFor="let prom of mera" [value]="prom.idMere">
+            {{ prom.opisMere}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a (click)="dodajMeru()" style="color: white;" class="btn btn-primary">Dodaj</a>
+
+<div *ngFor="let mera of artikl.mere">
+  <p style="width: 150px!important; display: inline-block;">{{mera.opisMere}}</p> 
+  <a (click)="obrisiMeru(mera.idMere)" style="color: white;" class="btn btn-danger">Obrisi</a>
+</div>
+</div>

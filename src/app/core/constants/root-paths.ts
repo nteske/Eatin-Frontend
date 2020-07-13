@@ -15,5 +15,6 @@ export const rootPaths = {
     users: "users",
     restaurants: "restaurants",
     restaurantsView: "view",
+    articlesView: "articles",
     restaurantAdmin: "restaurant-admin"
   }

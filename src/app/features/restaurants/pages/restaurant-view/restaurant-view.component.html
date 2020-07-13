@@ -1,1 +1,152 @@
-<p>restaurant-view works!</p>
+<div *ngIf="ucitao" class="container">
+    <div class="row justify-content-center">
+        <div class="col-4" style="text-align: center;">
+            <h2  style="width: 18rem;">Artikli</h2>
+            <div class="card" style="width: 18rem;">
+            <a (click)="upravljajArtiklima()" style="color: white; max-width: 18rem;" class="btn btn-primary">Upravljaj artiklima</a>
+        </div>
+            <h2  style="width: 18rem;">Rastoran</h2>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="getMyImage(restoran.slikaRestorana)" alt="Card image cap">
+                <label *ngIf="menja" for="slikaRestorana">Slika restorana:</label>
+                <input [class.crvena]="restoran.slikaRestorana.length==0||restoran.slikaRestorana.length>199"
+                    *ngIf="menja" type="text" id="slikaRestorana" name="slikaRestorana"
+                    [(ngModel)]="restoran.slikaRestorana">
+
+                <div class="card-body">
+
+
+                    <h5 *ngIf="!menja" class="card-title">{{restoran.nazivRestorana}}</h5>
+
+                    <label *ngIf="menja" for="nazivRestorana">Naziv restorana:</label>
+                    <input [class.crvena]="restoran.nazivRestorana.length==0||restoran.nazivRestorana.length>49"
+                        *ngIf="menja" type="text" id="nazivRestorana" name="nazivRestorana"
+                        [(ngModel)]="restoran.nazivRestorana">
+
+                    <p *ngIf="!menja" class="card-text">{{restoran.opisRestorana}}</p>
+
+                    <label *ngIf="menja" for="opisRestorana">Opis restorana:</label>
+                    <input [class.crvena]="restoran.opisRestorana.length>199" *ngIf="menja" type="text"
+                        id="opisRestorana" name="opisRestorana" [(ngModel)]="restoran.opisRestorana">
+
+                    <p *ngIf="!menja" class="card-text">Pib: {{restoran.pibRestorana}}</p>
+
+                    <label *ngIf="menja" for="pibRestorana">Pib restorana:</label>
+                    <input [class.crvena]="restoran.pibRestorana.length!=9" *ngIf="menja" type="text" id="pibRestorana"
+                        name="pibRestorana" [(ngModel)]="restoran.pibRestorana">
+
+                    <p *ngIf="!menja" class="card-text">Telefon: {{restoran.telefonRestorana}}</p>
+
+
+                    <label *ngIf="menja" for="telefonRestorana">Telefon restorana:</label>
+                    <input [class.crvena]="restoran.telefonRestorana.length==0||restoran.telefonRestorana.length>14"
+                        *ngIf="menja" type="text" id="telefonRestorana" name="telefonRestorana"
+                        [(ngModel)]="restoran.telefonRestorana">
+
+
+                    <a (click)="izmena()" style="color: white;" class="btn btn-primary">Izmeni</a>
+
+                </div>
+            </div>
+            <h2 style="width: 18rem;">Tipovi restorana</h2>
+            <div style="width: 18rem;">
+            <mat-form-field >
+                <mat-select [(ngModel)]="odabraoTip" (selectionChange)="promena()" name="tip">
+                    <mat-option *ngFor="let tip of tipovi" [value]="tip.idTipaRestorana">
+                        {{tip.opisTipaRestorana}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <a (click)="dodaj()" style="color: white;" class="btn btn-primary">Dodaj</a>
+        </div>
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;"
+                *ngFor="let tip of restoran.tipRestorana">
+                <div class="card-header">{{tip.opisTipaRestorana}}</div>
+                <div class="card-body" style="padding: 0px;">
+                    <a *ngIf="restoran.tipRestorana.length>1" (click)="obrisiMe(tip.idTipaRestorana)"
+                        style="color: white; width: 100% !important;" class="btn btn-danger">Obrisi</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-4" style="text-align: center;">
+
+            <h2 style="width: 18rem;">Radno vreme</h2>
+            <div style="width: 18rem;">
+            <mat-form-field>
+                <mat-select [(ngModel)]="odabraoTipDatuma" (selectionChange)="promena()" name="tipDatuma">
+                    <mat-option *ngFor="let tip of tipoviDatuma" [value]="tip.idTipaDatuma">
+                        {{tip.opisTipaDatuma}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <a (click)="dodajVreme()" style="color: white;" class="btn btn-primary">Dodaj</a>
+        </div>
+            <div style="width: 18rem;">
+                <input [class.crvena]="vremeOd<0||vremeOd>vremeDo" [(ngModel)]="vremeOd"
+                    style="width: 120px; margin: 3px;" min="0" max="24" placeholder="Vreme Od" type="number"
+                    id="vremeOd" name="vremeOd">
+                <input [class.crvena]="vremeDo>24||vremeDo<vremeOd" [(ngModel)]="vremeDo"
+                    style="width: 120px; margin: 3px;" min="0" max="24" placeholder="Vreme Do" type="number"
+                    id="vremeDo" name="vremeDo">
+            </div>
+
+
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;"
+                *ngFor="let rv of restoran.radnoVreme">
+                <div class="card-header">{{rv.tipDatuma.opisTipaDatuma}}</div>
+                <div class="card-body" style="padding: 0px;">
+                    <p class="card-text">Od {{rv.vremeOd}} Do {{rv.vremeDo}}</p>
+                    <a *ngIf="restoran.radnoVreme.length>1" (click)="obrisiVreme(rv.tipDatuma.idTipaDatuma)"
+                        style="color: white; width: 100% !important;" class="btn btn-danger">Obrisi</a>
+                </div>
+            </div>
+
+
+            <h2>Lokacije</h2>
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="postanskiBroj">Postanski broj:</label>
+                <input [class.crvena]="lokacija.postanskiBroj.length!=5" type="text" id="postanskiBroj"
+                    name="postanskiBroj" [(ngModel)]="lokacija.postanskiBroj">
+            </div>
+
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="grad">Grad:</label>
+                <input [class.crvena]="lokacija.grad.length<1||lokacija.grad.length>20" type="text" id="grad"
+                    name="grad" [(ngModel)]="lokacija.grad">
+            </div>
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="ulica">Ulica:</label>
+                <input [class.crvena]="lokacija.ulica.length<1||lokacija.ulica.length>30" type="text" id="ulica"
+                    name="ulica" [(ngModel)]="lokacija.ulica">
+            </div>
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="broj">Broj:</label>
+                <input [class.crvena]="lokacija.broj.length<1||lokacija.broj.length>1000" type="text" id="broj"
+                    name="broj" [(ngModel)]="lokacija.broj">
+            </div>
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="latitude">Latitude:</label>
+                <input [class.crvena]="lokacija.latitude<10" type="number" id="latitude" name="latitude"
+                    [(ngModel)]="lokacija.latitude">
+            </div>
+            <div style="text-align: left;">
+                <label style="width: 100px;" for="longitude">Longitude:</label>
+                <input [class.crvena]="lokacija.longitude<10" type="number" id="longitude" name="longitude"
+                    [(ngModel)]="lokacija.longitude">
+            </div>
+            <a (click)="dodajLokaciju()" style="color: white; max-width: 18rem; margin-bottom: 8px;"
+                class="btn btn-primary">Dodaj lokaciju</a>
+            <div class="card text-white bg-info mb-3" style="max-width: 18rem;" *ngFor="let lok of restoran.lokacije">
+                <div class="card-header">{{lok.postanskiBroj}}, {{lok.grad}}, {{lok.ulica}} {{lok.broj}}</div>
+                <div class="card-body" style="padding: 0px;">
+                    <p class="card-text">Latitude {{lok.latitude}}, Longitude {{lok.longitude}}</p>
+                    <a (click)="obrisiLokaciju(lok.idLokacije)" style="color: white; width: 100% !important;"
+                        class="btn btn-danger">Obrisi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 style="text-align: center;">Selektujte kordinate nove lokacije na mapi</h2>
+    <app-click-map (promena)="kordinate($event)" lat="45.2566559" lng="19.844614" width="100%" height="500px"></app-click-map>
+</div>

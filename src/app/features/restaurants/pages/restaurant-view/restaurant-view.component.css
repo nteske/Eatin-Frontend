@@ -1,0 +1,11 @@
+.crvena{
+    background-color: #c82333;
+    color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .row {
+        text-align: center;
+      display: block!important;
+    }
+  }
