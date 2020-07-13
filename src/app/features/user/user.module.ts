@@ -29,6 +29,7 @@ import { AdminDialogComponent } from './components/dialogs/admin-dialog/admin-di
 import { ZaposleniDialogComponent } from './components/dialogs/zaposleni-dialog/zaposleni-dialog.component';
 import { DostavljacDialogComponent } from './components/dialogs/dostavljac-dialog/dostavljac-dialog.component';
 import { RestaurantAdminComponent } from './pages/restaurant-admin/restaurant-admin.component';
+import { RestaurantsModule } from '../restaurants/restaurants.module';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { RestaurantAdminComponent } from './pages/restaurant-admin/restaurant-ad
     MatAutocompleteModule,
     MatPaginatorModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    RestaurantsModule
   ],
   entryComponents: [
     KlijentDialogComponent,

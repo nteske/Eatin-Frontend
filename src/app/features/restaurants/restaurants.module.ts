@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
 import { RestaurantViewComponent } from './pages/restaurant-view/restaurant-view.component';
 import { MatInputModule } from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatSelectModule} from '@angular/material/select'; 
-import {MatCardModule} from '@angular/material/card'; 
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { ArticlesEditComponent } from './pages/articles-edit/articles-edit.component';
@@ -24,5 +24,8 @@ import { ClickMapComponent } from './components/click-map/click-map.component';
   ],entryComponents: [
     PriloziIMereComponent
   ],
+  exports: [
+    ClickMapComponent
+  ]
 })
 export class RestaurantsModule { }

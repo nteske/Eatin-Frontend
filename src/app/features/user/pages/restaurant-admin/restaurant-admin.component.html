@@ -61,6 +61,19 @@
                       Unesite validan postanski broj.
                   </mat-error>
               </mat-form-field><br/>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Latitude</mat-label>
+                <input readonly formControlName="latitude" matInput type="text" placeholder="Latitude" />
+            </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Logitude</mat-label>
+                <input readonly formControlName="longitude" matInput type="text" placeholder="Longitude" />
+            </mat-form-field>
+
+
+
             </form>
           </mat-card-content>
           <mat-card-actions class="w3-center">
@@ -97,6 +110,12 @@
                 <mat-form-field >
                     <input matInput formControlName="slikaRestorana" placeholder="URL slike restorana" name="slika" required>
                   </mat-form-field>
+                  <div class="w3-center" *ngFor="let tipDat of tipoviDatuma">
+                    <p style="margin-bottom: 5pt;">{{tipDat.opisTipaDatuma}}</p><p style="display: inline; margin-left: 2pt; margin-right: 2pt;">Od</p>
+                    <input type="time" id="{{'start'+tipDat.idTipaDatuma}}" name="start"><p style="display: inline; margin-left: 2pt; margin-right: 2pt;">Do</p>
+                    <input style="margin-bottom: 5pt" type="time" id="{{'end'+tipDat.idTipaDatuma}}" name="end">
+                  </div>
+                  <!--
                   <div class="w3-center">
                     <p style="margin-bottom: 5pt;">Radni dan</p>
                     <input type="time" id="startTimeRD" name="startTimeRD">
@@ -110,7 +129,7 @@
                     <input type="time" id="startTimeN" name="startTimeN">
                     <input  style="margin-bottom: 5pt;" type="time" id="endTimeN" name="endTimeN">
                   </div>
-
+                  -->
                 <h3 class="w3-center">Odaberite kojih je tipova restoran</h3>
                   <section style="padding: 10px;" class="example-section">
                       <mat-checkbox #checkboxes *ngFor="let tip of tipoviRestorana" class="example-margin w3-margin" (change)="promena(tip)">{{tip.opisTipaRestorana}}</mat-checkbox>
@@ -121,10 +140,11 @@
           </mat-card-content>
           <mat-card-actions class="w3-center">
             <button mat-raised-button [type]="onSubmit" color="primary" [disabled]="!formControl.valid" (click)="onSubmit()">Kreiraj</button>
-            <button mat-raised-button color="primary" (click)="klik()">Pokazi se</button>
           </mat-card-actions>
         </mat-card>
 
   </div>
 </div>
 </div>
+<h2 style="text-align: center;">Selektujte koordinate lokacije na mapi</h2>
+<app-click-map (promena)="kordinate($event)" lat="45.2566559" lng="19.844614" width="100%" height="500px"></app-click-map>

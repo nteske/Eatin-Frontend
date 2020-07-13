@@ -5,6 +5,9 @@ import { RestoranService } from '../../../home/services/restoran.service';
 import { TipRestorana } from '../../../home/models/tip_restorana.model';
 import { ToastrService } from 'ngx-toastr';
 import { LokacijaAdmin } from '../../models/lokacijaAdmin.model';
+import { ZaposleniArtikliService } from '../../../restaurants/services/zaposleni-artikli.service';
+import { TipDatuma } from '../../../restaurants/models/tipDatuma.model';
+import { TipDatumaPost } from '../../models/tipDatumaPost.model';
 
 @Component({
   selector: 'app-restaurant-admin',
@@ -20,8 +23,10 @@ export class RestaurantAdminComponent implements OnInit {
   tipoviRestorana: TipRestorana[];
   odabraniTipoviRestorana: TipRestorana[] = [];
   lokacije: LokacijaAdmin[] = [];
+  tipoviDatuma: TipDatuma[] = [];
 
   constructor(private restoranService: RestoranService,
+              private zaposleniArtikliService: ZaposleniArtikliService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -30,22 +35,29 @@ export class RestaurantAdminComponent implements OnInit {
       broj: new FormControl(null, [Validators.required,Validators.minLength(1)]),
       grad: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       pBroj: new FormControl(null, [Validators.required,Validators.minLength(5),Validators.maxLength(5)]),
-
+      latitude: new FormControl(null,[Validators.required]),
+      longitude: new FormControl(null,[Validators.required])
     });
 
     this.form = new FormGroup({
-
       nazivRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       opisRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       telefonRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       slikaRestorana: new FormControl(null, [Validators.required,Validators.minLength(2)]),
       pibRestorana: new FormControl(null, [Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
     });
+
     this.restoranService.getTipoveRestorana().subscribe({
       next: data => {
         this.tipoviRestorana = data;
       }
-    })
+    });
+
+    this.zaposleniArtikliService.getTipoveDatuma().subscribe({
+      next: data => {
+        this.tipoviDatuma = data;
+      }
+    });
   }
 
   promena(tip: TipRestorana) {
@@ -71,6 +83,29 @@ export class RestaurantAdminComponent implements OnInit {
       });
       return;
     }
+
+    for (let i = 0; i < this.tipoviDatuma.length; i++) {
+      if ((document.getElementById('start' + this.tipoviDatuma[i].idTipaDatuma) as HTMLInputElement).value === '' ||
+            (document.getElementById('end' + this.tipoviDatuma[i].idTipaDatuma) as HTMLInputElement).value === '') {
+              this.toastr.error("Morate navesti radno vreme za sve tipove datuma!","Neuspeh",{
+                closeButton:true,
+                positionClass:'toast-bottom-right'
+              });
+              return;
+     }
+    }
+
+    let radnoVremeRestorana: TipDatumaPost[] = [];
+
+    this.tipoviDatuma.forEach(tip => {
+      let obj: TipDatumaPost = {
+        tipDatuma: tip,
+        vremeOd: (document.getElementById('start' + tip.idTipaDatuma) as HTMLInputElement).value,
+        vremeDo: (document.getElementById('end' + tip.idTipaDatuma) as HTMLInputElement).value
+      }
+      radnoVremeRestorana.push(obj);
+    });
+
     let req: PostRestoran = {
       lokacije: this.lokacije,
       nazivRestorana: this.form.value.nazivRestorana,
@@ -78,16 +113,7 @@ export class RestaurantAdminComponent implements OnInit {
       pibRestorana: this.form.value.pibRestorana,
       telefonRestorana: this.form.value.telefonRestorana,
       slikaRestorana: this.form.value.slikaRestorana,
-      radnoVreme: [
-        {
-          tipDatuma: {
-            idTipaDatuma: 1,
-            opisTipaDatuma: 'Radni dan'
-          },
-          vremeDo: '08:00',
-          vremeOd: '16:00'
-        }
-      ],
+      radnoVreme: radnoVremeRestorana,
       tipRestorana: this.odabraniTipoviRestorana
     }
     this.restoranService.postRestoran(req).subscribe({
@@ -115,8 +141,8 @@ export class RestaurantAdminComponent implements OnInit {
     let lok: LokacijaAdmin = {
       broj: this.formLokacija.value.broj,
       grad: this.formLokacija.value.grad,
-      latitude: 19.827260000,
-      longitude: 45.281864000,
+      latitude: this.formLokacija.value.latitude,
+      longitude: this.formLokacija.value.longitude,
       postanskiBroj: this.formLokacija.value.pBroj,
       ulica: this.formLokacija.value.ulica
     }
@@ -124,13 +150,9 @@ export class RestaurantAdminComponent implements OnInit {
     this.formLokacija.reset();
   }
 
-  klik() {
-    const startTime = document.getElementById('startTimeRD') as HTMLInputElement;
-    const endTime = document.getElementById('endTimeRD') as HTMLInputElement;
-    console.log(startTime.value);
-    console.log(endTime.value);
-    //TO DO
-
+  kordinate(ev){
+    this.formLokacija.controls.latitude.setValue(ev.lat);
+    this.formLokacija.controls.longitude.setValue(ev.lng);
   }
 
 }
