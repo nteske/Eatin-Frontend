@@ -1,0 +1,45 @@
+<div class="w3-content w3-padding-large" style="max-width:600px;margin-top:80px;margin-bottom:80px;" id="top">
+
+    <div class="mat-elevation-z8">
+        <div class="w3-bar w3-xlarge w3-indigo">
+            <div class="w3-bar-item">Tipovi restorana</div>
+            <button class="mobile-label w3-bar-item w3-button w3-text-white w3-round-xlarge" (click)="openDialog(1, null, null)">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+            <mat-table #table mat-table [dataSource]="dataSource" class="mat-cell w3-card">
+              <ng-container matColumnDef="opisTipaRestorana">
+                <mat-header-cell *matHeaderCellDef> Opis tipa restorana </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let tip">
+                  <span class="mobile-label">Opis tipa restorana:</span>
+                  {{tip.opisTipaRestorana}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef>
+                      <button mat-icon-button color="primary" (click)="openDialog(1, null, null)">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;">
+                    <button mat-icon-button color="primary"  (click)="openDialog(2, row.idTipaRestorana, row.opisTipaRestorana)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </mat-cell>
+                  </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-card *ngIf="!loaded" style="z-index: 1; display: flex; justify-content: center; align-items: center">
+              <mat-progress-spinner
+                color="primary"
+                mode="indeterminate">
+              </mat-progress-spinner>
+            </mat-card>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+          </div>
+
+</div>
+

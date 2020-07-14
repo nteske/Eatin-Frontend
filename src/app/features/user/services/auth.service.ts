@@ -68,10 +68,11 @@ export class AuthService {
     if (token == null) token = "";
     var headers = new HttpHeaders().set('Authorization', token);
     return this.httpClient.get<Register>(this.API_URL + ApiUrls.profil, { 'headers': headers })
+    /*
     .pipe(catchError((error: Response) => {
       this.errorService.handleError(error);
       return throwError(error);
-    }));
+    }));*/
   }
 
   public updateProfile(updatedKorisnik: Register) {

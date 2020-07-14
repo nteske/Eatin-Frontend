@@ -5,6 +5,11 @@
 
     <a *ngIf="auth.isLoggedIn() && checkRole(assigned.admin)" routerLink="/user/restaurant-admin"><i class="fa fa-cutlery"></i> Restorani</a>
 
+    <a *ngIf="auth.isLoggedIn() && checkRole(assigned.admin)" routerLink="/user/tip-retorana"> Tip restorana</a>
+
+    <a *ngIf="auth.isLoggedIn() && checkRole(assigned.admin)" routerLink="/user/tip-artikla"> Tip artikla</a>
+
+
 
     <a *ngIf="!auth.isLoggedIn()" class="w3-right" id="navSignIn" routerLink="/user/login"><i class="fa fa-sign-in"></i> Sign in</a>
 

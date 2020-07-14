@@ -30,10 +30,14 @@ import { ZaposleniDialogComponent } from './components/dialogs/zaposleni-dialog/
 import { DostavljacDialogComponent } from './components/dialogs/dostavljac-dialog/dostavljac-dialog.component';
 import { RestaurantAdminComponent } from './pages/restaurant-admin/restaurant-admin.component';
 import { RestaurantsModule } from '../restaurants/restaurants.module';
+import { TipoviRestoranaComponent } from './pages/tipovi-restorana/tipovi-restorana.component';
+import { TipoviArtiklaComponent } from './pages/tipovi-artikla/tipovi-artikla.component';
+import { TipRestoranaDialogComponent } from './components/dialogs/tip-restorana-dialog/tip-restorana-dialog.component';
+import { TipArtiklaDialogComponent } from './components/dialogs/tip-artikla-dialog/tip-artikla-dialog.component';
 
 
 @NgModule({
-  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent, KlijentDialogComponent, AdminDialogComponent, ZaposleniDialogComponent, DostavljacDialogComponent, RestaurantAdminComponent],
+  declarations: [SettingsComponent, UserInterfaceComponent, LoginComponent, RegisterComponent, PasswordComponent, ApanelComponent, EmployeComponent, ProfilComponent, UsersComponent, KlijentDialogComponent, AdminDialogComponent, ZaposleniDialogComponent, DostavljacDialogComponent, RestaurantAdminComponent, TipoviRestoranaComponent, TipoviArtiklaComponent, TipRestoranaDialogComponent, TipArtiklaDialogComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -58,7 +62,9 @@ import { RestaurantsModule } from '../restaurants/restaurants.module';
     KlijentDialogComponent,
     AdminDialogComponent,
     ZaposleniDialogComponent,
-    DostavljacDialogComponent
+    DostavljacDialogComponent,
+    TipRestoranaDialogComponent,
+    TipArtiklaDialogComponent
   ]
 })
 export class UserModule { }

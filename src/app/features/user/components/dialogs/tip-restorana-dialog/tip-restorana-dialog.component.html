@@ -1,0 +1,22 @@
+<div class="container">
+    <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje tipa restorana</h3>
+    <h3 mat-dialog-title *ngIf="flag == 2">Modifikacija tipa restorana</h3>
+    <form class="mat-dialog-content" #formControl="ngForm">
+
+      <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Opis tipa restorana" [(ngModel)]="data.opisTipaRestorana" name="opis" required [disabled]="flag == 3" minlength="2" maxlength="20">
+        <mat-hint>Minimum 2, a maksimum 20 slova</mat-hint>
+      </mat-form-field>
+      </div>
+
+
+      <div mat-dialog-actions>
+        <button mat-button *ngIf="flag == 1" [mat-dialog-close]="1"
+          (click)="add()" [disabled]="!formControl.valid">Sačuvaj</button>
+        <button mat-button *ngIf="flag == 2" [mat-dialog-close]="1"
+          (click)="update()" [disabled]="!formControl.valid">Sačuvaj</button>
+        <button mat-button (click)="cancel()">Poništi</button>
+      </div>
+    </form>
+  </div>

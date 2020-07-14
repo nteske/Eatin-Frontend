@@ -16,5 +16,7 @@ export const rootPaths = {
     restaurants: "restaurants",
     restaurantsView: "view",
     articlesView: "articles",
-    restaurantAdmin: "restaurant-admin"
+    restaurantAdmin: "restaurant-admin",
+    tipRestorana: "tip-retorana",
+    tipArtikla: "tip-artikla"
   }

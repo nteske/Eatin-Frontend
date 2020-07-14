@@ -13,6 +13,8 @@ import { Zaposleni } from '../models/zaposleni.model';
 import { Admin } from '../models/admin.model';
 import { Klijent } from '../models/klijent.model';
 import { RestoraniSimple } from '../models/restoraniSimple.model';
+import { TipRestorana } from '../../home/models/tip_restorana.model';
+import { TipArtikla } from '../../home/models/tip_artikla';
 
 
 
@@ -183,4 +185,47 @@ export class UserService {
     }));
   }
 
+  public postTipRestoran(tipRestorana: TipRestorana) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/tip-restorana-admin', tipRestorana, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public putTipRestoran(tipRestorana: TipRestorana) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put('https://eatin-backend.herokuapp.com/tip-restorana-admin', tipRestorana, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public postTipArtikla(tipArtikla: TipArtikla) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.post('https://eatin-backend.herokuapp.com/tip-artikla-admin', tipArtikla, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
+
+  public putTipArtikla(tipArtikla: TipArtikla) {
+    var token=localStorage.getItem(Storage.token);
+    if(token==null)token="";
+    var headers = new HttpHeaders().set('Authorization', token);
+    return this.httpClient.put('https://eatin-backend.herokuapp.com/tip-artikla-admin', tipArtikla, { headers: headers, responseType: 'text' } )
+    .pipe(catchError((error: Response) => {
+      this.errorService.handleError(error);
+      return throwError(error);
+    }));
+  }
 }
